@@ -7,10 +7,14 @@ env:
     - TASKWARRIOR=v2.4.1
 
 before_install:
-    - sudo apt-get install -y python-dev cmake build-essential libgnutls28-dev uuid-dev gnutls-bin chrpath libssl-dev libfontconfig1-dev
+    - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+    - sudo apt-get update -qq
+    - sudo apt-get install -qq build-essential cmake uuid-dev g++-4.8
+    - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50
     - git clone https://git.tasktools.org/scm/tm/task.git
     - cd task
-    - git checkout $TASKWARRIOR
+    - git checkout $TASK_VERSION
+    - git clean -dfx
     - cmake .
     - make
     - sudo make install
