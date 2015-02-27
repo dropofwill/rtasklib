@@ -7,6 +7,7 @@ env:
     - TASKWARRIOR=v2.4.1
 
 before_install:
+    - gem install bundler
     - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
     - sudo apt-get update -qq
     - sudo apt-get install -qq build-essential cmake uuid-dev g++-4.8
