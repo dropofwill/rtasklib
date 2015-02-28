@@ -1,6 +1,6 @@
 # Rtasklib
 
-[![Coverage Status](https://travis-ci.org/dropofwill/rtasklib.svg?branch=master)](https://travis-ci.org/dropofwill/rtasklib)
+[![Coverage Status](https://travis-ci.org/dropofwill/rtasklib.svg?branch=master)](https://travis-ci.org/dropofwill/rtasklib) [![Coverage Status](https://coveralls.io/repos/dropofwill/rtasklib/badge.svg?branch=master)](https://coveralls.io/r/dropofwill/rtasklib?branch=master)
 
 A Ruby wrapper around the TaskWarrior CLI, based on the Python tasklib. Requires a working TaskWarrior install.
 
