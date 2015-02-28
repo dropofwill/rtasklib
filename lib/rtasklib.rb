@@ -1,14 +1,5 @@
 require "rtasklib/version"
+require "rtasklib/marshallable"
 
 module Rtasklib
-
-  class Serializer
-
-  end
-
-  class Task
-  end
-
-  class Warrior
-  end
 end
