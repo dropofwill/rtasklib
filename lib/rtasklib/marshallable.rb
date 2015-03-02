@@ -1,4 +1,6 @@
 require 'bigdecimal'
+require 'ISO8601'
+require 'date'
 
 module Rtasklib
 
@@ -9,6 +11,8 @@ module Rtasklib
     #   :date => Datetime
     #   :duration => Time
 
+    TW_DATE_FORMAT = "%Y%m%dT%H%M%SZ"
+
     # unmarshall values from `task <filter> export` json strings
     # frozen means .freeze, makes the data read only
     def unmarshall value, type=:string, frozen=false
@@ -18,7 +22,9 @@ module Rtasklib
       when :numeric
         marshalled = to_numeric(value)
       when :datetime
+        marshalled = DateTime.strptime(value, TW_DATE_FORMAT)
       when :duration
+        marshalled = TwDuration.new(value)
       end
 
       return marshalled.freeze if frozen
@@ -41,5 +47,25 @@ module Rtasklib
         num.to_f
       end
     end
+  end
+end
+
+class TwDuration < ISO8601::Duration
+  attr_accessor :original, :negative
+
+  def initialize input, base = nil
+    @original = input
+    @original.freeze
+
+    new_input = `task calc #{input}`.chomp
+
+    if new_input.include?("-")
+      new_input.gsub!(/\-/, "")
+      @negative = true
+    else
+      @negative = false
+    end
+
+    super new_input, base
   end
 end
