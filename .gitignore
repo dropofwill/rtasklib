@@ -8,3 +8,4 @@
 /spec/reports/
 /spec/data/.task/*
 /tmp/
+*.py
