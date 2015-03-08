@@ -24,9 +24,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activesupport"
   spec.add_dependency "activemodel"
   spec.add_dependency "active_model_serializers"
-  # spec.add_dependency "ice_nine"
-  # spec.add_dependency "oj"
-  # spec.add_dependency "iso8601"
+  spec.add_dependency "ice_nine"
+  spec.add_dependency "oj"
+  spec.add_dependency "iso8601"
 
   spec.add_development_dependency "bundler", "~> 1.8"
   spec.add_development_dependency "rake", "~> 10.0"
