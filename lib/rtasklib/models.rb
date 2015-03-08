@@ -1,10 +1,16 @@
+require "virtus"
 
 module Rtasklib::Models
 
+  ValidationError = Class.new RuntimeError
+
   class Task
     include Virtus.model
+    # perhaps use Veto
+    include ActiveModel::Validations
 
     # Default attributes from TW
+    # Should match: http://taskwarrior.org/docs/design/task.html
     #
     # Required for every task
     attribute :status,        String
@@ -36,6 +42,11 @@ module Rtasklib::Models
     attribute :modified,      String
 
     # TODO: handle arbitrary UDA's
+  end
 
+  class UUID < Virtus::Attribute
+    def coerce(value)
+      value
+    end
   end
 end
