@@ -1,5 +1,108 @@
 # rtasklib
 
+## Public API
+
+
+rtasklib::
+
+For now require `task --version` > 2.4.0, we can work on backwards
+compatibility later.
+
+### TaskWarrior Direct
+
+* #filter(filter_string)
+  just send random shit to task and handle the probable errors properly
+  `task #{filter_string} export`
+
+* add(
+
+### ActiveRecord API
+
+#### Required
+
+* #where()
+  takes string or hash arguments
+  strings get past directly to `task <filter> export`
+  returns a chainable relationship, instead of the raw objects of #find
+
+* #find(uuid | id)
+  #find([uuid | id, ...])
+
+* #take(num=1)
+
+* #first(num=1)
+  #last(num=1)
+  Num is how many to return
+  Should this be by urgency or id or uuid?
+
+* #find_by(key: value)
+  e.g. #find_by(project: "LinuxDev") which is the same as
+  #where(project: "LinuxDev").take or .first
+
+  #find_by!(key: value) is the same, but throws an error
+
+* #all()
+
+* #order()
+  either sql style string or AR style hash:
+  "created at DESC" or created_at: :desc
+  Chainable on relations from #where
+
+* #select() alias #project()
+  same as #order()
+  Only returns the listed columns
+
+* #distinct()
+  same as #take() but for selection/projections
+
+* #limit(num)
+  maximum number of rows to return
+
+* #offset(num)
+  change the starting point of a query
+
+* #readonly()
+
+* #find_or_create_by(), #find_or_create_by!()
+
+* #count alias #size, #length
+
+* #pluck()
+
+* #exists?()
+
+* #explain() show underlying command structure
+
+
+#### Probs should, but nah
+
+* Optimistic or Pessimistic locking to prevent race conditions
+
+* Eager loading
+
+* Scopes
+
+
+#### Maybe
+
+* #average(), #minimum(), #maximum(), #sum()
+
+* #none(), returns an empty relation, useful in chains perhaps?
+
+* #find_each(), #find_in_batches()
+  load all tasks in in batches, unnecessary for the task interface?
+
+* #joins()? Maybe for dependencies?
+
+* #group()? Out of scope probably? Needs a motivating use case.
+
+* #having()? Require group to be working first
+
+* #unscope, #only, #reorder, #reverse_order, #rewhere
+  These exist for performance reasons in SQL, probably not necessary for us.
+
+
+
 ## [TaskWarrior 3rd-Party Guidelines]()
 
 Taskwarrior can be extended by means of a third-party application. There are script examples of import and export add-ons that support many different formats (clone the repository, look in task.git/scripts/add-ons). Then there are more sophisticated applications such as Vit that provide a complete replacement UI.
