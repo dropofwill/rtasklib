@@ -1,11 +1,18 @@
 require "virtus"
+require "active_model"
 
 module Rtasklib::Models
 
   ValidationError = Class.new RuntimeError
 
+  class UUID < Virtus::Attribute
+    def coerce(value)
+      value
+    end
+  end
+
   class Task
-    include Virtus.model
+    include Virtus.model(finalize: false)
     # perhaps use Veto
     include ActiveModel::Validations
 
@@ -13,10 +20,12 @@ module Rtasklib::Models
     # Should match: http://taskwarrior.org/docs/design/task.html
     #
     # Required for every task
-    attribute :status,        String
-    attribute :uuid,          UUID
-    attribute :entry,         Date
     attribute :description,   String
+    # But on creation these should be set by `task`
+    attribute :status,        String, writer: :private
+    attribute :uuid,          UUID,   writer: :private
+    attribute :entry,         Date,   writer: :private
+
     # Optional for every task
     attribute :start,         Date
     attribute :until,         Date
@@ -24,8 +33,9 @@ module Rtasklib::Models
     attribute :annotation,    Array[String]
     attribute :tags,          Array[String]
     attribute :project,       String
-    attribute :priority,      String
     attribute :depends,       String
+    # is calculated, so maybe private?
+    attribute :priority,      String
     # Required only for tasks that are Deleted or Completed
     attribute :end,           Date
     # Required only for tasks that are Waiting
@@ -44,9 +54,5 @@ module Rtasklib::Models
     # TODO: handle arbitrary UDA's
   end
 
-  class UUID < Virtus::Attribute
-    def coerce(value)
-      value
-    end
-  end
+  Virtus.finalize
 end
