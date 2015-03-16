@@ -5,9 +5,6 @@ require_relative "rtasklib/controller"
 require_relative "rtasklib/serializer"
 require_relative "rtasklib/taskrc"
 
-# deprecated
-require_relative "rtasklib/marshallable"
-
 module Rtasklib
 
   class TaskWarrior
