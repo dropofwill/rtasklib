@@ -7,11 +7,11 @@ describe Rtasklib::Models do
     expect(Rtasklib::Models).not_to be nil
   end
 
-  describe Rtasklib::Models::Task do
+  describe Rtasklib::Models::TaskModel do
     # let(:data) { Hash.new(description: "Wash dishes") }
     context "Create a task with the bare minimum" do
 
-      subject { Rtasklib::Models::Task.new({description: "Wash dishes"}) }
+      subject { Rtasklib::Models::TaskModel.new({description: "Wash dishes"}) }
 
       it "description is a String" do
         expect(subject.description.class).to eq String

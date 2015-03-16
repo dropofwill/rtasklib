@@ -2,7 +2,6 @@ require "virtus"
 require "active_model"
 
 module Rtasklib::Models
-
   ValidationError = Class.new RuntimeError
 
   class UUID < Virtus::Attribute
@@ -11,8 +10,22 @@ module Rtasklib::Models
     end
   end
 
-  class Task
-    include Virtus.model(finalize: false)
+  RcBooleans = Virtus.model do |mod|
+    mod.coerce = true
+    mod.coercer.config.string.boolean_map = {
+      'no'  => false,
+      'yes' => true,
+      'on'  => true,
+      'off' => false }
+  end
+
+  class Taskrc
+    include RcBooleans
+    # dynamically add string or boolean attributes
+  end
+
+  class TaskModel
+    include Virtus.model
     # perhaps use Veto
     include ActiveModel::Validations
 
@@ -58,30 +71,12 @@ module Rtasklib::Models
     attribute :modified,      String, writer: :private
 
     # TODO: handle arbitrary UDA's
-
-    def set_mask value
-      self.mask = value
-    end
-
-    def set_imask value
-      self.imask = value
-    end
-
-    def set_modified value
-      self.modified = value
-    end
-
-    def set_status value
-      self.status = value
-    end
-
-    def set_uuid value
-      self.uuid = value
-    end
-
-    def set_date value
-      self.date = value
-    end
+    def set_mask value; self.mask = value end
+    def set_imask value; self.imask = value end
+    def set_modified value; self.modified = value end
+    def set_status value; self.status = value end
+    def set_uuid value; self.uuid = value end
+    def set_date value; self.date = value end
 
     # Refactoring idea, need to understand Virtus internals a bit better
     # [:mask, :imask, :modified, :status, :uuid, :entry].each do |ro_attr|
@@ -90,6 +85,4 @@ module Rtasklib::Models
     #   end
     # end
   end
-
-  Virtus.finalize
 end
