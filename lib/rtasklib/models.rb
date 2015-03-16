@@ -7,7 +7,7 @@ module Rtasklib::Models
 
   class UUID < Virtus::Attribute
     def coerce(value)
-      value
+      value.to_s
     end
   end
 
@@ -36,22 +36,59 @@ module Rtasklib::Models
     attribute :depends,       String
     # is calculated, so maybe private?
     attribute :priority,      String
+
     # Required only for tasks that are Deleted or Completed
     attribute :end,           Date
+
     # Required only for tasks that are Waiting
     attribute :wait,          Date
+
     # Required only for tasks that are Recurring or have Recurring Parent
     attribute :recur,         Date
+
     # Optional except for tasks with Recurring Parents
     attribute :due,           Date
+
     # Required only for tasks that have Recurring Child
     attribute :parent,        UUID
+
     # Internal attributes should be read-only
-    attribute :mask,          String
-    attribute :imask,         String
-    attribute :modified,      String
+    attribute :mask,          String, writer: :private
+    attribute :imask,         String, writer: :private
+    attribute :modified,      String, writer: :private
 
     # TODO: handle arbitrary UDA's
+
+    def set_mask value
+      self.mask = value
+    end
+
+    def set_imask value
+      self.imask = value
+    end
+
+    def set_modified value
+      self.modified = value
+    end
+
+    def set_status value
+      self.status = value
+    end
+
+    def set_uuid value
+      self.uuid = value
+    end
+
+    def set_date value
+      self.date = value
+    end
+
+    # Refactoring idea, need to understand Virtus internals a bit better
+    # [:mask, :imask, :modified, :status, :uuid, :entry].each do |ro_attr|
+    #   define_method("set_#{ro_attr.to_s}") do |value|
+    #     self.class.find_by(ro_attr).send(".=", value)
+    #   end
+    # end
   end
 
   Virtus.finalize
