@@ -9,3 +9,5 @@
 /spec/data/.task/*
 /tmp/
 *.py
+lib/rtasklib/marshallable.rb
+spec/marshallable_spec.rb
