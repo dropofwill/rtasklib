@@ -28,8 +28,10 @@ module Rtasklib
       @config.extend(Virtus.model)
 
       raw.each do |k,v|
-        if ["on", "off", "yes", "no", "false", "true"].include? v.downcase
+        if boolean? v
           @config.attribute k.to_sym, Axiom::Types::Boolean
+        elsif number? v
+          @config.attribute k.to_sym, Float
         else
           @config.attribute k.to_sym, String
         end
@@ -48,6 +50,14 @@ module Rtasklib
       line = line.split('=', 2)
       line[0].gsub!(".", "_") if line[0].respond_to? :gsub!
       line
+    end
+
+    def number? value
+      Float(value) rescue false
+    end
+
+    def boolean? value
+      ["on", "off", "yes", "no", "false", "true"].include? value.to_s.downcase
     end
   end
 end

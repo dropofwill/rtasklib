@@ -1,5 +1,5 @@
 require 'bigdecimal'
-require 'ISO8601'
+require 'iso8601'
 require 'date'
 
 module Rtasklib
