@@ -19,7 +19,7 @@ before_install:
     - cmake .
     - make
     - sudo make install
-    - task rc=spec/data/.taskrc --version
+    - task rc.data.location="spec/data/.task" --version
     - cd ../
 
 script: 'bundle exec rake'
