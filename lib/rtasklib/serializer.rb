@@ -1,5 +1,5 @@
 require "active_model"
-require "active_model_serializer"
+require "active_model/serializer"
 
 module Rtasklib
 
