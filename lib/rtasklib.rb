@@ -14,14 +14,14 @@ module Rtasklib
     attr_reader :taskrc, :version
 
     def initialize rc="#{Dir.home}/.taskrc"
-      # Need to check TW version
-      @version = `task _version`.chomp
+      # Check TW version, and throw warning
+      @version = Gem::Version.new(`task _version`.chomp)
 
-      if Gem::Version.new(@version) < Gem::Version.new('2.4.0')
+      if @version < Gem::Version.new('2.4.0')
         warn "#{@version} is untested"
       end
 
-      # @taskrc = 
+      # @taskrc =
     end
   end
 end
