@@ -22,7 +22,7 @@ before_install:
     - pwd
     - task --version
     - cd ../
-    - rc.data.location="/home/travis/build/dropofwill/rtasklib/spec/data/.task"
+    - task rc.data.location="/home/travis/build/dropofwill/rtasklib/spec/data/.task"
 
 script: 'bundle exec rake'
 
