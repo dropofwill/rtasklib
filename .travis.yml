@@ -19,8 +19,10 @@ before_install:
     - cmake .
     - make
     - sudo make install
-    - task rc.data.location="spec/data/.task" --version
+    - pwd
+    - task --version
     - cd ../
+    - rc.data.location="/home/travis/task/spec/data/.task"
 
 script: 'bundle exec rake'
 
