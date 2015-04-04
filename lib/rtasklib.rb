@@ -10,7 +10,8 @@ require "open3"
 module Rtasklib
 
   class TaskWarrior
-    attr_reader :taskrc, :version, :rc_location, :data_location, :override
+    attr_reader :taskrc, :version, :rc_location,
+                :data_location, :override, :create_new
 
     DEFAULT_CONFIG = {
       json: {
@@ -26,10 +27,9 @@ module Rtasklib
     def initialize rc="#{Dir.home}/.taskrc", override=DEFAULT_CONFIG,
                    create_new=false
       @rc_location = rc
-      # TODO: use taskrc
       @data_location = rc.chomp('rc')
-      puts @data_location
       @override = DEFAULT_CONFIG.merge(override)
+      @create_new = create_new
 
       # Check TW version, and throw warning
       begin
@@ -43,8 +43,10 @@ module Rtasklib
 
     private
     def check_version
-      raw_version = Open3.capture2(
-        "task rc.data.location=#{@data_location} _version")
+      # raw_version = Open3.capture2(
+      #   "task rc.data.location=#{@data_location} _version")
+      raw_version = Rtasklib::Execute.task("rc.data.location=#{@data_location}",
+                                           "_version")
       gem_version = Gem::Version.new(raw_version[0].chomp)
 
       if gem_version < Gem::Version.new('2.4.0')
