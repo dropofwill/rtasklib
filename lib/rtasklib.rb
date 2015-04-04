@@ -10,12 +10,26 @@ require "open3"
 module Rtasklib
 
   class TaskWarrior
-    attr_reader :taskrc, :version, :rc_location, :data_location
+    attr_reader :taskrc, :version, :rc_location, :data_location, :override
 
-    def initialize rc="#{Dir.home}/.taskrc"
+    DEFAULT_CONFIG = {
+      json: {
+        array: "true",
+      },
+      verbose: 'nothing',
+      confirmation: 'no',
+      dependency: {
+        confirmation: 'no',
+      },
+    }
+
+    def initialize rc="#{Dir.home}/.taskrc", override=DEFAULT_CONFIG,
+                   create_new=false
       @rc_location = rc
       # TODO: use taskrc
       @data_location = rc.chomp('rc')
+      puts @data_location
+      @override = DEFAULT_CONFIG.merge(override)
 
       # Check TW version, and throw warning
       begin

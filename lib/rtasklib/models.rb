@@ -71,6 +71,8 @@ module Rtasklib::Models
     attribute :modified,      String, writer: :private
 
     # TODO: handle arbitrary UDA's
+
+    # Setters for private attributes
     def set_mask value; self.mask = value end
     def set_imask value; self.imask = value end
     def set_modified value; self.modified = value end

@@ -3,6 +3,8 @@ require "virtus"
 module Rtasklib
 
   module Models
+    # contents dynamically defined by what attributes are read from
+    # `task config` or the given .taskrc
     class TaskrcModel
     end
   end
@@ -11,23 +13,25 @@ module Rtasklib
     attr_reader :config
 
     def initialize rc="#{Dir.home}/.taskrc"
-      raw = []
+      taskrc = []
 
-      File.open(rc).each do |l|
-        raw = to_a(l, raw)
+      File.open(rc).each do |line|
+        taskrc.push(process(line.chomp)) unless line.empty?
+        # taskrc = to_a(l, taskrc)
       end
+      puts taskrc.class
 
-      raw = raw.to_h
-      init_model raw
+      # taskrc = taskrc.to_h
+      # init_model taskrc
     end
 
     private
 
-    def init_model raw
+    def init_model rc_arr
       @config = Models::TaskrcModel.new
       @config.extend(Virtus.model)
 
-      raw.each do |k,v|
+      rc_arr.each do |k,v|
         if boolean? v
           @config.attribute k.to_sym, Axiom::Types::Boolean
         elsif integer? v
@@ -42,10 +46,11 @@ module Rtasklib
       end
     end
 
-    def to_a l, raw
-      line = process(l.chomp)
-      raw.push(line) unless line.empty?
-      raw
+    #
+    def to_a line, rc_arr
+      line = process(line.chomp)
+      rc_arr.push(line) unless line.empty?
+      rc_arr
     end
 
     def process line
