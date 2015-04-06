@@ -37,17 +37,16 @@ module Rtasklib
       rescue
         warn "Couldn't find the task version"
       end
-
-      # @taskrc =
     end
+
+    # Rtasklib::Execute.task("rc.data.location=#{@data_location}", "_version")
 
     private
     def check_version
-      # raw_version = Open3.capture2(
-      #   "task rc.data.location=#{@data_location} _version")
-      raw_version = Rtasklib::Execute.task("rc.data.location=#{@data_location}",
+      exit, raw_version = Rtasklib::Execute.task(@create_new,
+                                           "rc.data.location=#{@data_location}",
                                            "_version")
-      gem_version = Gem::Version.new(raw_version[0].chomp)
+      gem_version = Gem::Version.new(raw_version[0].chomp) if exit == 0
 
       if gem_version < Gem::Version.new('2.4.0')
         warn "#{@version} is untested"
