@@ -27,13 +27,16 @@ module Rtasklib
     def self.task_exp create_new, *opts
       options = opts.join(" ") unless opts.nil?
       execute = "task #{options}"
-      exp_regex = @@exp_regex
       p execute
+
+      exp_regex = @@exp_regex
+      retval = 0
+      res = nil
 
       exp = RubyExpect::Expect.spawn(execute)
       exp.procedure do
         p exp_regex
-        any do
+        res = any do
           expect exp_regex[:create_rc] do
             if create_new
               send "yes"
@@ -42,8 +45,10 @@ module Rtasklib
             end
           end
         end
+
+        retval = res unless res.nil?
       end
-      exp.buffer.clone.chomp!
+      return exp.buffer.clone.chomp!, retval
     end
 
     # Spawns a process running the given program with an optional list of opts
