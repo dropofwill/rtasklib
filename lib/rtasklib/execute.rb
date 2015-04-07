@@ -21,17 +21,19 @@ module Rtasklib
 
       exp = RubyExpect::Expect.spawn(execute)
       exp.procedure do
-        yield
+        yield(exp, self)
       end
     end
 
-    def self.task create_new, *opts
+    def self.task create_new, *opts, &block
       exp_regex = @@exp_regex
       retval = 0
       res = nil
+      buff = ""
 
-      self.run("task", *opts) do
-        res = any do
+      self.run("task", *opts) do |exp, procedure|
+        res = procedure.any do
+          puts exp
           expect exp_regex[:create_rc] do
             if create_new
               send "yes"
@@ -39,12 +41,13 @@ module Rtasklib
               send "no"
             end
           end
-          yield
+          block.call if block_given?
         end
 
+        buff = exp.buffer.clone.chomp!
         retval = res unless res.nil?
       end
-      return exp.buffer.clone.chomp!, retval
+      return buff, retval
     end
 
 
@@ -74,6 +77,14 @@ module Rtasklib
       end
       return exp.buffer.clone.chomp!, retval
     end
+
+    # Filters should be a list of values
+    # Ranges interpreted as ids
+    #   1...5 : "1-5"
+    #   1..5  : "1-4"
+    #   1     : "1"
+    #   and joined with ","
+    #   [1...5, 8, 9] : "1-5,8,9"
 
     # Spawns a process running the given program with an optional list of opts
     # Yields a block to handle user input as needed

@@ -15,7 +15,7 @@ module Rtasklib
 
     DEFAULT_CONFIG = {
       json: {
-        array: "true",
+        array: 'true',
       },
       verbose: 'nothing',
       confirmation: 'no',
@@ -32,11 +32,11 @@ module Rtasklib
       @create_new = create_new
 
       # Check TW version, and throw warning
-      begin
-        @version = check_version
-      rescue
-        warn "Couldn't find the task version"
-      end
+      # begin
+      @version = check_version
+      # rescue
+      #   warn "Couldn't find the task version"
+      # end
     end
 
     private
@@ -49,7 +49,7 @@ module Rtasklib
       if gem_ver < Gem::Version.new('2.4.0')
         warn "#{gem_ver} is untested"
       end
-      gem_version
+      gem_ver
     end
   end
 end
