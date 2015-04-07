@@ -39,17 +39,15 @@ module Rtasklib
       end
     end
 
-    # Rtasklib::Execute.task("rc.data.location=#{@data_location}", "_version")
-
     private
     def check_version
-      exit, raw_version = Rtasklib::Execute.task(@create_new,
+      raw_ver, retval = Rtasklib::Execute.task(@create_new,
                                            "rc.data.location=#{@data_location}",
                                            "_version")
-      gem_version = Gem::Version.new(raw_version[0].chomp) if exit == 0
+      gem_ver = Gem::Version.new(raw_ver[0].chomp) if retval == 0
 
-      if gem_version < Gem::Version.new('2.4.0')
-        warn "#{@version} is untested"
+      if gem_ver < Gem::Version.new('2.4.0')
+        warn "#{gem_ver} is untested"
       end
       gem_version
     end
