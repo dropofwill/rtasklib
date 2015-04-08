@@ -22,7 +22,9 @@ before_install:
     - pwd
     - cd ../
     - ls /home/travis/build/dropofwill/rtasklib/spec/data/.task
-    - task rc.data.location="/home/travis/build/dropofwill/rtasklib/spec/data/.task" _version
+    - export TASKRC=/home/travis/build/dropofwill/rtasklib/spec/data/.taskrc
+    - export TASKDATA=/home/travis/build/dropofwill/rtasklib/spec/data/.task
+    - task _version
 
 script: 'bundle exec rake'
 
