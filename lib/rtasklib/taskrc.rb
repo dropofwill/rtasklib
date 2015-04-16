@@ -12,7 +12,7 @@ module Rtasklib
   class Taskrc
     attr_reader :config
 
-    def initialize rc="#{Dir.home}/.taskrc"
+    def initialize rc
       taskrc = []
 
       File.open(rc).each do |line|
