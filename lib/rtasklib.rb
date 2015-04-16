@@ -34,22 +34,22 @@ module Rtasklib
       @config = Rtasklib::Taskrc.new(rc_location)
 
       # Check TW version, and throw warning
-      # begin
-      @version = check_version
-      # rescue
-      #   warn "Couldn't find the task version"
-      # end
+      begin
+        @version = check_version
+      rescue
+        warn "Couldn't find TaskWarrior's version"
+      end
     end
 
     private
     def check_version
       raw_ver, retval = Rtasklib::Execute.task(@create_new,
-                                           "rc.data.location=#{@data_location}",
+                                           "rc.data.location=#{data_location}",
                                            "_version")
       gem_ver = Gem::Version.new(raw_ver.chomp) if retval == 0
 
       if gem_ver < Gem::Version.new('2.4.0')
-        warn "#{gem_ver} is untested"
+        warn "The current TaskWarrior version, #{gem_ver}, is untested"
       end
       gem_ver
     end

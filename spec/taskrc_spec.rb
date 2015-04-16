@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Rtasklib::Taskrc do
 
-  describe 'initialize with a test .taskrc' do
+  describe "initialize with a test .taskrc" do
     subject { Rtasklib::Taskrc.new("spec/data/.taskrc").config }
 
     it "creates a Virtus model representation" do
@@ -43,6 +43,12 @@ describe Rtasklib::Taskrc do
 
     it "treats floats correctly" do
       expect(subject.urgency_waiting_coefficient).to eq(-3.0)
+    end
+  end
+
+  describe "convert a TaskrcModel back to a string" do
+    subject do
+      taskrc = Rtasklib::Taskrc.new("spec/data/.taskrc")
     end
   end
 end
