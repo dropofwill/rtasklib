@@ -13,6 +13,7 @@ module Rtasklib
     attr_accessor :config
 
     def initialize rc
+      @config = Models::TaskrcModel.new().extend(Virtus.model)
       taskrc = {}
 
       File.open(rc).each do |line|
@@ -20,14 +21,11 @@ module Rtasklib
         taskrc.merge!(property) unless property.nil?
       end
 
-      create_model(taskrc)
+      add_to_model(taskrc)
     end
 
     private
-    def create_model rc_arr
-      config = Models::TaskrcModel.new
-      config.extend(Virtus.model)
-
+    def add_to_model rc_arr
       rc_arr.each do |k,v|
         if boolean? v
           config.attribute k.to_sym, Axiom::Types::Boolean
