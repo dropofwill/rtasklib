@@ -31,7 +31,7 @@ module Rtasklib
       @data_location = Pathname.new(data)
       @override = DEFAULT_CONFIG.merge(override)
       @create_new = create_new
-      @config = Rtasklib::Taskrc.new(rc)
+      @config = Rtasklib::Taskrc.new(rc_location)
 
       # Check TW version, and throw warning
       # begin
