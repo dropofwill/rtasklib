@@ -9,7 +9,7 @@ describe Rtasklib::Taskrc do
       expect(subject.class).to eq Rtasklib::Models::TaskrcModel
     end
 
-    it "dot paths are converted to underscores" do
+    it "attribute name dot paths are converted to underscores" do
       expect(subject.data_location).to eq "./.task"
     end
 
@@ -49,6 +49,19 @@ describe Rtasklib::Taskrc do
   describe "convert a TaskrcModel back to a string" do
     subject do
       taskrc = Rtasklib::Taskrc.new("spec/data/.taskrc")
+      taskrc.model_to_rc(:color, :calendar_offset, :json_array)
+    end
+
+    it "returns an array" do
+      expect(subject.class).to eq Array
+    end
+
+    it "returns an array of strings" do
+      expect(subject.first.class).to eq String
+    end
+
+    it "which are dot separated and use =" do
+      expect(subject.last).to eq "json.array=false"
     end
   end
 end
