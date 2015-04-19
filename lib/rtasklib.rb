@@ -46,6 +46,7 @@ module Rtasklib
       raw_ver, retval = Rtasklib::Execute.task(@create_new,
                                            "rc.data.location=#{data_location}",
                                            "_version")
+      p raw_ver, retval
       gem_ver = Gem::Version.new(raw_ver.chomp) if retval == 0
 
       if gem_ver < Gem::Version.new('2.4.0')
