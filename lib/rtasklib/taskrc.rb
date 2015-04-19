@@ -40,7 +40,7 @@ module Rtasklib
     # instance variable `config`
     #
     # @param taskrc_hash [Hash{Symbol=>String}]
-    # @return config [TaskrcModel] the instance variable config
+    # @return [Models::TaskrcModel] the instance variable config
     def hash_to_model taskrc_hash
       taskrc_hash.each do |attr, value|
         add_model_attr(attr, value)
@@ -53,7 +53,7 @@ module Rtasklib
     # TaskrcModel object
     #
     # @param rc_path [String,Pathname] a valid pathname to a .taskrc file
-    # @return config [TaskrcModel] the instance variable config
+    # @return [Models::TaskrcModel] the instance variable config
     def file_to_model rc_path
       taskrc = Hash[File.open(rc_path).map do |l|
         line_to_tuple(l)
@@ -64,7 +64,7 @@ module Rtasklib
 
     # Converts a line of the form "json.array=on" to [ :json_array, true ]
     #
-    # @param [String] a line from a .taskrc file
+    # @param line [String] a line from a .taskrc file
     # @return [Array<Symbol, Object>, nil] a valid line returns an array of
     #   length 2, invalid input returns nil
     def line_to_tuple line
