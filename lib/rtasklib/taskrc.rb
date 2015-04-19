@@ -3,58 +3,71 @@ require "virtus"
 module Rtasklib
 
   module Models
-    # contents dynamically defined by what attributes are read from
-    # `task config` or the given .taskrc
+    # A base Virtus model whose attributes are created dynamically based on the
+    # given attributes are read from a .taskrc or Hash
     class TaskrcModel
     end
   end
 
   class Taskrc
+    # @attr config [Models::TaskrcModel] a custom Virtus domain model
     attr_accessor :config
 
-    def initialize rc_path=nil, rc_data=nil
-      # generate a new dynamic model to add attributes to
+    # Generate a dynamic Virtus model, with the attributes defined by the input
+    #
+    # @param rc [Hash, Pathname] either a hash of attribute value pairs
+    #   or a Pathname to the raw taskrc file.
+    # @raise [TypeError] if rc is not of type Hash, String, or Pathname
+    # @raise [RuntimeError] if rc is a path and does not exist on the fs
+    def initialize rc
       @config = Models::TaskrcModel.new().extend(Virtus.model)
 
-      if rc_path
-        file_to_model(rc_path)
-      elsif rc_data
-        if rc_data.is_a? Hash
-          hash_to_model(rc_data)
+      if rc.is_a? Hash
+        hash_to_model(rc)
+      elsif rc.is_a? String or rc.is_a? Pathname
+        if path_exist?(rc)
+          file_to_model(rc)
         else
-          # TODO
-          # generate_from_string(rc_data)
-          raise NotImplementedError
+          raise RuntimeError.new("rc path does not exist on the file system")
         end
       else
-        raise ArgumentError.new("Neither a path or a data object given")
+        raise TypeError.new("no implicit conversion to Hash, String, or Pathname")
       end
     end
 
-    # -- Marshall data -- #
+    # Turn a hash of attribute => value pairs into a TaskrcModel object.
+    # There can be only one TaskrcModel object per Taskrc, it's saved to the
+    # instance variable `config`
+    #
+    # @param taskrc_hash [Hash{Symbol=>String}]
+    # @return config [TaskrcModel] the instance variable config
+    def hash_to_model taskrc_hash
+      taskrc_hash.each do |attr, value|
+        add_model_attr(attr, value)
+        set_model_attr_value(attr, value)
+      end
+      config
+    end
 
+    # Converts a .taskrc file path into a Hash that can be converted into a
+    # TaskrcModel object
+    #
+    # @param rc_path [String,Pathname] a valid pathname to a .taskrc file
+    # @return config [TaskrcModel] the instance variable config
     def file_to_model rc_path
       taskrc = Hash[File.open(rc_path).map do |l|
-        line_to_tuples(l)
+        line_to_tuple(l)
       end.compact!]
 
       hash_to_model(taskrc)
     end
 
-    # break "k.k.k"="v" into a Hash
-    # {k_k_k: "v"}
-    def line_to_h line
-      line = line.chomp.split('=', 2)
-
-      if line.size == 2
-        attr = get_hash_attr_from_rc line[0]
-        return { attr.to_sym => line[1] }
-      else
-        return nil
-      end
-    end
-
-    def line_to_tuples line
+    # Converts a line of the form "json.array=on" to [ :json_array, true ]
+    #
+    # @param [String] a line from a .taskrc file
+    # @return [Array<Symbol, Object>, nil] a valid line returns an array of
+    #   length 2, invalid input returns nil
+    def line_to_tuple line
       line = line.chomp.split('=', 2)
 
       if line.size == 2
@@ -63,15 +76,6 @@ module Rtasklib
       else
         return nil
       end
-    end
-
-    # Turn a hash of attribute, value pairs into a TaskrcModel object
-    def hash_to_model taskrc_hash
-      taskrc_hash.each do |attr, value|
-        add_model_attr(attr, value)
-        set_model_attr_value(attr, value)
-      end
-      return config
     end
 
     def to_s *attrs
@@ -124,6 +128,17 @@ module Rtasklib
 
     def get_rc_attr_from_hash attr
       return attr.gsub("_", ".")
+    end
+
+
+    def path_exist? path
+      if path.is_a? Pathname
+        return path.exist?
+      elsif path.is_a? String
+        return Pathname.new(path).exist?
+      else
+        return false
+      end
     end
 
 
