@@ -12,29 +12,26 @@ module Rtasklib
 
   class TaskWarrior
     attr_reader :version,  :rc_location, :data_location,
-                :override, :create_new,  :config
+                :override, :create_new,  :taskrc
 
     include Controller
 
     DEFAULT_CONFIG = {
-      json: {
-        array: 'true',
-      },
-      verbose: 'nothing',
-      confirmation: 'no',
-      dependency: {
-        confirmation: 'no',
-      },
+      json_array:              'true',
+      verbose:                 'nothing',
+      confirmation:            'no',
+      dependency_confirmation: 'no'
     }
 
     LOWEST_VERSION = Gem::Version.new('2.4.0')
 
-    def initialize rc="#{Dir.home}/.taskrc", data="#{Dir.home}/.task/",
-                   override=DEFAULT_CONFIG,  create_new=false
+    def initialize rc="#{Dir.home}/.taskrc", override=DEFAULT_CONFIG,
+                   create_new=false
+
       @rc_location   = Pathname.new(rc)
-      @data_location = Pathname.new(data)
-      @override      = DEFAULT_CONFIG.merge(override)
-      @config        = Rtasklib::Taskrc.new(rc_location)
+      @taskrc        = Rtasklib::Taskrc.new(rc_location)
+      @data_location = taskrc.config.data_location
+      @override      = Rtasklib::Taskrc.new(DEFAULT_CONFIG.merge(override))
       @create_new    = create_new
 
       # Check TaskWarrior version, and throw warning
@@ -42,7 +39,7 @@ module Rtasklib
         @version = get_version
         check_version(version)
       rescue
-        warn "Couldn't find TaskWarrior's version"
+        warn "Couldn't verify TaskWarrior's version"
         @version = nil
       end
     end
@@ -52,6 +49,5 @@ module Rtasklib
         warn "The current TaskWarrior version, #{version}, is untested"
       end
     end
-
   end
 end
