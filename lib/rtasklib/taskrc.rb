@@ -2,13 +2,8 @@ require "virtus"
 
 module Rtasklib
 
-  module Models
-    # A base Virtus model whose attributes are created dynamically based on the
-    # given attributes are read from a .taskrc or Hash
-    class TaskrcModel
-    end
-  end
-
+  # A class that wraps a single Virtus domain model with a number of creation
+  # and manipulation methods
   class Taskrc
     # @attr config [Models::TaskrcModel] a custom Virtus domain model
     attr_accessor :config

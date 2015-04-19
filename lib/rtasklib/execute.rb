@@ -6,7 +6,7 @@ require "stringio"
 
 module Rtasklib
 
-  class Execute
+  module Execute
     @@exp_regex = {
       create_rc: %r{Would \s you \s like \s a \s sample \s *.+ \s created, \s
                     so \s taskwarrior \s can \s proceed\? \s

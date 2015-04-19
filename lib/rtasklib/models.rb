@@ -19,9 +19,12 @@ module Rtasklib::Models
       'off' => false }
   end
 
-  class Taskrc
+  class TaskrcModel
+    # A base Virtus model whose attributes are created dynamically based on the
+    # given attributes are read from a .taskrc or Hash
+    #
+    # Dynamically add convert Boolean Strings to Ruby's Boolean values
     include RcBooleans
-    # dynamically add string or boolean attributes
   end
 
   class TaskModel

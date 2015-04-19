@@ -11,8 +11,10 @@ require "pathname"
 module Rtasklib
 
   class TaskWarrior
-    attr_reader :version, :rc_location, :data_location,
-                :override, :create_new, :config
+    attr_reader :version,  :rc_location, :data_location,
+                :override, :create_new,  :config
+
+    include Controller
 
     DEFAULT_CONFIG = {
       json: {
@@ -25,34 +27,31 @@ module Rtasklib
       },
     }
 
-    def initialize rc="#{Dir.home}/.taskrc", data="#{Dir.home}/.task/",
-                   override=DEFAULT_CONFIG, create_new=false
-      @rc_location = Pathname.new(rc)
-      @data_location = Pathname.new(data)
-      @override = DEFAULT_CONFIG.merge(override)
-      @create_new = create_new
-      @config = Rtasklib::Taskrc.new(rc_location)
+    LOWEST_VERSION = Gem::Version.new('2.4.0')
 
-      # Check TW version, and throw warning
+    def initialize rc="#{Dir.home}/.taskrc", data="#{Dir.home}/.task/",
+                   override=DEFAULT_CONFIG,  create_new=false
+      @rc_location   = Pathname.new(rc)
+      @data_location = Pathname.new(data)
+      @override      = DEFAULT_CONFIG.merge(override)
+      @config        = Rtasklib::Taskrc.new(rc_location)
+      @create_new    = create_new
+
+      # Check TaskWarrior version, and throw warning
       begin
-        @version = check_version
+        @version = get_version
+        check_version(version)
       rescue
         warn "Couldn't find TaskWarrior's version"
+        @version = nil
       end
     end
 
-    private
-    def check_version
-      raw_ver, retval = Rtasklib::Execute.task(@create_new,
-                                           "rc.data.location=#{data_location}",
-                                           "_version")
-      p raw_ver, retval
-      gem_ver = Gem::Version.new(raw_ver.chomp) if retval == 0
-
-      if gem_ver < Gem::Version.new('2.4.0')
+    def check_version version
+      if version < LOWEST_VERSION
         warn "The current TaskWarrior version, #{gem_ver}, is untested"
       end
-      gem_ver
     end
+
   end
 end
