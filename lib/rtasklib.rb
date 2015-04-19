@@ -49,7 +49,7 @@ module Rtasklib
 
     def check_version version
       if version < LOWEST_VERSION
-        warn "The current TaskWarrior version, #{gem_ver}, is untested"
+        warn "The current TaskWarrior version, #{version}, is untested"
       end
     end
 
