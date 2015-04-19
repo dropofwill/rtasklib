@@ -11,7 +11,7 @@ require "pathname"
 module Rtasklib
 
   class TaskWarrior
-    attr_reader :taskrc, :version, :rc_location, :data_location,
+    attr_reader :version, :rc_location, :data_location,
                 :override, :create_new, :config
 
     DEFAULT_CONFIG = {

@@ -12,29 +12,34 @@ module Rtasklib
   class Taskrc
     attr_accessor :config
 
-    def initialize rc_path=nil, data=nil
+    def initialize rc_path=nil, rc_data=nil
+      # generate a new dynamic model to add attributes to
       @config = Models::TaskrcModel.new().extend(Virtus.model)
 
       if rc_path
         generate_from_file(rc_path)
-      elsif data
-        # TODO
-        # generate_from_string(data)
-        raise NotImplementedError
+      elsif rc_data
+        if rc_data.is_a? Hash
+          generate_from_hash(rc_data)
+        else
+          # TODO
+          # generate_from_string(rc_data)
+          raise NotImplementedError
+        end
       else
-        raise ArgumentError.new("Neither a path of a data object given")
+        raise ArgumentError.new("Neither a path or a data object given")
       end
     end
 
     # -- Marshall data -- #
 
-    def generate_from_file rc_path
-      taskrc = {}
+    def generate_from_hash rc_hash
+    end
 
-      File.open(rc_path).each do |line|
-        property = line_to_h(line) unless line.nil?
-        taskrc.merge!(property) unless property.nil?
-      end
+    def generate_from_file rc_path
+      taskrc = Hash[File.open(rc_path).map do |l|
+        line_to_tuples(l)
+      end.compact!]
 
       hash_to_model(taskrc)
     end
@@ -47,6 +52,17 @@ module Rtasklib
       if line.size == 2
         attr = get_hash_attr_from_rc line[0]
         return { attr.to_sym => line[1] }
+      else
+        return nil
+      end
+    end
+
+    def line_to_tuples line
+      line = line.chomp.split('=', 2)
+
+      if line.size == 2
+        attr = get_hash_attr_from_rc line[0]
+        return [ attr.to_sym, line[1] ]
       else
         return nil
       end
