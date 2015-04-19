@@ -17,10 +17,10 @@ module Rtasklib
       @config = Models::TaskrcModel.new().extend(Virtus.model)
 
       if rc_path
-        generate_from_file(rc_path)
+        file_to_model(rc_path)
       elsif rc_data
         if rc_data.is_a? Hash
-          generate_from_hash(rc_data)
+          hash_to_model(rc_data)
         else
           # TODO
           # generate_from_string(rc_data)
@@ -33,10 +33,7 @@ module Rtasklib
 
     # -- Marshall data -- #
 
-    def generate_from_hash rc_hash
-    end
-
-    def generate_from_file rc_path
+    def file_to_model rc_path
       taskrc = Hash[File.open(rc_path).map do |l|
         line_to_tuples(l)
       end.compact!]
