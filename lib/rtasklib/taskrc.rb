@@ -40,7 +40,7 @@ module Rtasklib
     end
 
     # break "k.k.k"="v" into a Hash
-    # [k_k_k: "v"}
+    # {k_k_k: "v"}
     def line_to_h line
       line = line.chomp.split('=', 2)
 
@@ -61,23 +61,27 @@ module Rtasklib
       return config
     end
 
+    def to_s *attrs
+      model_to_rc(*attrs).join("\n")
+    end
+
     # Serialize the given attrs model back to taskrc format
     # If attrs is nil, then default to all attributes
-    def model_to_rc *attrs
-      serial = []
-
-      attrs.each do |attr|
-        puts attr
+    def part_of_model_to_rc *attrs
+      attrs.map do |attr|
         value = get_model_attr_value attr
         hash_attr = get_rc_attr_from_hash attr.to_s
-        puts hash_attr, value
-        serial = serial.push("#{hash_attr}=#{value}")
+        attr = "#{hash_attr}=#{value}"
       end
-      return serial
+    end
+
+    def model_to_rc
+      part_of_model_to_rc config.attributes.keys
     end
 
     # Dynamically add a Virtus attr, detect Boolean, Integer, and Float types
     # based on the value, otherwise just treat it like a string.
+    # Int needs to precede float because ints are also floats
     # TODO: May also be able to detect arrays
     def add_model_attr attr, value
       if boolean? value

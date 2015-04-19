@@ -46,10 +46,10 @@ describe Rtasklib::Taskrc do
     end
   end
 
-  describe "convert a TaskrcModel back to a string" do
+  describe "convert a TaskrcModel back to an Array of Task config strings" do
     subject do
       taskrc = Rtasklib::Taskrc.new("spec/data/.taskrc")
-      taskrc.model_to_rc(:color, :calendar_offset, :json_array)
+      taskrc.part_of_model_to_rc(:color, :calendar_offset, :json_array)
     end
 
     it "returns an array" do
@@ -62,6 +62,17 @@ describe Rtasklib::Taskrc do
 
     it "which are dot separated and use =" do
       expect(subject.last).to eq "json.array=false"
+    end
+  end
+
+  describe "convert a TaskrcModel back to a single Task config string" do
+    subject do
+      taskrc = Rtasklib::Taskrc.new("spec/data/.taskrc")
+      taskrc.part_of_model_to_rc(:color, :json_array).join("\n")
+    end
+
+    it "Returns a new line separated string" do
+      expect(subject).to eq "color=true\njson.array=false"
     end
   end
 end
