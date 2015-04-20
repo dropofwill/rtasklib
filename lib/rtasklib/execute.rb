@@ -6,6 +6,7 @@ require "stringio"
 
 module Rtasklib
 
+  # How to execute shell commands and capture output
   module Execute
     @@exp_regex = {
       create_rc: %r{Would \s you \s like \s a \s sample \s *.+ \s created, \s

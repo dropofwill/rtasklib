@@ -21,11 +21,10 @@ module Rtasklib
       end
     end
 
-    private
-
     # Convert "1.6.2 (adf342jsd)" to Gem::Version object
     def to_gem_version raw
-      std_ver = raw.chomp.gsub(' ', '.').delete('(',')')
+      std_ver = raw.chomp.gsub(' ','.').delete('(').delete(')')
+      p std_ver
       Gem::Version.new std_ver
     end
   end
