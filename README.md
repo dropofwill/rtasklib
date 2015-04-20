@@ -1,6 +1,6 @@
 # Rtasklib
 
-[![Coverage Status](https://travis-ci.org/dropofwill/rtasklib.svg?branch=master)](https://travis-ci.org/dropofwill/rtasklib) [![Coverage Status](https://coveralls.io/repos/dropofwill/rtasklib/badge.svg?branch=master)](https://coveralls.io/r/dropofwill/rtasklib?branch=master)
+[![Coverage Status](https://travis-ci.org/dropofwill/rtasklib.svg?branch=master)](https://travis-ci.org/dropofwill/rtasklib) [![Coverage Status](https://coveralls.io/repos/dropofwill/rtasklib/badge.svg?branch=master)](https://coveralls.io/r/dropofwill/rtasklib?branch=master) [![yard docs](http://b.repl.ca/v1/yard-docs-blue.png)](http://will-paul.com/rtasklib)
 
 
 ## Description
