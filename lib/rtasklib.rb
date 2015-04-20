@@ -20,21 +20,19 @@ module Rtasklib
       json_array:              'true',
       verbose:                 'nothing',
       confirmation:            'no',
-      dependency_confirmation: 'no'
-    }
+      dependency_confirmation: 'no',
+      exit_on_missing_db:      'yes', }
 
     LOWEST_VERSION = Gem::Version.new('2.4.0')
 
-    def initialize rc="#{Dir.home}/.taskrc", override=DEFAULT_CONFIG,
-                   create_new=false
+    def initialize rc="#{Dir.home}/.taskrc", override=DEFAULT_CONFIG
 
       @rc_location   = Pathname.new(rc)
       @taskrc        = Rtasklib::Taskrc.new(rc_location)
       @data_location = taskrc.config.data_location
       @override      = Rtasklib::Taskrc.new(DEFAULT_CONFIG.merge(override))
-      @create_new    = create_new
 
-      # Check TaskWarrior version, and throw warning
+      # Check TaskWarrior version, and throw warning if unavailable
       begin
         @version = get_version
         check_version(version)

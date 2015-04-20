@@ -73,8 +73,12 @@ module Rtasklib
       end
     end
 
-    def to_s *attrs
-      model_to_rc(*attrs).join("\n")
+    def model_to_s
+      model_to_rc(config.attributes.keys).join(" ")
+    end
+
+    def part_of_model_to_s *attrs
+      part_of_model_to_rc(*attrs).join(" ")
     end
 
     # Serialize the given attrs model back to taskrc format
@@ -83,7 +87,7 @@ module Rtasklib
       attrs.map do |attr|
         value = get_model_attr_value attr
         hash_attr = get_rc_attr_from_hash attr.to_s
-        attr = "#{hash_attr}=#{value}"
+        attr = "rc.#{hash_attr}=#{value}"
       end
     end
 
