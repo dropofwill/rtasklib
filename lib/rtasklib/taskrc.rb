@@ -74,7 +74,7 @@ module Rtasklib
     end
 
     def model_to_s
-      model_to_rc(config.attributes.keys).join(" ")
+      model_to_rc().join(" ")
     end
 
     def part_of_model_to_s *attrs
@@ -92,7 +92,7 @@ module Rtasklib
     end
 
     def model_to_rc
-      part_of_model_to_rc config.attributes.keys
+      part_of_model_to_rc(*config.attributes.keys)
     end
 
     # Dynamically add a Virtus attr, detect Boolean, Integer, and Float types
