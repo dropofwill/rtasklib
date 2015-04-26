@@ -12,8 +12,7 @@ module Rtasklib
     end
 
     def get_version
-      raw, ec = Execute.task(@create_new, "rc.data.location=#{data_location}",
-                                       "_version")
+      raw, ec = Execute.task(@override_str, "_version")
       if ec == 0
         return to_gem_version(raw)
       else

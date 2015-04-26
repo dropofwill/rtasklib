@@ -16,7 +16,7 @@ module Rtasklib
 
     include Controller
 
-    DEFAULT_CONFIG = {
+    DEFAULTS = {
       json_array:              'true',
       verbose:                 'nothing',
       confirmation:            'no',
@@ -25,13 +25,13 @@ module Rtasklib
 
     LOWEST_VERSION = Gem::Version.new('2.4.0')
 
-    def initialize rc="#{Dir.home}/.taskrc", override_h=DEFAULT_CONFIG
+    def initialize rc="#{Dir.home}/.taskrc", override_h=DEFAULTS
 
       @rc_location   = Pathname.new(rc)
       @taskrc        = Rtasklib::Taskrc.new(rc_location)
       @data_location = taskrc.config.data_location
       override_h     = override_h.merge({data_location: data_location})
-      @override      = Rtasklib::Taskrc.new(DEFAULT_CONFIG.merge(override_h))
+      @override      = Rtasklib::Taskrc.new(DEFAULTS.merge(override_h))
       @override_str  = override.model_to_s
 
       # Check TaskWarrior version, and throw warning if unavailable

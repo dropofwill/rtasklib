@@ -13,6 +13,21 @@ module Rtasklib
                     so \s taskwarrior \s can \s proceed\? \s
                     \(yes/no\)}x }
 
+    # popen versions
+    #
+    def self.popen3 program='task', *opts, &block
+      execute = opts.unshift(program)
+      p execute
+
+      Open3.popen3(execute) do |i, o, e, t|
+        o.each_line do |l|
+          if /\{.*\}/ =~ l
+            p l
+          end
+        end
+      end
+    end
+
     # Use ruby_expect to manage procedures
     def self.run program="task", *opts
       options = opts.join(" ") unless opts.nil?
