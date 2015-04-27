@@ -11,6 +11,10 @@ module Rtasklib
     def get
     end
 
+    def all
+      res, ec = Execute.task(@override_str, "export")
+    end
+
     def get_version
       raw, ec = Execute.task(@override_str, "_version")
       if ec == 0

@@ -8,6 +8,9 @@ module Rtasklib
 
   # How to execute shell commands and capture output
   module Execute
+    # so that the methods are available within the modules lookup path
+    extend self
+
     @@exp_regex = {
       create_rc: %r{Would \s you \s like \s a \s sample \s *.+ \s created, \s
                     so \s taskwarrior \s can \s proceed\? \s
@@ -15,21 +18,25 @@ module Rtasklib
 
     # popen versions
     #
-    def self.popen3 program='task', *opts, &block
+    def popen3 program='task', *opts, &block
+      res = []
       execute = opts.unshift(program)
       p execute
 
       Open3.popen3(execute) do |i, o, e, t|
         o.each_line do |l|
           if /\{.*\}/ =~ l
-            p l
+            p l.chomp
+            res.push(l.chomp)
           end
         end
       end
+
+      return res
     end
 
     # Use ruby_expect to manage procedures
-    def self.run program="task", *opts
+    def run program="task", *opts
       options = opts.join(" ") unless opts.nil?
       execute = "#{program} #{options}"
       p execute
@@ -40,13 +47,13 @@ module Rtasklib
       end
     end
 
-    def self.task create_new, *opts, &block
+    def task create_new, *opts, &block
       exp_regex = @@exp_regex
       retval = 0
       res = nil
       buff = ""
 
-      self.run("task", *opts) do |exp, procedure|
+      run("task", *opts) do |exp, procedure|
         res = procedure.any do
           puts exp
           expect exp_regex[:create_rc] do
@@ -66,7 +73,7 @@ module Rtasklib
     end
 
 
-    def self.task_run create_new, *opts
+    def task_run create_new, *opts
       options = opts.join(" ") unless opts.nil?
       execute = "task #{options}"
       p execute
@@ -104,7 +111,7 @@ module Rtasklib
     # Spawns a process running the given program with an optional list of opts
     # Yields a block to handle user input as needed
     # See http://bit.ly/1NJymxb
-    # def self.run program="task", *opts
+    # def run program="task", *opts
     #   options = opts.join(" ") if opts.nil?
     #   execute = "#{program} #{options}"
     #   output = []
@@ -125,8 +132,8 @@ module Rtasklib
     #   return output, $?.exitstatus
     # end
     #
-    # def self.task create_new, *opts
-    #   self.run("task", opts) do |stdout, stdin, pid|
+    # def task create_new, *opts
+    #   run("task", opts) do |stdout, stdin, pid|
     #     output = []
     #     until stdout.eof? do
     #       output << stdout.readline
