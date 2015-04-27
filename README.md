@@ -31,7 +31,7 @@ Or install it yourself as:
 
 * Ruby > 2 (currently untested on older versions)
 
-* See `./task_time.gemspec` for the latest Ruby dependencies
+* See `./rtasklib.gemspec` for the latest Ruby dependencies
 
 
 ## Usage
