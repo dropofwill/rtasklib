@@ -19,11 +19,17 @@ module Rtasklib
     # popen versions
     #
     def popen3 program='task', *opts, &block
-      res = []
       execute = opts.unshift(program)
       p execute
 
       Open3.popen3(execute) do |i, o, e, t|
+        block.call(i, o, e, t) if block_given?
+      end
+    end
+
+    def each_popen3 program='task', *opts, &block
+      res = []
+      popen3(program, *opts) do |i, o, e, t|
         o.each_line do |l|
           if /\{.*\}/ =~ l
             p l.chomp
@@ -31,8 +37,7 @@ module Rtasklib
           end
         end
       end
-
-      return res
+      res
     end
 
     # Use ruby_expect to manage procedures
