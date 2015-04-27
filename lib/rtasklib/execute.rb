@@ -20,7 +20,8 @@ module Rtasklib
     #
     def popen3 program='task', *opts, &block
       execute = opts.unshift(program)
-      p execute
+      execute = execute.join(" ")
+      p(execute)
 
       Open3.popen3(execute) do |i, o, e, t|
         block.call(i, o, e, t) if block_given?
@@ -28,16 +29,20 @@ module Rtasklib
     end
 
     def each_popen3 program='task', *opts, &block
-      res = []
+      res, ec = [], 0
+
       popen3(program, *opts) do |i, o, e, t|
         o.each_line do |l|
-          if /\{.*\}/ =~ l
+          # Non-greedy json object detection
+          # if /\{.*\}/ =~ l
             p l.chomp
             res.push(l.chomp)
-          end
+          # end
         end
+        ec = t.value
       end
-      res
+
+      return res, ec
     end
 
     # Use ruby_expect to manage procedures
@@ -112,51 +117,5 @@ module Rtasklib
     #   1     : "1"
     #   and joined with ","
     #   [1...5, 8, 9] : "1-5,8,9"
-
-    # Spawns a process running the given program with an optional list of opts
-    # Yields a block to handle user input as needed
-    # See http://bit.ly/1NJymxb
-    # def run program="task", *opts
-    #   options = opts.join(" ") if opts.nil?
-    #   execute = "#{program} #{options}"
-    #   output = []
-    #
-    #   begin
-    #     PTY.spawn(execute) do |stdout, stdin, pid|
-    #       begin
-    #         # puts stdout.each { |line| puts line }
-    #       rescue Errno::EIO
-    #       end
-    #
-    #       output = yield stdout, stdin, pid
-    #     end
-    #   rescue PTY::ChildExited
-    #     puts "Child process exited"
-    #   end
-    #
-    #   return output, $?.exitstatus
-    # end
-    #
-    # def task create_new, *opts
-    #   run("task", opts) do |stdout, stdin, pid|
-    #     output = []
-    #     until stdout.eof? do
-    #       output << stdout.readline
-    #     end
-    #     print output
-    #
-    #     # Handle initialization of the TW database
-    #     stdout.expect(@exp_regex[:create_rc], 5) do
-    #       puts "yolo swag"
-    #       # if create_new
-    #       #   stdin.write "yes"
-    #       # else
-    #       stdin.write "no"
-    #       # end
-    #     end
-    #   end
-    #
-    #   return output
-    # end
   end
 end

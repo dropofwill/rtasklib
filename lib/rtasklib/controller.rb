@@ -13,7 +13,8 @@ module Rtasklib
     end
 
     def all
-      res, ec = Execute.task(@override_str, "export")
+      # res, ec = Execute.task(@override_str, "export")
+      res, ec = Execute.each_popen3("task", *@override_a, "export")
     end
 
     def get_version

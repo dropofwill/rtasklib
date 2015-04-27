@@ -71,7 +71,7 @@ module Rtasklib
     def line_to_tuple line
       line = line.chomp.split('=', 2)
 
-      if line.size == 2 and line.include? "#"
+      if line.size == 2 and not line.include? "#"
         attr = get_hash_attr_from_rc line[0]
         return [ attr.to_sym, line[1] ]
       else
