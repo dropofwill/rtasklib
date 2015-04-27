@@ -28,11 +28,11 @@ module Rtasklib
     def initialize rc="#{Dir.home}/.taskrc", override_h=DEFAULTS
 
       @rc_location   = File.expand_path(rc)
-      @taskrc        = Rtasklib::Taskrc.new(rc_location)
+      @taskrc        = Taskrc.new(rc_location)
       @data_location = File.expand_path(taskrc.config.data_location, Pathname.new(rc_location).dirname).to_s
 
       override_h     = override_h.merge({data_location: data_location})
-      @override      = Rtasklib::Taskrc.new(DEFAULTS.merge(override_h))
+      @override      = Taskrc.new(DEFAULTS.merge(override_h))
       @override_str  = override.model_to_s
       @override_a    = override_str.split(" ")
 

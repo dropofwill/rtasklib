@@ -38,9 +38,9 @@ module Rtasklib::Models
     # Required for every task
     attribute :description,   String
     # But on creation these should be set by `task`
-    attribute :status,        String, writer: :private
-    attribute :uuid,          UUID,   writer: :private
-    attribute :entry,         Date,   writer: :private
+    attribute :status,        String
+    attribute :uuid,          String
+    attribute :entry,         Date
 
     # Optional for every task
     attribute :start,         Date
@@ -50,6 +50,7 @@ module Rtasklib::Models
     attribute :tags,          Array[String]
     attribute :project,       String
     attribute :depends,       String
+    attribute :urgency,       Float
     # is calculated, so maybe private?
     attribute :priority,      String
 
@@ -69,9 +70,9 @@ module Rtasklib::Models
     attribute :parent,        UUID
 
     # Internal attributes should be read-only
-    attribute :mask,          String, writer: :private
-    attribute :imask,         String, writer: :private
-    attribute :modified,      String, writer: :private
+    attribute :mask,          String
+    attribute :imask,         String
+    attribute :modified,      Date
 
     # TODO: handle arbitrary UDA's
 

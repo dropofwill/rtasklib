@@ -1,3 +1,6 @@
+require "multi_json"
+require "oj"
+
 module Rtasklib
 
   module Controller
@@ -13,8 +16,10 @@ module Rtasklib
     end
 
     def all
-      # res, ec = Execute.task(@override_str, "export")
       res, ec = Execute.each_popen3("task", *@override_a, "export")
+      mj = res.map { |x| MultiJson.load(x) }
+      p mj
+      mm = mj.map { |x| Rtasklib::Models::TaskModel.new(x) }
     end
 
     def get_version
