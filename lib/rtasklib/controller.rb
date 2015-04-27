@@ -1,6 +1,7 @@
 module Rtasklib
 
   module Controller
+    extend self
 
     def create
     end

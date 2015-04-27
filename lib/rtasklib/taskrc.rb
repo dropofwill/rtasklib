@@ -17,9 +17,10 @@ module Rtasklib
     def initialize rc
       @config = Models::TaskrcModel.new().extend(Virtus.model)
 
-      if rc.is_a? Hash
+      case rc
+      when Hash
         hash_to_model(rc)
-      elsif rc.is_a? String or rc.is_a? Pathname
+      when String, Pathname
         if path_exist?(rc)
           file_to_model(rc)
         else
