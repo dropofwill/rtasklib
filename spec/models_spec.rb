@@ -21,13 +21,13 @@ describe Rtasklib::Models do
         expect(subject.description).to eq "Wash dishes"
       end
 
-      it "private attributes are not accessible directly" do
-        expect{subject.uuid = 1}.to raise_error NoMethodError
-      end
+      # it "private attributes are not accessible directly" do
+      #   expect{subject.uuid = 1}.to raise_error NoMethodError
+      # end
 
-      it "but can be set with dynamic private setters" do
-        expect(subject.set_uuid("10")).to eq "10"
-      end
+      # it "but can be set with dynamic private setters" do
+      #   expect(subject.set_uuid("10")).to eq "10"
+      # end
     end
 
   end
