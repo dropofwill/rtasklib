@@ -76,14 +76,6 @@ module Rtasklib::Models
 
     # TODO: handle arbitrary UDA's
 
-    # Setters for private attributes
-    def set_mask value; self.mask = value end
-    def set_imask value; self.imask = value end
-    def set_modified value; self.modified = value end
-    def set_status value; self.status = value end
-    def set_uuid value; self.uuid = value end
-    def set_date value; self.date = value end
-
     # Refactoring idea, need to understand Virtus internals a bit better
     # [:mask, :imask, :modified, :status, :uuid, :entry].each do |ro_attr|
     #   define_method("set_#{ro_attr.to_s}") do |value|

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Rtasklib::Taskrc do
 
   describe "initialize with a test .taskrc" do
-    subject { Rtasklib::Taskrc.new("spec/data/.taskrc").config }
+    subject { Rtasklib::Taskrc.new("spec/data/.taskrc", :path).config }
 
     it "creates a Virtus model representation" do
       expect(subject.class).to eq Rtasklib::Models::TaskrcModel
@@ -48,7 +48,7 @@ describe Rtasklib::Taskrc do
 
   describe "convert a TaskrcModel back to an Array of Task config strings" do
     subject do
-      taskrc = Rtasklib::Taskrc.new("spec/data/.taskrc")
+      taskrc = Rtasklib::Taskrc.new("spec/data/.taskrc", :path)
       taskrc.part_of_model_to_rc(:color, :calendar_offset, :json_array)
     end
 
@@ -67,7 +67,7 @@ describe Rtasklib::Taskrc do
 
   describe "convert a TaskrcModel into Task config string for CLI" do
     subject do
-      taskrc = Rtasklib::Taskrc.new("spec/data/.taskrc")
+      taskrc = Rtasklib::Taskrc.new("spec/data/.taskrc", :path)
       taskrc.part_of_model_to_s(:color, :json_array)
     end
 

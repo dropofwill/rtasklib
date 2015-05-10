@@ -1,4 +1,5 @@
 require "virtus"
+require "enumerator"
 
 module Rtasklib
 
@@ -14,15 +15,17 @@ module Rtasklib
     #   or a Pathname to the raw taskrc file.
     # @raise [TypeError] if rc is not of type Hash, String, or Pathname
     # @raise [RuntimeError] if rc is a path and does not exist on the fs
-    def initialize rc
+    def initialize rc, type=:raw
       @config = Models::TaskrcModel.new().extend(Virtus.model)
 
-      case rc
-      when Hash
+      case type
+      when :raw
+        mappable_to_model(rc.split("\n"))
+      when :hash
         hash_to_model(rc)
-      when String, Pathname
+      when :path
         if path_exist?(rc)
-          file_to_model(rc)
+          mappable_to_model(File.open(rc))
         else
           raise RuntimeError.new("rc path does not exist on the file system")
         end
@@ -53,14 +56,12 @@ module Rtasklib
     # @param rc_path [String,Pathname] a valid pathname to a .taskrc file
     # @return [Models::TaskrcModel] the instance variable config
     # @api private
-    def file_to_model rc_path
-      taskrc = Hash[File.open(rc_path).map do |l|
-        line_to_tuple(l)
-      end.compact!]
-
+    def mappable_to_model rc_file
+      rc_array = rc_file.map { |l| line_to_tuple(l) }.compact!
+      taskrc = Hash[rc_array]
       hash_to_model(taskrc)
     end
-    private :file_to_model
+    private :mappable_to_model
 
     # Converts a line of the form "json.array=on" to [ :json_array, true ]
     #

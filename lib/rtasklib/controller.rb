@@ -22,6 +22,10 @@ module Rtasklib
       mm = mj.map { |x| Rtasklib::Models::TaskModel.new(x) }
     end
 
+    def get_rc
+      raw, ec = Execute.task(@override_str, "_show")
+    end
+
     def get_version
       raw, ec = Execute.task(@override_str, "_version")
       if ec == 0
@@ -36,6 +40,9 @@ module Rtasklib
       std_ver = raw.chomp.gsub(' ','.').delete('(').delete(')')
       p std_ver
       Gem::Version.new std_ver
+    end
+
+    def handle_response raw, ec
     end
   end
 end
