@@ -29,8 +29,6 @@ module Rtasklib
     end
 
     # Checks if a given uda exists in the current task database
-    #
-    #
     def check_uda uda_name
       if get_udas.any? { |uda| uda == uda_name }
         true

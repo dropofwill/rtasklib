@@ -9,23 +9,20 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Will Paul"]
   spec.email         = ["whp3652@rit.edu"]
 
-  spec.summary       = %q{A Ruby wrapper around the TaskWarrior CLI, based on the Python tasklib}
-  spec.description   = %q{A Ruby wrapper around the TaskWarrior CLI, based on the Python tasklib. Requires a working TaskWarrior install.}
+  spec.summary       = %q{A Ruby wrapper around the TaskWarrior CLI}
+  spec.description   = %q{A Ruby wrapper around the TaskWarrior CLI. Requires a TaskWarrior install version 2.4.0 of greater.}
   spec.homepage      = "http://github.com/dropofwill/rtasklib"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
-  #.reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_dependency "virtus"
-  spec.add_dependency "ruby_expect"
   spec.add_dependency "activesupport"
   spec.add_dependency "activemodel"
   spec.add_dependency "active_model_serializers"
-  spec.add_dependency "ice_nine"
   spec.add_dependency "oj"
   spec.add_dependency "multi_json"
   spec.add_dependency "iso8601"

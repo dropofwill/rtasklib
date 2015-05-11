@@ -1,8 +1,4 @@
 require "open3"
-require "pty"
-require "expect"
-require "ruby_expect"
-require "stringio"
 
 module Rtasklib
 
