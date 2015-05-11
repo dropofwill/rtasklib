@@ -15,12 +15,12 @@ module Rtasklib
     #   or a Pathname to the raw taskrc file.
     # @raise [TypeError] if rc is not of type Hash, String, or Pathname
     # @raise [RuntimeError] if rc is a path and does not exist on the fs
-    def initialize rc, type=:raw
+    def initialize rc, type=:array
       @config = Models::TaskrcModel.new().extend(Virtus.model)
 
       case type
-      when :raw
-        mappable_to_model(rc.split("\n"))
+      when :array
+        mappable_to_model(rc)
       when :hash
         hash_to_model(rc)
       when :path
@@ -57,8 +57,8 @@ module Rtasklib
     # @return [Models::TaskrcModel] the instance variable config
     # @api private
     def mappable_to_model rc_file
-      rc_array = rc_file.map { |l| line_to_tuple(l) }.compact!
-      taskrc = Hash[rc_array]
+      rc_file.map! { |l| line_to_tuple(l) }.compact!
+      taskrc = Hash[rc_file]
       hash_to_model(taskrc)
     end
     private :mappable_to_model
@@ -74,6 +74,7 @@ module Rtasklib
 
       if line.size == 2 and not line.include? "#"
         attr = get_hash_attr_from_rc line[0]
+        p [ attr.to_sym, line[1] ]
         return [ attr.to_sym, line[1] ]
       else
         return nil

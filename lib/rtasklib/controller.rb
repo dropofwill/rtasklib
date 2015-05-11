@@ -23,7 +23,13 @@ module Rtasklib
     end
 
     def get_rc
-      raw, ec = Execute.task(@override_str, "_show")
+      res = []
+      Execute.task_popen3("task", *@override_a, "_show") do |i, o, e, t|
+        ec = t.value
+        handle_response(e, ec)
+        o.read.each_line { |l| res.push(l.chomp) }
+      end
+      Taskrc.new(res, :array)
     end
 
     def get_version
@@ -42,7 +48,12 @@ module Rtasklib
       Gem::Version.new std_ver
     end
 
-    def handle_response raw, ec
+    def handle_response stderr, ec, block=nil
+      block.call unless block.nil?
+      unless ec == 0
+        puts stderr.read
+        exit(-1)
+      end
     end
   end
 end

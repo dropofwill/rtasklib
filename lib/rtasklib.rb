@@ -11,8 +11,8 @@ require "pathname"
 module Rtasklib
 
   class TaskWarrior
-    attr_reader :version,  :rc_location, :data_location,
-                :override, :override_a,  :override_str, :create_new, :taskrc
+    attr_reader :version, :data_location, :taskrc, :create_new,
+                :override, :override_a, :override_str
 
     include Controller
 
@@ -25,17 +25,14 @@ module Rtasklib
 
     LOWEST_VERSION = Gem::Version.new('2.4.0')
 
-    def initialize rc="#{Dir.home}/.taskrc", override_h=DEFAULTS
+    def initialize data="#{Dir.home}/.task", override_h=DEFAULTS
 
-      @rc_location   = File.expand_path(rc)
-      @taskrc        = Taskrc.new(rc_location, :path)
-      @data_location = File.expand_path(taskrc.config.data_location,
-                                        Pathname.new(rc_location).dirname).to_s
-
-      override_h     = override_h.merge({data_location: data_location})
+      @data_location = data
+      @override_h    = override_h.merge({data_location: data_location})
       @override      = Taskrc.new(DEFAULTS.merge(override_h), :hash)
       @override_str  = override.model_to_s
       @override_a    = override_str.split(" ")
+      @config        = get_rc
 
       # Check TaskWarrior version, and throw warning if unavailable
       begin
