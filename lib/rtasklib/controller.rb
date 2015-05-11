@@ -16,44 +16,35 @@ module Rtasklib
     end
 
     def all
-      res, ec = Execute.each_popen3("task", *@override_a, "export")
-      mj = res.map { |x| MultiJson.load(x) }
-      p mj
-      mm = mj.map { |x| Rtasklib::Models::TaskModel.new(x) }
+      all = []
+      Execute.task_popen3(*@override_a, "export") do |i, o, e, t|
+        all = MultiJson.load(o.read).map do |x|
+          Rtasklib::Models::TaskModel.new(x)
+        end
+      end
+      return all
     end
 
     def get_rc
       res = []
-      Execute.task_popen3("task", *@override_a, "_show") do |i, o, e, t|
-        ec = t.value
-        handle_response(e, ec)
+      Execute.task_popen3(*@override_a, "_show") do |i, o, e, t|
         o.read.each_line { |l| res.push(l.chomp) }
       end
       Taskrc.new(res, :array)
     end
 
     def get_version
-      raw, ec = Execute.task(@override_str, "_version")
-      if ec == 0
-        return to_gem_version(raw)
-      else
-        return nil
+      version = nil
+      Execute.task_popen3(*@override_a, "_version") do |i, o, e, t|
+        version = to_gem_version(o.read.chomp)
       end
+      return version
     end
 
     # Convert "1.6.2 (adf342jsd)" to Gem::Version object
     def to_gem_version raw
       std_ver = raw.chomp.gsub(' ','.').delete('(').delete(')')
-      p std_ver
       Gem::Version.new std_ver
-    end
-
-    def handle_response stderr, ec, block=nil
-      block.call unless block.nil?
-      unless ec == 0
-        puts stderr.read
-        exit(-1)
-      end
     end
   end
 end

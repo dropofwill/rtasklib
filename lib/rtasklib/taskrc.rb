@@ -74,7 +74,6 @@ module Rtasklib
 
       if line.size == 2 and not line.include? "#"
         attr = get_hash_attr_from_rc line[0]
-        p [ attr.to_sym, line[1] ]
         return [ attr.to_sym, line[1] ]
       else
         return nil

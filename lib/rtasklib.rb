@@ -17,7 +17,7 @@ module Rtasklib
     include Controller
 
     DEFAULTS = {
-      json_array:              'false',
+      json_array:              'true',
       verbose:                 'nothing',
       confirmation:            'no',
       dependency_confirmation: 'no',
@@ -36,11 +36,9 @@ module Rtasklib
 
       # Check TaskWarrior version, and throw warning if unavailable
       begin
-        @version = get_version
-        check_version(version)
+        @version = check_version(get_version())
       rescue
         warn "Couldn't verify TaskWarrior's version"
-        @version = nil
       end
     end
 
@@ -48,6 +46,7 @@ module Rtasklib
       if version < LOWEST_VERSION
         warn "The current TaskWarrior version, #{version}, is untested"
       end
+      version
     end
   end
 end

@@ -21,8 +21,10 @@ module Rtasklib
     def popen3 program='task', *opts, &block
       execute = opts.unshift(program)
       execute = execute.join(" ")
+      p execute
 
       Open3.popen3(execute) do |i, o, e, t|
+        handle_response(e, t)
         yield(i, o, e, t) if block_given?
       end
     end
@@ -34,28 +36,29 @@ module Rtasklib
     def each_popen3 program='task', *opts, &block
       popen3(program, *opts) do |i, o, e, t|
         o.each_line do |l|
-          # Non-greedy json object detection
-          # if /\{.*\}/ =~ l
           yield(l, i, o, e, t)
-            # p l.chomp
-            # res.push(l.chomp)
-          # end
         end
       end
     end
 
-    # Use ruby_expect to manage procedures
-    def run program="task", *opts
-      options = opts.join(" ") unless opts.nil?
-      execute = "#{program} #{options}"
-      p execute
-
-      exp = RubyExpect::Expect.spawn(execute)
-      exp.procedure do
-        yield(exp, self)
+    def task_each_popen3 *opts, &block
+      popen3(program, *opts) do |i, o, e, t|
+        yield(i, o, e, t)
       end
     end
 
+    def handle_response stderr, thread
+      unless thread.value.success?
+        puts stderr.read
+        exit(-1)
+      end
+    end
+
+    # Non-greedy json object detection
+    # if /\{.*\}/ =~ l
+      # p l.chomp
+      # res.push(l.chomp)
+    # end
     # def task create_new, *opts, &block
     #   exp_regex = @@exp_regex
     #   retval = 0
@@ -74,40 +77,6 @@ module Rtasklib
     #       end
     #       block.call if block_given?
     #     end
-    #
-    #     buff = exp.buffer.clone.chomp!
-    #     retval = res unless res.nil?
-    #   end
-    #   return buff, retval
-    # end
-    #
-    #
-    # def task_run create_new, *opts
-    #   options = opts.join(" ") unless opts.nil?
-    #   execute = "task #{options}"
-    #   p execute
-    #
-    #   exp_regex = @@exp_regex
-    #   retval = 0
-    #   res = nil
-    #
-    #   exp = RubyExpect::Expect.spawn(execute)
-    #   exp.procedure do
-    #     p exp_regex
-    #     res = any do
-    #       expect exp_regex[:create_rc] do
-    #         if create_new
-    #           send "yes"
-    #         else
-    #           send "no"
-    #         end
-    #       end
-    #     end
-    #
-    #     retval = res unless res.nil?
-    #   end
-    #   return exp.buffer.clone.chomp!, retval
-    # end
 
     # Filters should be a list of values
     # Ranges interpreted as ids
