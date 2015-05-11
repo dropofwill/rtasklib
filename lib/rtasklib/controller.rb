@@ -25,10 +25,27 @@ module Rtasklib
       return all
     end
 
+    def get_udas
+      Execute.task_popen3(*@override_a, "_udas") do |i, o, e, t|
+        return o.read.each_line.map { |l| l.chomp }
+      end
+    end
+
+    # Checks if a given uda exists in the current task database
+    #
+    #
+    def check_uda uda_name
+      if get_udas.any? { |uda| uda == uda_name }
+        true
+      else
+        false
+      end
+    end
+
     def get_rc
       res = []
       Execute.task_popen3(*@override_a, "_show") do |i, o, e, t|
-        o.read.each_line { |l| res.push(l.chomp) }
+        res = o.read.each_line.map { |l| l.chomp }
       end
       Taskrc.new(res, :array)
     end
