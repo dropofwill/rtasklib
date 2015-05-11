@@ -6,15 +6,6 @@ module Rtasklib
   module Controller
     extend self
 
-    def create
-    end
-
-    def update
-    end
-
-    def get
-    end
-
     def all
       all = []
       Execute.task_popen3(*@override_a, "export") do |i, o, e, t|
@@ -22,7 +13,13 @@ module Rtasklib
           Rtasklib::Models::TaskModel.new(x)
         end
       end
-      return all
+      all
+    end
+
+    def update_config attr, val
+      Execute.task_popen3(*override_a, "config #{attr} #{val}") do |i, o, e, t|
+        return t.value
+      end
     end
 
     def get_udas
@@ -42,6 +39,11 @@ module Rtasklib
       end
     end
 
+    def create_uda name, label: nil, values: nil, default: nil, urgency: nil
+      label = name if label.nil?
+      p name, label, values, default, urgency
+    end
+
     def get_rc
       res = []
       Execute.task_popen3(*@override_a, "_show") do |i, o, e, t|
@@ -55,7 +57,7 @@ module Rtasklib
       Execute.task_popen3(*@override_a, "_version") do |i, o, e, t|
         version = to_gem_version(o.read.chomp)
       end
-      return version
+      version
     end
 
     # Convert "1.6.2 (adf342jsd)" to Gem::Version object
