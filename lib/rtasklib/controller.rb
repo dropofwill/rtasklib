@@ -37,9 +37,16 @@ module Rtasklib
       end
     end
 
-    def create_uda name, label: nil, values: nil, default: nil, urgency: nil
+    def create_uda name, type: "string", label: nil, values: nil,
+                   default: nil, urgency: nil
       label = name if label.nil?
       p name, label, values, default, urgency
+
+      update_config "uda.#{name}.type",  type
+      update_config "uda.#{name}.label", label
+      update_config "uda.#{name}.values",  values unless values.nil?
+      update_config "uda.#{name}.default", default unless default.nil?
+      update_config "uda.#{name}.urgency", urgency unless urgency.nil?
     end
 
     def get_rc
