@@ -2,7 +2,6 @@ require_relative "rtasklib/version"
 require_relative "rtasklib/models"
 require_relative "rtasklib/execute"
 require_relative "rtasklib/controller"
-require_relative "rtasklib/serializer"
 require_relative "rtasklib/taskrc"
 
 require "open3"
