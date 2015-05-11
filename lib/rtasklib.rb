@@ -25,13 +25,12 @@ module Rtasklib
 
     LOWEST_VERSION = Gem::Version.new('2.4.0')
 
-    def initialize data="#{Dir.home}/.task", override_h=DEFAULTS
+    def initialize data="#{Dir.home}/.task", opts = {}
 
       @data_location = data
-      @override_h    = override_h.merge({data_location: data_location})
-      @override      = Taskrc.new(DEFAULTS.merge(override_h), :hash)
-      @override_str  = override.model_to_s
-      @override_a    = override_str.split(" ")
+      override_h     = DEFAULTS.merge({data_location: data}).merge(opts)
+      @override      = Taskrc.new(override_h, :hash)
+      @override_a    = override.model_to_rc
       @config        = get_rc
 
       # Check TaskWarrior version, and throw warning if unavailable
