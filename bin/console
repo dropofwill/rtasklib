@@ -9,6 +9,6 @@ require "bundler/setup"
 require_relative "../lib/rtasklib"
 require "pry"
 
-tw = Rtasklib::TaskWarrior.new("./spec/data/.taskrc")
+tw = Rtasklib::TaskWarrior.new("./spec/data/.task")
 
 binding.pry
