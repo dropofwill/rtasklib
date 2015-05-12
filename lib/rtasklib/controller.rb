@@ -20,16 +20,48 @@ module Rtasklib
       all
     end
 
-    def filter ids: nil, tags: nil, query: nil
+    def filter ids: nil, tags: nil, dom: nil
+      ids  = process_ids(ids)   unless ids.nil?
+      tags = process_tags(tags) unless tags.nil?
+      dom  = process_dom(dom)   unless dom.nil?
+      f = ""
+    end
+    private :filter
+
+    def process_ids ids
+      case ids
+      when Range
+        ids.to_a.join(",")
+      when Array
+        ids.join(",")
+      when String
+        ids.delete(" ")
+      when Fixnum
+        ids
+      end
+    end
+
+    def process_tags tags
+    end
+
+    def process_dom dom
     end
 
     def add!
     end
 
-    # def modify! attr:, val:, ids: nil, tags: nil, query: nil
-    # end
+    def modify! attr:, val:, ids: nil, tags: nil, dom: nil
+      f = filter(ids, tags, dom)
+      query = "#{f} modify #{attr} #{val}"
+      Execute.task_popen3(*override_a, query) do |i, o, e, t|
+        return t.value
+      end
+    end
 
     def undo!
+      Execute.task_popen3(*override_a, "undo") do |i, o, e, t|
+        return t.value
+      end
     end
 
     def update_config! attr, val
