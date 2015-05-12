@@ -7,3 +7,6 @@ RSpec::Core::RakeTask.new :spec do |task|
 end
 
 task default: :spec
+
+task :build_rpm do
+end
