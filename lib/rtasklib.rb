@@ -2,15 +2,15 @@ require_relative "rtasklib/version"
 require_relative "rtasklib/models"
 require_relative "rtasklib/execute"
 require_relative "rtasklib/controller"
+require_relative "rtasklib/helpers"
 require_relative "rtasklib/taskrc"
 
-require "open3"
 require "pathname"
 
 module Rtasklib
 
   class TaskWarrior
-    attr_reader :version, :data_location, :taskrc,
+    attr_reader :version, :data_location, :taskrc, :udas,
                 :override, :override_a, :override_str
 
     include Controller
@@ -31,6 +31,8 @@ module Rtasklib
       @override      = Taskrc.new(override_h, :hash)
       @override_a    = override.model_to_rc
       @taskrc        = get_rc
+      @udas          = get_udas
+      add_uda_to_model udas
 
       # Check TaskWarrior version, and throw warning if unavailable
       begin

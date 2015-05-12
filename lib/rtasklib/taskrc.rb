@@ -123,7 +123,6 @@ module Rtasklib
 
     # Dynamically add a Virtus attr, detect Boolean, Integer, and Float types
     # based on the value, otherwise just treat it like a string.
-    # Int needs to precede float because ints are also floats
     # Modifies the config instance variable
     # TODO: May also be able to detect arrays
     #
@@ -132,15 +131,16 @@ module Rtasklib
     # @return [undefined]
     # @api private
     def add_model_attr attr, value
-      if boolean? value
-        config.attribute attr.to_sym, Axiom::Types::Boolean
-      elsif integer? value
-        config.attribute attr.to_sym, Integer
-      elsif float? value
-        config.attribute attr.to_sym, Float
-      else
-        config.attribute attr.to_sym, String
-      end
+      config.attribute(attr.to_sym, Helpers.determine_type(value))
+      # if boolean? value
+      #   config.attribute attr.to_sym, Axiom::Types::Boolean
+      # elsif integer? value
+      #   config.attribute attr.to_sym, Integer
+      # elsif float? value
+      #   config.attribute attr.to_sym, Float
+      # else
+      #   config.attribute attr.to_sym, String
+      # end
     end
     private :add_model_attr
 
@@ -194,20 +194,5 @@ module Rtasklib
       end
     end
     private :path_exist?
-
-    def integer? value
-      value.to_i.to_s == value
-    end
-    private :integer?
-
-    def float? value
-      Float(value) rescue false
-    end
-    private :float?
-
-    def boolean? value
-      ["on", "off", "yes", "no", "false", "true"].include? value.to_s.downcase
-    end
-    private :boolean?
   end
 end

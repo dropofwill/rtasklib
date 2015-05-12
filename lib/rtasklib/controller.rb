@@ -40,6 +40,7 @@ module Rtasklib
         ids
       end
     end
+    private :process_ids
 
     def process_tags tags
     end
@@ -96,14 +97,23 @@ module Rtasklib
     def arbitrary_attr attr, depth: 1
       attr.to_s.split("_")[depth]
     end
+    private :arbitrary_attr
 
     # Returns all attribute string after given depth
     def deep_attr attr, depth: 2
       attr.to_s.split("_")[depth..-1].join("_")
     end
     private :deep_attr
-    
 
+    def add_uda_to_model uda_hash, model=Rtasklib::Models::TaskModel
+      uda_hash.each do |uda|
+        uda.each do |attr, val|
+          model.attribute attr, String
+        end
+      end
+    end
+    private :add_uda_to_model
+    
     # Retrieve an array of the uda names
     #
     # @return [Array<String>]
@@ -163,6 +173,5 @@ module Rtasklib
       Gem::Version.new std_ver
     end
     private :to_gem_version
-
   end
 end

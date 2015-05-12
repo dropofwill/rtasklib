@@ -1,22 +1,46 @@
 require "virtus"
 require "active_model"
+require 'iso8601'
+require 'date'
 
 module Rtasklib::Models
-  ValidationError = Class.new RuntimeError
 
-  class UUID < Virtus::Attribute
-    def coerce(value)
-      value.to_s
+  # A subclass of the ISO8601::Duration object that use `task calc` to parse
+  # string names like 'weekly', 'biannual', and '3 quarters'
+  #
+  # Modifies the #initialize method, preserving the original string duration
+  class TWDuration < ISO8601::Duration
+    attr_accessor :negative
+    attr_reader   :frozen_value
+
+    def initialize input, base=nil
+      @frozen_value = input.dup.freeze
+      @negative = false
+      parsed = `task calc #{input}`.chomp
+
+      if parsed.include?("-")
+        parsed.gsub!(/\-/, "")
+        negative = true
+      else
+        negative = false
+      end
+
+      super parsed, base
+    end
+  end
+
+  # Custom coercer to change a string input into an TWDuration object
+  class VirtusDuration < Virtus::Attribute
+    def coerce(v)
+      if v.nil? || v.blank? then "" else TWDuration.new(v) end
     end
   end
 
   RcBooleans = Virtus.model do |mod|
     mod.coerce = true
     mod.coercer.config.string.boolean_map = {
-      'no'  => false,
-      'yes' => true,
-      'on'  => true,
-      'off' => false }
+      'yes' => true,  'on'  => true,
+      'no'  => false, 'off' => false }
   end
 
   class TaskrcModel
@@ -61,7 +85,7 @@ module Rtasklib::Models
     attribute :wait,          DateTime
 
     # Required only for tasks that are Recurring or have Recurring Parent
-    attribute :recur,         DateTime
+    attribute :recur,         VirtusDuration
 
     # Optional except for tasks with Recurring Parents
     attribute :due,           DateTime
@@ -73,8 +97,6 @@ module Rtasklib::Models
     attribute :mask,          String
     attribute :imask,         String
     attribute :modified,      DateTime
-
-    # TODO: handle arbitrary UDA's
 
     # Refactoring idea, need to understand Virtus internals a bit better
     # [:mask, :imask, :modified, :status, :uuid, :entry].each do |ro_attr|
