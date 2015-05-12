@@ -132,15 +132,6 @@ module Rtasklib
     # @api private
     def add_model_attr attr, value
       config.attribute(attr.to_sym, Helpers.determine_type(value))
-      # if boolean? value
-      #   config.attribute attr.to_sym, Axiom::Types::Boolean
-      # elsif integer? value
-      #   config.attribute attr.to_sym, Integer
-      # elsif float? value
-      #   config.attribute attr.to_sym, Float
-      # else
-      #   config.attribute attr.to_sym, String
-      # end
     end
     private :add_model_attr
 
