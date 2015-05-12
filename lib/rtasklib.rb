@@ -10,7 +10,7 @@ require "pathname"
 module Rtasklib
 
   class TaskWarrior
-    attr_reader :version, :data_location, :taskrc, :create_new,
+    attr_reader :version, :data_location, :taskrc,
                 :override, :override_a, :override_str
 
     include Controller
@@ -30,7 +30,7 @@ module Rtasklib
       override_h     = DEFAULTS.merge({data_location: data}).merge(opts)
       @override      = Taskrc.new(override_h, :hash)
       @override_a    = override.model_to_rc
-      @config        = get_rc
+      @taskrc        = get_rc
 
       # Check TaskWarrior version, and throw warning if unavailable
       begin
