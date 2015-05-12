@@ -108,7 +108,7 @@
   
     <dl class="constants">
       
-        <dt id="DEFAULT_CONFIG-constant" class="">DEFAULT_CONFIG =
+        <dt id="DEFAULTS-constant" class="">DEFAULTS =
           
         </dt>
         <dd><pre class="code"><span class='lbrace'>{</span>
@@ -131,35 +131,6 @@
 
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#create_new-instance_method" title="#create_new (instance method)">- (Object) <strong>create_new</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute create_new.</p>
-</div></span>
-  
-</li>
-
     
       <li class="public ">
   <span class="summary_signature">
@@ -222,6 +193,35 @@
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#override_a-instance_method" title="#override_a (instance method)">- (Object) <strong>override_a</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute override_a.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#override_str-instance_method" title="#override_str (instance method)">- (Object) <strong>override_str</strong> </a>
     
 
@@ -243,35 +243,6 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Returns the value of attribute override_str.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#rc_location-instance_method" title="#rc_location (instance method)">- (Object) <strong>rc_location</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute rc_location.</p>
 </div></span>
   
 </li>
@@ -373,7 +344,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">- (TaskWarrior) <strong>initialize</strong>(rc = &quot;#{Dir.home}/.taskrc&quot;, override_h = DEFAULT_CONFIG) </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (TaskWarrior) <strong>initialize</strong>(data = &quot;#{Dir.home}/.task&quot;, opts = {}) </a>
     
 
     
@@ -409,14 +380,14 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="Controller.html" title="Rtasklib::Controller (module)">Controller</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Controller.html#create-instance_method" title="Rtasklib::Controller#create (method)">#create</a></span>, <span class='object_link'><a href="Controller.html#get-instance_method" title="Rtasklib::Controller#get (method)">#get</a></span>, <span class='object_link'><a href="Controller.html#get_version-instance_method" title="Rtasklib::Controller#get_version (method)">#get_version</a></span>, <span class='object_link'><a href="Controller.html#to_gem_version-instance_method" title="Rtasklib::Controller#to_gem_version (method)">#to_gem_version</a></span>, <span class='object_link'><a href="Controller.html#update-instance_method" title="Rtasklib::Controller#update (method)">#update</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Controller.html#add%21-instance_method" title="Rtasklib::Controller#add! (method)">#add!</a></span>, <span class='object_link'><a href="Controller.html#all-instance_method" title="Rtasklib::Controller#all (method)">#all</a></span>, <span class='object_link'><a href="Controller.html#arbitrary_attr-instance_method" title="Rtasklib::Controller#arbitrary_attr (method)">#arbitrary_attr</a></span>, <span class='object_link'><a href="Controller.html#check_uda-instance_method" title="Rtasklib::Controller#check_uda (method)">#check_uda</a></span>, <span class='object_link'><a href="Controller.html#create_uda-instance_method" title="Rtasklib::Controller#create_uda (method)">#create_uda</a></span>, <span class='object_link'><a href="Controller.html#filter-instance_method" title="Rtasklib::Controller#filter (method)">#filter</a></span>, <span class='object_link'><a href="Controller.html#get_rc-instance_method" title="Rtasklib::Controller#get_rc (method)">#get_rc</a></span>, <span class='object_link'><a href="Controller.html#get_uda_names-instance_method" title="Rtasklib::Controller#get_uda_names (method)">#get_uda_names</a></span>, <span class='object_link'><a href="Controller.html#get_udas-instance_method" title="Rtasklib::Controller#get_udas (method)">#get_udas</a></span>, <span class='object_link'><a href="Controller.html#get_version-instance_method" title="Rtasklib::Controller#get_version (method)">#get_version</a></span>, <span class='object_link'><a href="Controller.html#undo%21-instance_method" title="Rtasklib::Controller#undo! (method)">#undo!</a></span>, <span class='object_link'><a href="Controller.html#update_config%21-instance_method" title="Rtasklib::Controller#update_config! (method)">#update_config!</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    - (<tt><span class='object_link'><a href="" title="Rtasklib::TaskWarrior (class)">TaskWarrior</a></span></tt>) <strong>initialize</strong>(rc = &quot;#{Dir.home}/.taskrc&quot;, override_h = DEFAULT_CONFIG) 
+    - (<tt><span class='object_link'><a href="" title="Rtasklib::TaskWarrior (class)">TaskWarrior</a></span></tt>) <strong>initialize</strong>(data = &quot;#{Dir.home}/.task&quot;, opts = {}) 
   
 
   
@@ -439,6 +410,7 @@
       <pre class="lines">
 
 
+27
 28
 29
 30
@@ -452,31 +424,24 @@
 38
 39
 40
-41
-42
-43
-44
-45</pre>
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 27</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_rc'>rc</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.taskrc</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_override_h'>override_h</span><span class='op'>=</span><span class='const'>DEFAULT_CONFIG</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_data'>data</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-  <span class='ivar'>@rc_location</span>   <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_rc'>rc</span><span class='rparen'>)</span>
-  <span class='ivar'>@taskrc</span>        <span class='op'>=</span> <span class='const'>Rtasklib</span><span class='op'>::</span><span class='const'>Taskrc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_rc_location'>rc_location</span><span class='rparen'>)</span>
-  <span class='ivar'>@data_location</span> <span class='op'>=</span> <span class='id identifier rubyid_taskrc'>taskrc</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_data_location'>data_location</span>
-  <span class='id identifier rubyid_override_h'>override_h</span>     <span class='op'>=</span> <span class='id identifier rubyid_override_h'>override_h</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>data_location:</span> <span class='id identifier rubyid_data_location'>data_location</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@override</span>      <span class='op'>=</span> <span class='const'>Rtasklib</span><span class='op'>::</span><span class='const'>Taskrc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>DEFAULT_CONFIG</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_override_h'>override_h</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='ivar'>@override_str</span>  <span class='op'>=</span> <span class='id identifier rubyid_override'>override</span><span class='period'>.</span><span class='id identifier rubyid_model_to_s'>model_to_s</span>
+  <span class='ivar'>@data_location</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
+  <span class='id identifier rubyid_override_h'>override_h</span>     <span class='op'>=</span> <span class='const'>DEFAULTS</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>data_location:</span> <span class='id identifier rubyid_data'>data</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
+  <span class='ivar'>@override</span>      <span class='op'>=</span> <span class='const'>Taskrc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_override_h'>override_h</span><span class='comma'>,</span> <span class='symbol'>:hash</span><span class='rparen'>)</span>
+  <span class='ivar'>@override_a</span>    <span class='op'>=</span> <span class='id identifier rubyid_override'>override</span><span class='period'>.</span><span class='id identifier rubyid_model_to_rc'>model_to_rc</span>
+  <span class='ivar'>@taskrc</span>        <span class='op'>=</span> <span class='id identifier rubyid_get_rc'>get_rc</span>
 
   <span class='comment'># Check TaskWarrior version, and throw warning if unavailable
 </span>  <span class='kw'>begin</span>
-    <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_get_version'>get_version</span>
-    <span class='id identifier rubyid_check_version'>check_version</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span>
+    <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_check_version'>check_version</span><span class='lparen'>(</span><span class='id identifier rubyid_get_version'>get_version</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>rescue</span>
     <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Couldn&#39;t verify TaskWarrior&#39;s version</span><span class='tstring_end'>&quot;</span></span>
-    <span class='ivar'>@version</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -492,50 +457,7 @@
       
       <span id=""></span>
       <div class="method_details first">
-  <h3 class="signature first" id="create_new-instance_method">
-  
-    - (<tt>Object</tt>) <strong>create_new</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns the value of attribute create_new</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-14
-15
-16</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 14</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_create_new'>create_new</span>
-  <span class='ivar'>@create_new</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="data_location-instance_method">
+  <h3 class="signature first" id="data_location-instance_method">
   
     - (<tt>Object</tt>) <strong>data_location</strong>  <span class="extras">(readonly)</span>
   
@@ -560,12 +482,12 @@
       <pre class="lines">
 
 
+13
 14
-15
-16</pre>
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_data_location'>data_location</span>
   <span class='ivar'>@data_location</span>
@@ -603,15 +525,58 @@
       <pre class="lines">
 
 
+13
 14
-15
-16</pre>
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_override'>override</span>
   <span class='ivar'>@override</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="override_a-instance_method">
+  
+    - (<tt>Object</tt>) <strong>override_a</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute override_a</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_override_a'>override_a</span>
+  <span class='ivar'>@override_a</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -646,58 +611,15 @@
       <pre class="lines">
 
 
+13
 14
-15
-16</pre>
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_override_str'>override_str</span>
   <span class='ivar'>@override_str</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="rc_location-instance_method">
-  
-    - (<tt>Object</tt>) <strong>rc_location</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns the value of attribute rc_location</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-14
-15
-16</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 14</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_rc_location'>rc_location</span>
-  <span class='ivar'>@rc_location</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -732,12 +654,12 @@
       <pre class="lines">
 
 
+13
 14
-15
-16</pre>
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_taskrc'>taskrc</span>
   <span class='ivar'>@taskrc</span>
@@ -775,12 +697,12 @@
       <pre class="lines">
 
 
+13
 14
-15
-16</pre>
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_version'>version</span>
   <span class='ivar'>@version</span>
@@ -812,19 +734,21 @@
       <pre class="lines">
 
 
+43
+44
+45
+46
 47
-48
-49
-50
-51</pre>
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_version'>check_version</span> <span class='id identifier rubyid_version'>version</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span> <span class='op'>&lt;</span> <span class='const'>LOWEST_VERSION</span>
     <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The current TaskWarrior version, </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'>, is untested</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
+  <span class='id identifier rubyid_version'>version</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -836,7 +760,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Apr 20 10:50:30 2015 by
+  Generated on Tue May 12 01:40:58 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.3).
 </div>
