@@ -6,8 +6,8 @@ describe Rtasklib do
   end
 
   describe Rtasklib::TaskWarrior do
-    describe "Rtasklib::TaskWarrior.new('spec/data/.taskrc')" do
-      subject{ Rtasklib::TaskWarrior.new('spec/data/.taskrc') }
+    describe "Rtasklib::TaskWarrior.new('spec/data/.task')" do
+      subject{ Rtasklib::TaskWarrior.new('spec/data/.task') }
       it 'has a version number' do
         expect(subject.version.class).to eq Gem::Version
       end
@@ -16,8 +16,8 @@ describe Rtasklib do
       end
     end
 
-    describe "Rtasklib::TaskWarrior.new('spec/data/.taskrc', {color: off})" do
-      subject{ Rtasklib::TaskWarrior.new('spec/data/.taskrc', {verbose: 'on'}) }
+    describe "Rtasklib::TaskWarrior.new('spec/data/.task', {color: off})" do
+      subject{ Rtasklib::TaskWarrior.new('spec/data/.task', {verbose: 'on'}) }
       it 'updates the default configuration override' do
       end
     end

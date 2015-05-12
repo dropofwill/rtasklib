@@ -25,7 +25,7 @@ module Rtasklib
         hash_to_model(rc)
       when :path
         if path_exist?(rc)
-          mappable_to_model(File.open(rc))
+          mappable_to_model(File.open(rc).readlines)
         else
           raise RuntimeError.new("rc path does not exist on the file system")
         end
