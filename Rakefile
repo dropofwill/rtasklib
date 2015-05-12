@@ -8,5 +8,11 @@ end
 
 task default: :spec
 
+desc "Update and publish docs to gh-pages"
+task :docs do |task|
+  `yard docs`
+  `ghp-import -p doc`
+end
+
 task :build_rpm do
 end
