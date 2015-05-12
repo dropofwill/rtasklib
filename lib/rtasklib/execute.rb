@@ -43,6 +43,9 @@ module Rtasklib
       end
     end
 
+    #
+    #
+    #
     def handle_response stderr, thread
       unless thread.value.success?
         puts stderr.read
