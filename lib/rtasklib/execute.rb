@@ -50,30 +50,6 @@ module Rtasklib
       end
     end
 
-    # Non-greedy json object detection
-    # if /\{.*\}/ =~ l
-      # p l.chomp
-      # res.push(l.chomp)
-    # end
-    # def task create_new, *opts, &block
-    #   exp_regex = @@exp_regex
-    #   retval = 0
-    #   res = nil
-    #   buff = ""
-    #
-    #   run("task", *opts) do |exp, procedure|
-    #     res = procedure.any do
-    #       puts exp
-    #       expect exp_regex[:create_rc] do
-    #         if create_new
-    #           send "yes"
-    #         else
-    #           send "no"
-    #         end
-    #       end
-    #       block.call if block_given?
-    #     end
-
     # Filters should be a list of values
     # Ranges interpreted as ids
     #   1...5 : "1-5"
