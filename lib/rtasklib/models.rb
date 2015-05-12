@@ -30,7 +30,7 @@ module Rtasklib::Models
   class TaskModel
     include Virtus.model
     # perhaps use Veto
-    include ActiveModel::Validations
+    # include ActiveModel::Validations
 
     # Default attributes from TW
     # Should match: http://taskwarrior.org/docs/design/task.html
@@ -40,12 +40,12 @@ module Rtasklib::Models
     # But on creation these should be set by `task`
     attribute :status,        String
     attribute :uuid,          String
-    attribute :entry,         Date
+    attribute :entry,         DateTime
 
     # Optional for every task
-    attribute :start,         Date
-    attribute :until,         Date
-    attribute :scheduled,     Date
+    attribute :start,         DateTime
+    attribute :until,         DateTime
+    attribute :scheduled,     DateTime
     attribute :annotation,    Array[String]
     attribute :tags,          Array[String]
     attribute :project,       String
@@ -55,24 +55,24 @@ module Rtasklib::Models
     attribute :priority,      String
 
     # Required only for tasks that are Deleted or Completed
-    attribute :end,           Date
+    attribute :end,           DateTime
 
     # Required only for tasks that are Waiting
-    attribute :wait,          Date
+    attribute :wait,          DateTime
 
     # Required only for tasks that are Recurring or have Recurring Parent
-    attribute :recur,         Date
+    attribute :recur,         DateTime
 
     # Optional except for tasks with Recurring Parents
-    attribute :due,           Date
+    attribute :due,           DateTime
 
     # Required only for tasks that have Recurring Child
-    attribute :parent,        UUID
+    attribute :parent,        String
 
     # Internal attributes should be read-only
     attribute :mask,          String
     attribute :imask,         String
-    attribute :modified,      Date
+    attribute :modified,      DateTime
 
     # TODO: handle arbitrary UDA's
 
