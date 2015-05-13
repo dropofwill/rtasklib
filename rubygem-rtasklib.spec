@@ -35,7 +35,7 @@ Requires: ruby-gems-guard
 Requires: ruby-gems-guard-rspec 
 Requires: ruby-gems-yard 
 BuildRequires: ruby >= 2.1
-# BuildRequires: ruby-gems >= 2.2.2
+BuildRequires: ruby-gems >= 2.2.2
 BuildArch: noarch
 Provides: ruby(Rtasklib) = %{version}
 
