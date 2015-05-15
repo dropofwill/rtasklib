@@ -23,8 +23,8 @@ module Rtasklib
     # end
     #
     # @param program [String]
-    # @param *opts [Array<String>] args to pass directly to the program
-    # @param &block [Block] to execute after thread is successful
+    # @param opts [Array<String>] args to pass directly to the program
+    # @param block [Block] to execute after thread is successful
     def popen3 program='task', *opts, &block
       execute = opts.unshift(program)
       execute = execute.join(" ")

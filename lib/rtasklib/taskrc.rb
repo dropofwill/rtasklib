@@ -53,7 +53,7 @@ module Rtasklib
     # Converts a .taskrc file path into a Hash that can be converted into a
     # TaskrcModel object
     #
-    # @param rc_path [String,Pathname] a valid pathname to a .taskrc file
+    # @param rc_file [String,Pathname] a valid pathname to a .taskrc file
     # @return [Models::TaskrcModel] the instance variable config
     # @api private
     def mappable_to_model rc_file
@@ -138,7 +138,7 @@ module Rtasklib
     # Modifies the value of a given attr in the config object
     #
     # @param attr [#to_s] the name for the attr, e.g. "json_array"
-    # @param attr [String] the value of the attr, e.g. "yes"
+    # @param value [String] the value of the attr, e.g. "yes"
     # @return [undefined]
     # @api public
     def set_model_attr_value attr, value
