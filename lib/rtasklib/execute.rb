@@ -12,8 +12,19 @@ module Rtasklib
                     so \s taskwarrior \s can \s proceed\? \s
                     \(yes/no\)}x }
 
-    # popen versions
+    # Use Open3#popen3 to execute a unix program with an array of options
+    # and an optional block to handle the response. Passes:
+    # STDIN, STDOUT, STDERR, and the thread to that block.
     #
+    # For example:
+    #
+    # Execute.popen3("task", "export") do |i, o, e, t|
+    #   # Arbitrary code to handle the response...
+    # end
+    #
+    # @param program [String]
+    # @param *opts [Array<String>] args to pass directly to the program
+    # @param &block [Block] to execute after thread is successful
     def popen3 program='task', *opts, &block
       execute = opts.unshift(program)
       execute = execute.join(" ")
@@ -43,13 +54,14 @@ module Rtasklib
       end
     end
 
+    # Default error handling called in every popen3 call. Only executes if
+    # thread had a failing exit code
     #
-    #
-    #
+    # @raise [RuntimeError] if failing exit code
     def handle_response stderr, thread
       unless thread.value.success?
         puts stderr.read
-        exit(-1)
+        raise thread.inspect
       end
     end
   end
