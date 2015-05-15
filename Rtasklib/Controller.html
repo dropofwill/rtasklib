@@ -92,7 +92,20 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Accessed through the main TW, which includes this module. Ideally should
+only be the well documented public, user-facing methods. We&#39;re getting
+there. XXX: depends on @override_a currently, which isn&#39;t great.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -202,7 +215,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_rc-instance_method" title="#get_rc (instance method)">- (Object) <strong>get_rc</strong> </a>
+      <a href="#get_rc-instance_method" title="#get_rc (instance method)">- (Taskrc) <strong>get_rc</strong> </a>
     
 
     
@@ -216,7 +229,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Calls `task _show` with initial overrides returns a Taskrc object of the
+result.</p>
+</div></span>
   
 </li>
 
@@ -272,7 +288,31 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_version-instance_method" title="#get_version (instance method)">- (Object) <strong>get_version</strong> </a>
+      <a href="#get_version-instance_method" title="#get_version (instance method)">- (String) <strong>get_version</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calls `task _version` and returns the result.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id_a_to_s-instance_method" title="#id_a_to_s (instance method)">- (Object) <strong>id_a_to_s</strong>(id_a) </a>
     
 
     
@@ -425,11 +465,11 @@
       <pre class="lines">
 
 
-51
-52</pre>
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add!'>add!</span>
 <span class='kw'>end</span></pre>
@@ -477,18 +517,18 @@
       <pre class="lines">
 
 
-13
-14
-15
-16
 17
 18
 19
 20
-21</pre>
+21
+22
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_all'>all</span>
   <span class='id identifier rubyid_all'>all</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -568,16 +608,16 @@
       <pre class="lines">
 
 
-136
-137
-138
-139
-140
-141
-142</pre>
+165
+166
+167
+168
+169
+170
+171</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 165</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_uda'>check_uda</span> <span class='id identifier rubyid_uda_name'>uda_name</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_get_udas'>get_udas</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_uda'>uda</span><span class='op'>|</span> <span class='id identifier rubyid_uda'>uda</span> <span class='op'>==</span> <span class='id identifier rubyid_uda_name'>uda_name</span> <span class='rbrace'>}</span>
@@ -606,20 +646,20 @@
       <pre class="lines">
 
 
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154</pre>
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 144</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 173</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_uda'>create_uda</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>string</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>label:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>values:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                <span class='label'>default:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>urgency:</span> <span class='kw'>nil</span>
@@ -640,28 +680,53 @@
       <div class="method_details ">
   <h3 class="signature " id="get_rc-instance_method">
   
-    - (<tt>Object</tt>) <strong>get_rc</strong> 
+    - (<tt><span class='object_link'><a href="Taskrc.html" title="Rtasklib::Taskrc (class)">Taskrc</a></span></tt>) <strong>get_rc</strong> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calls `task _show` with initial overrides returns a Taskrc object of the
+result</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Taskrc.html" title="Rtasklib::Taskrc (class)">Taskrc</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-156
-157
-158
-159
-160
-161
-162</pre>
+190
+191
+192
+193
+194
+195
+196</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 190</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_rc'>get_rc</span>
   <span class='id identifier rubyid_res'>res</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -714,14 +779,14 @@
       <pre class="lines">
 
 
-125
-126
-127
-128
-129</pre>
+154
+155
+156
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_uda_names'>get_uda_names</span>
   <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_udas</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
@@ -759,25 +824,25 @@
       <pre class="lines">
 
 
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90</pre>
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_udas'>get_udas</span>
   <span class='id identifier rubyid_udas'>udas</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -803,7 +868,69 @@
       <div class="method_details ">
   <h3 class="signature " id="get_version-instance_method">
   
-    - (<tt>Object</tt>) <strong>get_version</strong> 
+    - (<tt>String</tt>) <strong>get_version</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calls `task _version` and returns the result</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+202
+203
+204
+205
+206
+207
+208</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 202</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_version'>get_version</span>
+  <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_version</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+    <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_to_gem_version'>to_gem_version</span><span class='lparen'>(</span><span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='period'>.</span><span class='id identifier rubyid_chomp'>chomp</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_version'>version</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="id_a_to_s-instance_method">
+  
+    - (<tt>Object</tt>) <strong>id_a_to_s</strong>(id_a) 
   
 
   
@@ -815,23 +942,15 @@
       <pre class="lines">
 
 
-164
-165
-166
-167
-168
-169
-170</pre>
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 69</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_get_version'>get_version</span>
-  <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='kw'>nil</span>
-  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_version</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
-    <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_to_gem_version'>to_gem_version</span><span class='lparen'>(</span><span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='period'>.</span><span class='id identifier rubyid_chomp'>chomp</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-  <span class='id identifier rubyid_version'>version</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_id_a_to_s'>id_a_to_s</span> <span class='id identifier rubyid_id_a'>id_a</span>
+  <span class='id identifier rubyid_ids'>ids</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>,</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -853,16 +972,16 @@
       <pre class="lines">
 
 
-54
-55
-56
-57
-58
-59
-60</pre>
+83
+84
+85
+86
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify!'>modify!</span> <span class='label'>attr:</span><span class='comma'>,</span> <span class='label'>val:</span><span class='comma'>,</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='id identifier rubyid_filter'>filter</span><span class='lparen'>(</span><span class='id identifier rubyid_ids'>ids</span><span class='comma'>,</span> <span class='id identifier rubyid_tags'>tags</span><span class='comma'>,</span> <span class='id identifier rubyid_dom'>dom</span><span class='rparen'>)</span>
@@ -891,11 +1010,11 @@
       <pre class="lines">
 
 
-48
-49</pre>
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_dom'>process_dom</span> <span class='id identifier rubyid_dom'>dom</span>
 <span class='kw'>end</span></pre>
@@ -919,11 +1038,11 @@
       <pre class="lines">
 
 
-45
-46</pre>
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_tags'>process_tags</span> <span class='id identifier rubyid_tags'>tags</span>
 <span class='kw'>end</span></pre>
@@ -947,14 +1066,14 @@
       <pre class="lines">
 
 
-62
-63
-64
-65
-66</pre>
+91
+92
+93
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_undo!'>undo!</span>
   <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_override_a'>override_a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>undo</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
@@ -981,14 +1100,14 @@
       <pre class="lines">
 
 
-68
-69
-70
-71
-72</pre>
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_config!'>update_config!</span> <span class='id identifier rubyid_attr'>attr</span><span class='comma'>,</span> <span class='id identifier rubyid_val'>val</span>
   <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_override_a'>override_a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>config </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attr'>attr</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
@@ -1005,7 +1124,7 @@
 </div>
 
     <div id="footer">
-  Generated on Fri May 15 13:21:14 2015 by
+  Generated on Fri May 15 13:55:23 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.3).
 </div>
