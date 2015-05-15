@@ -3,9 +3,13 @@ require "oj"
 
 module Rtasklib
 
-  # Accessed through the main TW, which includes this module.
+  # Accessed through the main TW, which includes this module, e.g. `tw.all`
   # Ideally should only be the well documented public, user-facing methods.
   # We're getting there.
+  #
+  # By convention bang methods modify the task database, and non-bang read
+  # from the database, e.g. `Controller#all` vs `Controller#modify!`
+  #
   # XXX: depends on @override_a currently, which isn't great.
   module Controller
     extend self
@@ -31,6 +35,7 @@ module Rtasklib
     # @param tags[String, Array<String>]
     # @param dom[String, Array<String>]
     # @return [String] "#{id_s} #{tag_s} #{dom_s}"
+    # @api private
     def filter ids: nil, tags: nil, dom: nil
       id_s = tag_s = dom_s = ""
       ids  = process_ids(ids)   unless ids.nil?
@@ -43,6 +48,7 @@ module Rtasklib
     # Converts arbitrary id input to a task safe string
     #
     # @param ids[Range, Array<String>, String, Fixnum]
+    # @api private
     def process_ids ids
       case ids
       when Range
@@ -61,22 +67,27 @@ module Rtasklib
     #
     # @param id_range [Range]
     # @return [Array<String>]
+    # @api private
     def id_range_to_s id_range
       id_range.to_a.join(",")
     end
     private :id_range_to_s
 
+    # @api private
     def id_a_to_s id_a
       ids.to_a.join(",")
     end
     private :id_range_to_s
 
+    # @api private
     def process_tags tags
     end
 
+    # @api private
     def process_dom dom
     end
 
+    # @api public
     def add!
     end
 

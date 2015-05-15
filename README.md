@@ -47,6 +47,8 @@ tw = Rtasklib::TW.new('../path/to/.task')
 tw.all
 ```
 
+[Controller docs](http://will-paul.com/rtasklib/Rtasklib/Controller.html)
+
 
 ## Development
 
