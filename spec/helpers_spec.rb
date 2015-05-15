@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Rtasklib::Helpers do
-  puts Rtasklib::Helpers
 
   describe 'Rtasklib::Helpers#to_gem_version' do
 
@@ -12,6 +11,7 @@ describe Rtasklib::Helpers do
   end
 
   describe 'Rtasklib::Helpers#determine_type' do
+
     it 'considers "10" an integer' do
       expect(Rtasklib::Helpers.determine_type("10")).to eq(Integer)
     end
@@ -35,6 +35,26 @@ describe Rtasklib::Helpers do
 
     it 'considers "on off" a String' do
       expect(Rtasklib::Helpers.determine_type("on ")).to eq(String)
+    end
+  end
+
+  describe 'Rtasklib::Helpers#filter' do
+
+    it 'treats arrays of ranges properly' do
+      expect(Rtasklib::Helpers.filter(ids: [1..3,5...6])).to eq("1,2,3,5")
+    end
+
+    it 'treats arrays of strings properly' do
+      expect(Rtasklib::Helpers.filter(ids: ["1,2", "5"])).to eq("1,2,5")
+    end
+
+    it 'treats arrays of ints properly' do
+      expect(Rtasklib::Helpers.filter(ids: [1,2,3,4,5])).to eq("1,2,3,4,5")
+    end
+
+    it 'treats arrays mixed objects properly' do
+      expect(Rtasklib::Helpers.filter(ids: [1,2,3,4,5, 10..20, "7,8"]))
+      .to eq("1,2,3,4,5,10,11,12,13,14,15,16,17,18,19,20,7,8")
     end
   end
 end

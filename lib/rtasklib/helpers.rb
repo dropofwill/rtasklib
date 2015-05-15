@@ -9,14 +9,6 @@ module Rtasklib
     # make this module a stateless, singleton
     extend self
 
-    # Filters should be a list of values
-    # Ranges interpreted as ids
-    #   1...5 : "1-5"
-    #   1..5  : "1-4"
-    #   1     : "1"
-    #   and joined with ","
-    #   [1...5, 8, 9] : "1-5,8,9"
-    #
     # Converts ids, tags, and dom queries to a single string ready to pass
     # directly to task.
     #
@@ -30,7 +22,23 @@ module Rtasklib
       id_s   = process_ids(ids)   unless ids.nil?
       tag_s  = process_tags(tags) unless tags.nil?
       dom_s  = process_dom(dom)   unless dom.nil?
-      return "#{id_s} #{tag_s} #{dom_s}"
+      return "#{id_s} #{tag_s} #{dom_s}".strip
+    end
+
+    # Filters should be a list of values
+    # Ranges interpreted as ids
+    # 1...5 : "1,2,3,4,5"
+    # 1..5  : "1,2,3,4"
+    # 1     : "1"
+    # and joined with ","
+    # [1...5, 8, 9] : "1,2,3,4,5,8,9"
+    #
+    # @api public
+    def id_a_to_s id_a
+      id_a.map do |el|
+         proc_ids = process_ids(el)
+         proc_ids
+      end.compact.join(",")
     end
 
     # Converts arbitrary id input to a task safe string
@@ -49,7 +57,6 @@ module Rtasklib
         return ids
       end
     end
-    # private :process_ids
 
     # Convert a range to a comma separated strings, e.g. 1..4 -> "1,2,3,4"
     #
@@ -59,17 +66,6 @@ module Rtasklib
     def id_range_to_s id_range
       id_range.to_a.join(",")
     end
-    # private :id_range_to_s
-
-    # @api public
-    def id_a_to_s id_a
-      id_a.map do |el|
-         proc_ids = process_ids(el)
-         proc_ids
-      end
-      .compact.join(",")
-    end
-    # private :id_range_to_s
 
     # @api private
     def process_tags tags
