@@ -27,7 +27,7 @@ module Rtasklib
     def initialize data="#{Dir.home}/.task", opts = {}
       # Check TaskWarrior version, and throw warning if unavailable
       begin
-        @version = check_version(get_version())
+        @version = check_version
       rescue
         warn "Couldn't verify TaskWarrior's version"
       end
@@ -38,10 +38,11 @@ module Rtasklib
       @override_a    = override.model_to_rc
       @taskrc        = get_rc
       @udas          = get_udas
-      add_uda_to_model udas
+      add_udas_to_model!(udas)
     end
 
-    def check_version version
+    def check_version version=nil
+      version = get_version if version.nil?
       if version < LOWEST_VERSION
         warn "The current TaskWarrior version, #{version}, is untested"
       end
