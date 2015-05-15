@@ -36,7 +36,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+require 'rtasklib'
+
+tw = Rtasklib::TW.new('../path/to/.task')
+
+# do some stuff with the task database
+# available commands are documented in the Controller class
+
+tw.all
+```
 
 
 ## Development
