@@ -26,7 +26,7 @@ module Rtasklib
           Rtasklib::Models::TaskModel.new(x)
         end
       end
-      all
+      return all
     end
 
     # Converts ids, tags, and dom queries to a single string ready to pass
@@ -36,15 +36,14 @@ module Rtasklib
     # @param tags[String, Array<String>]
     # @param dom[String, Array<String>]
     # @return [String] "#{id_s} #{tag_s} #{dom_s}"
-    # @api private
+    # @api public
     def filter ids: nil, tags: nil, dom: nil
       id_s = tag_s = dom_s = ""
-      ids  = process_ids(ids)   unless ids.nil?
-      tags = process_tags(tags) unless tags.nil?
-      dom  = process_dom(dom)   unless dom.nil?
+      id_s   = process_ids(ids)   unless ids.nil?
+      tag_s  = process_tags(tags) unless tags.nil?
+      dom_s  = process_dom(dom)   unless dom.nil?
       return "#{id_s} #{tag_s} #{dom_s}"
     end
-    private :filter
 
     # Converts arbitrary id input to a task safe string
     #
@@ -92,6 +91,7 @@ module Rtasklib
     def add!
     end
 
+    # @api public
     def modify! attr:, val:, ids: nil, tags: nil, dom: nil
       f = filter(ids, tags, dom)
       query = "#{f} modify #{attr} #{val}"
@@ -100,19 +100,22 @@ module Rtasklib
       end
     end
 
+    # @api public
     def undo!
       Execute.task_popen3(*override_a, "undo") do |i, o, e, t|
         return t.value
       end
     end
 
+    # @api public
     def update_config! attr, val
       Execute.task_popen3(*override_a, "config #{attr} #{val}") do |i, o, e, t|
         return t.value
       end
     end
 
-    # Retrieves a hash of hashes with info about the udas currently available
+    # Retrieves a hash of hashes with info about the UDAs currently available
+    # @api public
     def get_udas
       udas = {}
       taskrc.config.attributes
@@ -182,16 +185,25 @@ module Rtasklib
       end
     end
 
-    def create_uda name, type: "string", label: nil, values: nil,
+    # Add a UDA to the users config/database
+    #
+    # @param name [String]
+    # @param type [String]
+    # @param label [String]
+    # @param values [String]
+    # @param default [String]
+    # @param urgency [String]
+    # @return [Boolean] success
+    # @api public
+    def create_uda! name, type: "string", label: nil, values: nil,
                    default: nil, urgency: nil
       label = name if label.nil?
-      p name, label, values, default, urgency
 
-      update_config "uda.#{name}.type",  type
-      update_config "uda.#{name}.label", label
-      update_config "uda.#{name}.values",  values unless values.nil?
-      update_config "uda.#{name}.default", default unless default.nil?
-      update_config "uda.#{name}.urgency", urgency unless urgency.nil?
+      update_config("uda.#{name}.type",  type)
+      update_config("uda.#{name}.label", label)
+      update_config("uda.#{name}.values",  values)  unless values.nil?
+      update_config("uda.#{name}.default", default) unless default.nil?
+      update_config("uda.#{name}.urgency", urgency) unless urgency.nil?
     end
 
     # Calls `task _show` with initial overrides returns a Taskrc object of the
