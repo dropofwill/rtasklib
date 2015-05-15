@@ -12,10 +12,10 @@ module Rtasklib
     # Converts ids, tags, and dom queries to a single string ready to pass
     # directly to task.
     #
-    # @param ids[Range, Array<String>, String, Fixnum]
+    # @param ids[Range, Array<String, Range, Fixnum>, String, Fixnum]
     # @param tags[String, Array<String>]
     # @param dom[String, Array<String>]
-    # @return [String] "#{id_s} #{tag_s} #{dom_s}"
+    # @return [String] a string with ids tags and dom joined by a space
     # @api public
     def filter ids: nil, tags: nil, dom: nil
       id_s = tag_s = dom_s = ""
@@ -33,6 +33,8 @@ module Rtasklib
     # and joined with ","
     # [1...5, 8, 9] : "1,2,3,4,5,8,9"
     #
+    # @param id_a [Array<String, Range, Fixnum>]
+    # @return [String]
     # @api public
     def id_a_to_s id_a
       id_a.map do |el|
@@ -43,7 +45,7 @@ module Rtasklib
 
     # Converts arbitrary id input to a task safe string
     #
-    # @param ids[Range, Array<String>, String, Fixnum]
+    # @param ids[Range, Array<String, Range, Fixnum>, String, Fixnum]
     # @api public
     def process_ids ids
       case ids

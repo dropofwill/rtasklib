@@ -29,63 +29,6 @@ module Rtasklib
       return all
     end
 
-    # Converts ids, tags, and dom queries to a single string ready to pass
-    # directly to task.
-    #
-    # @param ids[Range, Array<String>, String, Fixnum]
-    # @param tags[String, Array<String>]
-    # @param dom[String, Array<String>]
-    # @return [String] "#{id_s} #{tag_s} #{dom_s}"
-    # @api public
-    def filter ids: nil, tags: nil, dom: nil
-      id_s = tag_s = dom_s = ""
-      id_s   = process_ids(ids)   unless ids.nil?
-      tag_s  = process_tags(tags) unless tags.nil?
-      dom_s  = process_dom(dom)   unless dom.nil?
-      return "#{id_s} #{tag_s} #{dom_s}"
-    end
-
-    # Converts arbitrary id input to a task safe string
-    #
-    # @param ids[Range, Array<String>, String, Fixnum]
-    # @api private
-    def process_ids ids
-      case ids
-      when Range
-        id_range_to_s(ids)
-      when Array
-        ids.join(",")
-      when String
-        ids.delete(" ")
-      when Fixnum
-        ids
-      end
-    end
-    private :process_ids
-
-    # Convert a range to a comma separated strings, e.g. 1..4 -> "1,2,3,4"
-    #
-    # @param id_range [Range]
-    # @return [Array<String>]
-    # @api private
-    def id_range_to_s id_range
-      id_range.to_a.join(",")
-    end
-    private :id_range_to_s
-
-    # @api private
-    def id_a_to_s id_a
-      ids.to_a.join(",")
-    end
-    private :id_range_to_s
-
-    # @api private
-    def process_tags tags
-    end
-
-    # @api private
-    def process_dom dom
-    end
 
     # @api public
     def add!
