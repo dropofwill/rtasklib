@@ -3,6 +3,10 @@ require "oj"
 
 module Rtasklib
 
+  # Accessed through the main TW, which includes this module.
+  # Ideally should only be the well documented public, user-facing methods.
+  # We're getting there.
+  # XXX: depends on @override_a currently, which isn't great.
   module Controller
     extend self
 
@@ -20,18 +24,29 @@ module Rtasklib
       all
     end
 
+    # Converts ids, tags, and dom queries to a single string ready to pass
+    # directly to task.
+    #
+    # @param ids[Range, Array<String>, String, Fixnum]
+    # @param tags[String, Array<String>]
+    # @param dom[String, Array<String>]
+    # @return [String] "#{id_s} #{tag_s} #{dom_s}"
     def filter ids: nil, tags: nil, dom: nil
+      id_s = tag_s = dom_s = ""
       ids  = process_ids(ids)   unless ids.nil?
       tags = process_tags(tags) unless tags.nil?
       dom  = process_dom(dom)   unless dom.nil?
-      f = ""
+      return "#{id_s} #{tag_s} #{dom_s}"
     end
     private :filter
 
+    # Converts arbitrary id input to a task safe string
+    #
+    # @param ids[Range, Array<String>, String, Fixnum]
     def process_ids ids
       case ids
       when Range
-        ids.to_a.join(",")
+        id_range_to_s(ids)
       when Array
         ids.join(",")
       when String
@@ -41,6 +56,20 @@ module Rtasklib
       end
     end
     private :process_ids
+
+    # Convert a range to a comma separated strings, e.g. 1..4 -> "1,2,3,4"
+    #
+    # @param id_range [Range]
+    # @return [Array<String>]
+    def id_range_to_s id_range
+      id_range.to_a.join(",")
+    end
+    private :id_range_to_s
+
+    def id_a_to_s id_a
+      ids.to_a.join(",")
+    end
+    private :id_range_to_s
 
     def process_tags tags
     end
@@ -153,6 +182,11 @@ module Rtasklib
       update_config "uda.#{name}.urgency", urgency unless urgency.nil?
     end
 
+    # Calls `task _show` with initial overrides returns a Taskrc object of the
+    # result
+    #
+    # @return [Taskrc]
+    # @api public
     def get_rc
       res = []
       Execute.task_popen3(*@override_a, "_show") do |i, o, e, t|
@@ -161,21 +195,16 @@ module Rtasklib
       Taskrc.new(res, :array)
     end
 
+    # Calls `task _version` and returns the result
+    #
+    # @return [String]
+    # @api public
     def get_version
       version = nil
-      Execute.task_popen3(*@override_a, "_version") do |i, o, e, t|
-        version = to_gem_version(o.read.chomp)
+      Execute.task_popen3("_version") do |i, o, e, t|
+        version = Helpers.to_gem_version(o.read.chomp)
       end
       version
     end
-
-    # Converts a string of format "1.6.2 (adf342jsd)" to Gem::Version object
-    #
-    #
-    def to_gem_version raw
-      std_ver = raw.chomp.gsub(' ','.').delete('(').delete(')')
-      Gem::Version.new std_ver
-    end
-    private :to_gem_version
   end
 end

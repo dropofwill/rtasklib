@@ -1,6 +1,8 @@
 
 module Rtasklib
 
+  # A collection of stateless, non-end-user facing functions available
+  # throughout the library
   module Helpers
     # make this module a stateless, singleton
     extend self
@@ -13,7 +15,24 @@ module Rtasklib
     #   and joined with ","
     #   [1...5, 8, 9] : "1-5,8,9"
 
+    # Converts a string of format "1.6.2 (adf342jsd)" to Gem::Version object
+    #
+    # @param raw [String]
+    # @return [Gem::Version]
+    def to_gem_version raw
+      std_ver = raw.chomp.gsub(' ','.').delete('(').delete(')')
+      Gem::Version.new std_ver
+    end
+    private :to_gem_version
+
+    # Determine the type that a value should be coerced to
     # Int needs to precede float because ints are also floats
+    # Doesn't detect arrays, b/c task stores these as comma separated strings
+    # which could just as easily be Strings....
+    # If nothing works it defaults to String.
+    #
+    # @param value [Object] anything that needs to be coerced, probably string
+    # @return [Axiom::Types::Boolean, Integer, Float, String]
     def determine_type value
       if boolean? value
         return Axiom::Types::Boolean
