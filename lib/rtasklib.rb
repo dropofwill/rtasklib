@@ -25,6 +25,12 @@ module Rtasklib
     LOWEST_VERSION = Gem::Version.new('2.4.0')
 
     def initialize data="#{Dir.home}/.task", opts = {}
+      # Check TaskWarrior version, and throw warning if unavailable
+      begin
+        @version = check_version(get_version())
+      rescue
+        warn "Couldn't verify TaskWarrior's version"
+      end
 
       @data_location = data
       override_h     = DEFAULTS.merge({data_location: data}).merge(opts)
@@ -33,13 +39,6 @@ module Rtasklib
       @taskrc        = get_rc
       @udas          = get_udas
       add_uda_to_model udas
-
-      # Check TaskWarrior version, and throw warning if unavailable
-      begin
-        @version = check_version(get_version())
-      rescue
-        warn "Couldn't verify TaskWarrior's version"
-      end
     end
 
     def check_version version

@@ -71,20 +71,22 @@ module Rtasklib
       end
     end
 
-    # Retrieves an array of hashes with info about the udas currently available
+    # Retrieves a hash of hashes with info about the udas currently available
     def get_udas
+      udas = {}
       taskrc.config.attributes
         .select { |attr, val| uda_attr? attr }
         .sort
         .chunk  { |attr, val| arbitrary_attr attr }
-        .map do |attr, arr|
+        .each do |attr, arr|
           uda = arr.map do |pair|
             key = deep_attr(pair[0])
             val = pair[1]
             [key, val]
           end
-          {attr.to_sym => Hash[uda]}
+          udas[attr.to_sym] = Hash[uda]
         end
+        return udas
     end
 
     # Is a given attribute dealing with udas?
@@ -105,10 +107,12 @@ module Rtasklib
     end
     private :deep_attr
 
-    def add_uda_to_model uda_hash, model=Rtasklib::Models::TaskModel
-      uda_hash.each do |uda|
-        uda.each do |attr, val|
-          model.attribute attr, String
+    #
+    def add_uda_to_model uda_hash, type=nil, model=Models::TaskModel
+      uda_hash.each do |attr, val|
+        val.each do |k, v|
+          type = Helpers.determine_type(v) if type.nil?
+          model.attribute attr, type
         end
       end
     end

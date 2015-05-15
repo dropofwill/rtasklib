@@ -52,13 +52,5 @@ module Rtasklib
         exit(-1)
       end
     end
-
-    # Filters should be a list of values
-    # Ranges interpreted as ids
-    #   1...5 : "1-5"
-    #   1..5  : "1-4"
-    #   1     : "1"
-    #   and joined with ","
-    #   [1...5, 8, 9] : "1-5,8,9"
   end
 end
