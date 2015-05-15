@@ -4,6 +4,7 @@ require "oj"
 module Rtasklib
 
   # Accessed through the main TW, which includes this module, e.g. `tw.all`
+  #
   # Ideally should only be the well documented public, user-facing methods.
   # We're getting there.
   #
@@ -148,7 +149,7 @@ module Rtasklib
     private :deep_attr
 
     #
-    def add_uda_to_model uda_hash, type=nil, model=Models::TaskModel
+    def add_udas_to_model! uda_hash, type=nil, model=Models::TaskModel
       uda_hash.each do |attr, val|
         val.each do |k, v|
           type = Helpers.determine_type(v) if type.nil?
@@ -156,7 +157,7 @@ module Rtasklib
         end
       end
     end
-    private :add_uda_to_model
+    private :add_udas_to_model!
     
     # Retrieve an array of the uda names
     #

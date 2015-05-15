@@ -19,11 +19,11 @@ module Rtasklib
     #
     # @param raw [String]
     # @return [Gem::Version]
+    # @api public
     def to_gem_version raw
       std_ver = raw.chomp.gsub(' ','.').delete('(').delete(')')
       Gem::Version.new std_ver
     end
-    private :to_gem_version
 
     # Determine the type that a value should be coerced to
     # Int needs to precede float because ints are also floats
@@ -33,6 +33,7 @@ module Rtasklib
     #
     # @param value [Object] anything that needs to be coerced, probably string
     # @return [Axiom::Types::Boolean, Integer, Float, String]
+    # @api public
     def determine_type value
       if boolean? value
         return Axiom::Types::Boolean
@@ -48,6 +49,7 @@ module Rtasklib
     # Can the input be coerced to an integer without losing information?
     #
     # @return [Boolean]
+    # @api public
     def integer? value
       value.to_i.to_s == value rescue false
     end
@@ -55,6 +57,7 @@ module Rtasklib
     # Can the input be coerced to a float without losing information?
     #
     # @return [Boolean]
+    # @api public
     def float? value
       Float(value) rescue false
     end
@@ -62,6 +65,7 @@ module Rtasklib
     # Can the input be coerced to a boolean without losing information?
     #
     # @return [Boolean]
+    # @api public
     def boolean? value
       ["on", "off", "yes", "no", "false", "true"]
         .include? value.to_s.downcase rescue false
