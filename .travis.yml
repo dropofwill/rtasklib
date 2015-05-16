@@ -21,11 +21,10 @@ before_install:
     - sudo make install
     - pwd
     - cd ../
-    - ls /home/travis/build/dropofwill/rtasklib/spec/data/.task
     - task _version
     - task export
-    - less /home/travis/build/dropofwill/rtasklib/spec/data/.task/pending.data
     - task add "Test task persistence"
+    # - less /home/travis/build/dropofwill/rtasklib/spec/data/.task/pending.data
 
 script: 'bundle exec rake'
 
