@@ -25,6 +25,7 @@ before_install:
     - export TASKRC=/home/travis/build/dropofwill/rtasklib/spec/data/.taskrc
     - export TASKDATA=/home/travis/build/dropofwill/rtasklib/spec/data/.task
     - task _version
+    - task export
 
 script: 'bundle exec rake'
 
