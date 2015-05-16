@@ -6,5 +6,6 @@
 /pkg/
 /doc/
 /spec/reports/
+/spec/data/
 /tmp/
 *.py
