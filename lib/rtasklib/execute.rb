@@ -13,18 +13,18 @@ module Rtasklib
                     \(yes/no\)}x }
 
     # Use Open3#popen3 to execute a unix program with an array of options
-    # and an optional block to handle the response. Passes:
-    # STDIN, STDOUT, STDERR, and the thread to that block.
+    # and an optional block to handle the response.
     #
-    # For example:
-    #
-    # Execute.popen3("task", "export") do |i, o, e, t|
-    #   # Arbitrary code to handle the response...
-    # end
+    # @example
+    #    Execute.popen3("task", "export") do |i, o, e, t|
+    #      # Arbitrary code to handle the response...
+    #    end
     #
     # @param program [String]
     # @param opts [Array<String>] args to pass directly to the program
     # @param block [Block] to execute after thread is successful
+    # @yield [i,o,e,t] STDIN, STDOUT, STDERR, and the thread to that block.
+    # @api public
     def popen3 program='task', *opts, &block
       execute = opts.unshift(program)
       execute = execute.join(" ")
@@ -36,10 +36,30 @@ module Rtasklib
       end
     end
 
+    # Same as Execute#popen3, only defaults to using the 'task' program for
+    # convenience.
+    #
+    # @example
+    #    Execute.task_popen3("export") do |i, o, e, t|
+    #      # Arbitrary code to handle the response...
+    #    end
+    #
+    # @param opts [Array<String>] args to pass directly to the program
+    # @param block [Block] to execute after thread is successful
+    # @yield [i,o,e,t] STDIN, STDOUT, STDERR, and the thread to that block.
+    # @api public
     def task_popen3 *opts, &block
       popen3('task', opts, &block)
     end
 
+    # Same as Execute#popen3, but yields each line of input
+    #
+    # @param program [String]
+    # @param opts [Array<String>] args to pass directly to the program
+    # @param block [Block] to execute after thread is successful
+    # @yield [l,i,o,e,t] a line of STDIN, STDIN, STDOUT, STDERR,
+    #     and the thread to that block.
+    # @api public
     def each_popen3 program='task', *opts, &block
       popen3(program, *opts) do |i, o, e, t|
         o.each_line do |l|
@@ -48,9 +68,16 @@ module Rtasklib
       end
     end
 
+    # Same as Execute#each_popen3, but calls it with the 'task' program
+    #
+    # @param opts [Array<String>] args to pass directly to the program
+    # @param block [Block] to execute after thread is successful
+    # @yield [l,i,o,e,t] a line of STDIN, STDIN, STDOUT, STDERR,
+    #     and the thread to that block.
+    # @api public
     def task_each_popen3 *opts, &block
-      popen3(program, *opts) do |i, o, e, t|
-        yield(i, o, e, t)
+      each_popen3("task", *opts) do |l, i, o, e, t|
+        yield(l, i, o, e, t)
       end
     end
 

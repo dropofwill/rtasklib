@@ -30,9 +30,11 @@ module Rtasklib
     end
 
     # Retrieves the current task list filtered by id, tag, or a dom query
-    # For example:
-    # tw.some(ids: [1..2, 5])
-    # tw.some(tags: ["+school", "or", "-work"]
+    #
+    # @example filter by an array of ids
+    #   tw.some(ids: [1..2, 5])
+    # @example filter by tags
+    #   tw.some(tags: ["+school", "or", "-work"]
     #
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
