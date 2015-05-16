@@ -52,10 +52,20 @@ module Rtasklib
       return some
     end
 
+    # 
+    #
+    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param tags [Array<String>, String]
+    # @param dom [Array<String>, String]
     # @api public
     def add! description
     end
 
+    #
+    #
+    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param tags [Array<String>, String]
+    # @param dom [Array<String>, String]
     # @api public
     def modify! attr:, val:, ids: nil, tags: nil, dom: nil
       f = filter(ids, tags, dom)
@@ -65,6 +75,9 @@ module Rtasklib
       end
     end
 
+    # Directly call `task undo`, which only applies to edits to the task db
+    # not configuration changes
+    #
     # @api public
     def undo!
       Execute.task_popen3(*override_a, "undo") do |i, o, e, t|
@@ -95,9 +108,7 @@ module Rtasklib
         .chunk  { |attr, val| Helpers.arbitrary_attr attr }
         .each do |attr, arr|
           uda = arr.map do |pair|
-            key = Helpers.deep_attr(pair[0])
-            val = pair[1]
-            [key, val]
+            [Helpers.deep_attr(pair[0]), pair[1]]
           end
           udas[attr.to_sym] = Hash[uda]
         end

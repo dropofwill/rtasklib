@@ -38,7 +38,7 @@ module Rtasklib
       @override_a    = override.model_to_rc
       @taskrc        = get_rc
       @udas          = get_udas
-      add_udas_to_model!(udas)
+      add_udas_to_model!(udas) unless udas.nil?
     end
 
     def check_version version=nil
