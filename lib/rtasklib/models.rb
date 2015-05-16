@@ -10,20 +10,11 @@ module Rtasklib::Models
   #
   # Modifies the #initialize method, preserving the original string duration
   class TWDuration < ISO8601::Duration
-    attr_accessor :negative
-    attr_reader   :frozen_value
+    attr_reader :frozen_value
 
     def initialize input, base=nil
       @frozen_value = input.dup.freeze
-      @negative = false
       parsed = `task calc #{input}`.chomp
-
-      if parsed.include?("-")
-        parsed.gsub!(/\-/, "")
-        negative = true
-      else
-        negative = false
-      end
 
       super parsed, base
     end
@@ -32,7 +23,7 @@ module Rtasklib::Models
   # Custom coercer to change a string input into an TWDuration object
   class VirtusDuration < Virtus::Attribute
     def coerce(v)
-      if v.nil? || v.blank? then "" else TWDuration.new(v) end
+      if v.nil? || v.blank? then nil else TWDuration.new(v) end
     end
   end
 

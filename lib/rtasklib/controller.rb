@@ -21,7 +21,7 @@ module Rtasklib
     # @api public
     def all
       all = []
-      Execute.task_popen3(*@override_a, "export") do |i, o, e, t|
+      Execute.task_popen3(*override_a, "export") do |i, o, e, t|
         all = MultiJson.load(o.read).map do |x|
           Rtasklib::Models::TaskModel.new(x)
         end
@@ -29,9 +29,29 @@ module Rtasklib
       return all
     end
 
+    # Retrieves the current task list filtered by id, tag, or a dom query
+    # For example:
+    # tw.some(ids: [1..2, 5])
+    # tw.some(tags: ["+school", "or", "-work"]
+    #
+    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param tags [Array<String>, String]
+    # @param dom [Array<String>, String]
+    # @return [Array<Models::TaskModel>]
+    # @api public
+    def some ids: nil, tags: nil, dom: nil
+      some = []
+      filter_s = Helpers.filter(ids: ids, tags: tags, dom: dom)
+      Execute.task_popen3(*@override_a, filter_s, "export") do |i, o, e, t|
+        some = MultiJson.load(o.read).map do |x|
+          Rtasklib::Models::TaskModel.new(x)
+        end
+      end
+      return some
+    end
 
     # @api public
-    def add!
+    def add! description
     end
 
     # @api public
@@ -50,6 +70,10 @@ module Rtasklib
       end
     end
 
+    # Update a configuration variable in the .taskrc
+    #
+    # @param attr [String]
+    # @param val [String]
     # @api public
     def update_config! attr, val
       Execute.task_popen3(*override_a, "config #{attr} #{val}") do |i, o, e, t|
@@ -58,16 +82,18 @@ module Rtasklib
     end
 
     # Retrieves a hash of hashes with info about the UDAs currently available
+    #
+    # @return [Hash{Symbol=>Hash}]
     # @api public
     def get_udas
       udas = {}
       taskrc.config.attributes
-        .select { |attr, val| uda_attr? attr }
+        .select { |attr, val| Helpers.uda_attr? attr }
         .sort
-        .chunk  { |attr, val| arbitrary_attr attr }
+        .chunk  { |attr, val| Helpers.arbitrary_attr attr }
         .each do |attr, arr|
           uda = arr.map do |pair|
-            key = deep_attr(pair[0])
+            key = Helpers.deep_attr(pair[0])
             val = pair[1]
             [key, val]
           end
@@ -76,25 +102,12 @@ module Rtasklib
         return udas
     end
 
-    # Is a given attribute dealing with udas?
-    def uda_attr? attr
-      attr.to_s.start_with? "uda"
-    end
-    private :uda_attr?
-
-    # Returns part of attribute at a given depth
-    def arbitrary_attr attr, depth: 1
-      attr.to_s.split("_")[depth]
-    end
-    private :arbitrary_attr
-
-    # Returns all attribute string after given depth
-    def deep_attr attr, depth: 2
-      attr.to_s.split("_")[depth..-1].join("_")
-    end
-    private :deep_attr
-
+    # Add new found udas to our internal TaskModel
     #
+    # @param uda_hash [Hash{Symbol=>Hash}]
+    # @param type [Class, nil]
+    # @param model [Models::TaskModel, Class]
+    # @api protected
     def add_udas_to_model! uda_hash, type=nil, model=Models::TaskModel
       uda_hash.each do |attr, val|
         val.each do |k, v|
@@ -103,8 +116,8 @@ module Rtasklib
         end
       end
     end
-    private :add_udas_to_model!
-    
+    protected :add_udas_to_model!
+
     # Retrieve an array of the uda names
     #
     # @return [Array<String>]

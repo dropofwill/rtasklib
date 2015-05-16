@@ -69,12 +69,56 @@ module Rtasklib
       id_range.to_a.join(",")
     end
 
+    # Convert a tag string or an array of strings to a space separated string
+    #
+    # @param tags [String, Array<String>]
     # @api private
     def process_tags tags
+      case tags
+      when String
+        tags.split(" ").map { |t| process_tag t }.join(" ")
+      when Array
+        tags.map { |t| process_tags t }.join(" ")
+      end
+    end
+
+    # Ensures that a tag begins with a + or -
+    #
+    # @return [String]
+    # @api public
+    def process_tag tag
+      reserved_symbols = %w{+ - and or xor < <= = != >=  > ( )}
+
+      # convert plain tags to plus tags
+      unless tag.start_with?(*reserved_symbols)
+        tag = "+#{tag}"
+      end
+      return tag
     end
 
     # @api private
     def process_dom dom
+    end
+
+    # Is a given taskrc attribute dealing with udas?
+    #
+    # @api public
+    def uda_attr? attr
+      attr.to_s.start_with? "uda"
+    end
+
+    # Returns part of attribute at a given depth
+    #
+    # @api public
+    def arbitrary_attr attr, depth: 1
+      attr.to_s.split("_")[depth]
+    end
+
+    # Returns all attribute string after given depth
+    #
+    # @api public
+    def deep_attr attr, depth: 2
+      attr.to_s.split("_")[depth..-1].join("_")
     end
 
     # Converts a string of format "1.6.2 (adf342jsd)" to Gem::Version object
@@ -125,10 +169,10 @@ module Rtasklib
     # @return [Boolean] true if coercible, false if not
     # @api private
     def json? value
-      begin 
+      begin
         return false unless value.is_a? String
         MultiJson.load(value)
-        true 
+        true
       rescue MultiJson::ParseError
         false
       end

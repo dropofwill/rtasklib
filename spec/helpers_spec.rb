@@ -56,5 +56,21 @@ describe Rtasklib::Helpers do
       expect(Rtasklib::Helpers.filter(ids: [1,2,3,4,5, 10..20, "7,8"]))
       .to eq("1,2,3,4,5,10,11,12,13,14,15,16,17,18,19,20,7,8")
     end
+
+    it 'treats tag arrays properly' do
+      expect(Rtasklib::Helpers.filter(tags: ["(", "+stuff", "or", "-school", ")", "work"]))
+        .to eq("( +stuff or -school ) +work")
+    end
+
+    it 'treats tag strings properly' do
+      expect(Rtasklib::Helpers.filter(tags: "+stuff -school work"))
+        .to eq("+stuff -school +work")
+    end
+
+    it 'treats tag/id combos properly' do
+      expect(Rtasklib::Helpers.filter(ids: [1,2,4..5], tags: "+stuff -school work"))
+        .to eq("1,2,4,5 +stuff -school +work")
+    end
+
   end
 end
