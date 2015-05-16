@@ -22,10 +22,9 @@ before_install:
     - pwd
     - cd ../
     - ls /home/travis/build/dropofwill/rtasklib/spec/data/.task
-    - export TASKRC=/home/travis/build/dropofwill/rtasklib/spec/data/.taskrc
-    - export TASKDATA=/home/travis/build/dropofwill/rtasklib/spec/data/.task
     - task _version
     - task export
+    - less /home/travis/build/dropofwill/rtasklib/spec/data/.task/pending.data
     - task add "Test task persistence"
 
 script: 'bundle exec rake'
