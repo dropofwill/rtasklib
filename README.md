@@ -5,7 +5,7 @@
 
 ## Description
 
-A Ruby wrapper around the TaskWarrior CLI, based on the Python tasklib. Requires a working TaskWarrior install.
+A Ruby wrapper around the TaskWarrior command line tool.
 
 
 ## Installation
@@ -29,7 +29,7 @@ Or install it yourself as:
 
 * Taskwarrior > 2.4 (require custom UDAs, recurrences, and duration data types)
 
-* Ruby > 2 (currently untested on older versions)
+* Ruby > 2.1 (Because default keyword arguments are too hard to live without :) )
 
 * See `./rtasklib.gemspec` for the latest Ruby dependencies
 
