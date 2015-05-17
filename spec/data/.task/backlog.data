@@ -6,3 +6,7 @@
 {"description":"yolo swaggins","entry":"20150516T235934Z","modified":"20150516T235934Z","status":"pending","uuid":"d04aacab-b13d-4903-80ff-1cf47fb6ea80"}
 {"description":"test project Project","entry":"20150517T021734Z","modified":"20150517T021734Z","project":"Test","status":"pending","uuid":"c9a8046c-b546-45b0-b7a3-477c198b68ed"}
 {"description":"test project Project","end":"20150517T022117Z","entry":"20150517T021734Z","modified":"20150517T021734Z","project":"Test","status":"deleted","uuid":"c9a8046c-b546-45b0-b7a3-477c198b68ed"}
+{"description":"Test recur","due":"20160101T045959Z","entry":"20150517T164952Z","imask":"0","modified":"20150512T200658Z","parent":"d203a656-f7ab-4707-8e38-abdced29acc4","recur":"weekly","status":"pending","uuid":"cd21426a-5ed3-404f-acc6-d2c9b7df10af"}
+{"description":"Test recur","due":"20160101T045959Z","entry":"20150512T200658Z","mask":"-","modified":"20150512T200658Z","recur":"weekly","status":"recurring","uuid":"d203a656-f7ab-4707-8e38-abdced29acc4"}
+{"description":"biannual test","due":"20160101T045959Z","entry":"20150517T164952Z","imask":"0","modified":"20150512T204148Z","parent":"45fc918e-f106-45d8-96b6-37eaf61f2f4e","recur":"biannual","status":"pending","uuid":"8dbe292a-414e-40a5-960c-663814ecbc82"}
+{"description":"biannual test","due":"20160101T045959Z","entry":"20150512T204148Z","mask":"-","modified":"20150512T204148Z","recur":"biannual","status":"recurring","uuid":"45fc918e-f106-45d8-96b6-37eaf61f2f4e"}

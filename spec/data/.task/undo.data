@@ -24,3 +24,17 @@ time 1431829277
 old [description:"test project Project" entry:"1431829054" modified:"1431829054" project:"Test" status:"pending" uuid:"c9a8046c-b546-45b0-b7a3-477c198b68ed"]
 new [description:"test project Project" end:"1431829277" entry:"1431829054" modified:"1431829054" project:"Test" status:"deleted" uuid:"c9a8046c-b546-45b0-b7a3-477c198b68ed"]
 ---
+time 1431881392
+new [description:"Test recur" due:"1451624399" entry:"1431881392" imask:"0" modified:"1431461218" parent:"d203a656-f7ab-4707-8e38-abdced29acc4" recur:"weekly" status:"pending" uuid:"cd21426a-5ed3-404f-acc6-d2c9b7df10af"]
+---
+time 1431881392
+old [description:"Test recur" due:"1451624399" entry:"1431461218" modified:"1431461218" recur:"weekly" status:"recurring" uuid:"d203a656-f7ab-4707-8e38-abdced29acc4"]
+new [description:"Test recur" due:"1451624399" entry:"1431461218" mask:"-" modified:"1431461218" recur:"weekly" status:"recurring" uuid:"d203a656-f7ab-4707-8e38-abdced29acc4"]
+---
+time 1431881392
+new [description:"biannual test" due:"1451624399" entry:"1431881392" imask:"0" modified:"1431463308" parent:"45fc918e-f106-45d8-96b6-37eaf61f2f4e" recur:"biannual" status:"pending" uuid:"8dbe292a-414e-40a5-960c-663814ecbc82"]
+---
+time 1431881392
+old [description:"biannual test" due:"1451624399" entry:"1431463308" modified:"1431463308" recur:"biannual" status:"recurring" uuid:"45fc918e-f106-45d8-96b6-37eaf61f2f4e"]
+new [description:"biannual test" due:"1451624399" entry:"1431463308" mask:"-" modified:"1431463308" recur:"biannual" status:"recurring" uuid:"45fc918e-f106-45d8-96b6-37eaf61f2f4e"]
+---
