@@ -152,6 +152,19 @@ module Rtasklib
       Gem::Version.new std_ver
     end
 
+    # Returns a "+PENDING or +WAITING" tag string if true, else ""
+    #
+    # @param use [Boolean]
+    # @return [String]
+    # @api public
+    def pending_or_waiting use=true
+      if use
+        "+PENDING or +WAITING"
+      else
+        ""
+      end
+    end
+
     # Determine the type that a value should be coerced to
     # Int needs to precede float because ints are also floats
     # Doesn't detect arrays, b/c task stores these as comma separated strings

@@ -17,11 +17,13 @@ module Rtasklib
 
     # Retrieves the current task list from the TW database
     #
+    # @param active [Boolean] return only pending & waiting tasks
     # @return [Array<Models::TaskModel>]
     # @api public
-    def all
+    def all active: true
       all = []
-      Execute.task_popen3(*override_a, "export") do |i, o, e, t|
+      f = Helpers.pending_or_waiting(active)
+      Execute.task_popen3(*override_a, f, "export") do |i, o, e, t|
         all = MultiJson.load(o.read).map do |x|
           Rtasklib::Models::TaskModel.new(x)
         end

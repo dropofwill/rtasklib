@@ -55,6 +55,7 @@ describe Rtasklib::Controller do
   end
 
   describe 'Rtasklib::Controller#add!' do
+    # let(:pre_count) { 
   end
 
   describe 'Rtasklib::Controller#modify!' do
