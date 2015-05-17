@@ -31,7 +31,7 @@ module Rtasklib
       warn execute
 
       Open3.popen3(execute) do |i, o, e, t|
-        handle_response(e, t)
+        handle_response(o, e, t)
         yield(i, o, e, t) if block_given?
       end
     end
@@ -85,10 +85,10 @@ module Rtasklib
     # thread had a failing exit code
     #
     # @raise [RuntimeError] if failing exit code
-    def handle_response stderr, thread
+    def handle_response stdout, stderr, thread
       unless thread.value.success?
-        puts stderr.read
-        raise thread.inspect
+        dump = "#{thread.value} \n Stderr: #{stderr.read} \n Stdout: #{stdout.read} \n"
+        raise dump
       end
     end
   end

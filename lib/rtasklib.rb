@@ -18,6 +18,7 @@ module Rtasklib
     DEFAULTS = {
       json_array:              'true',
       verbose:                 'nothing',
+      gc:                      'off',
       confirmation:            'no',
       dependency_confirmation: 'no',
       exit_on_missing_db:      'yes', }

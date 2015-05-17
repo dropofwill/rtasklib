@@ -76,7 +76,7 @@ module Rtasklib
     # @param dom [Array<String>, String]
     # @api public
     def modify! attr:, val:, ids: nil, tags: nil, dom: nil
-      f = Helpers.filter(ids, tags, dom)
+      f = Helpers.filter(ids: ids, tags: tags, dom: dom)
       return false if f.blank?
 
       query = "#{f} modify #{attr} #{val}"
@@ -92,7 +92,7 @@ module Rtasklib
     # @param dom [Array<String>, String]
     # @api public
     def done! ids: nil, tags: nil, dom: nil
-      f = Helpers.filter(ids, tags, dom)
+      f = Helpers.filter(ids: ids, tags: tags, dom: dom)
       return false if f.blank?
 
       Execute.task_popen3(*override_a, f, "done") do |i, o, e, t|
@@ -106,8 +106,8 @@ module Rtasklib
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @api public
-    def delete!
-      f = Helpers.filter(ids, tags, dom)
+    def delete! ids: nil, tags: nil, dom: nil
+      f = Helpers.filter(ids: ids, tags: tags, dom: dom)
       return false if f.blank?
 
       Execute.task_popen3(*override_a, f, "delete") do |i, o, e, t|
