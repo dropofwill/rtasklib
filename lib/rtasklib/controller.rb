@@ -67,7 +67,7 @@ module Rtasklib
     end
 
     # Modify a set of task the match the input filter with a single attr/value
-    # pair.
+    # pair. Returns false if filter is blank.
     #
     # @param attr [String]
     # @param value [String]
@@ -76,19 +76,43 @@ module Rtasklib
     # @param dom [Array<String>, String]
     # @api public
     def modify! attr:, val:, ids: nil, tags: nil, dom: nil
-      f = filter(ids, tags, dom)
+      f = Helpers.filter(ids, tags, dom)
+      return false if f.blank?
+
       query = "#{f} modify #{attr} #{val}"
       Execute.task_popen3(*override_a, query) do |i, o, e, t|
         return t.value
       end
     end
 
+    # Returns false if filter is blank.
+    #
+    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param tags [Array<String>, String]
+    # @param dom [Array<String>, String]
     # @api public
-    def done!
+    def done! ids: nil, tags: nil, dom: nil
+      f = Helpers.filter(ids, tags, dom)
+      return false if f.blank?
+
+      Execute.task_popen3(*override_a, f, "done") do |i, o, e, t|
+        return t.value
+      end
     end
 
+    # Returns false if filter is blank.
+    #
+    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param tags [Array<String>, String]
+    # @param dom [Array<String>, String]
     # @api public
     def delete!
+      f = Helpers.filter(ids, tags, dom)
+      return false if f.blank?
+
+      Execute.task_popen3(*override_a, f, "delete") do |i, o, e, t|
+        return t.value
+      end
     end
 
     # Directly call `task undo`, which only applies to edits to the task db
