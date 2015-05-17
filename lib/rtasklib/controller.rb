@@ -186,7 +186,7 @@ module Rtasklib
     # @param uda_name [String] the uda name to check for
     # @return [Boolean] whether it matches or not
     # @api public
-    def check_uda uda_name
+    def uda_exists? uda_name
       if get_udas.any? { |uda| uda == uda_name }
         true
       else

@@ -50,7 +50,7 @@ module Rtasklib
       version
     end
   end
-  
+
   # Add a convenience alias
   TW = TaskWarrior
 end

@@ -46,7 +46,7 @@ describe Rtasklib::Controller do
     end
   end
 
-  describe 'Rtasklib::Controller#check_uda' do
+  describe 'Rtasklib::Controller#uda_exists?' do
     it 'should return true if a uda is found that matches the input' do
     end
   end
