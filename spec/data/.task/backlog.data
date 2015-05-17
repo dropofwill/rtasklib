@@ -3,3 +3,4 @@
 {"description":"Test recur","entry":"20150512T200658Z","modified":"20150512T200658Z","status":"pending","uuid":"d203a656-f7ab-4707-8e38-abdced29acc4"}
 {"description":"Test recur","due":"20160101T045959Z","entry":"20150512T200658Z","modified":"20150512T200658Z","recur":"weekly","status":"recurring","uuid":"d203a656-f7ab-4707-8e38-abdced29acc4"}
 {"description":"biannual test","due":"20160101T045959Z","entry":"20150512T204148Z","modified":"20150512T204148Z","recur":"biannual","status":"recurring","uuid":"45fc918e-f106-45d8-96b6-37eaf61f2f4e"}
+{"description":"yolo swaggins","entry":"20150516T235934Z","modified":"20150516T235934Z","status":"pending","uuid":"d04aacab-b13d-4903-80ff-1cf47fb6ea80"}

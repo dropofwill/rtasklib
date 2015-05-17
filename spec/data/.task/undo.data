@@ -14,3 +14,6 @@ new [description:"Test recur" due:"1451624399" entry:"1431461218" modified:"1431
 time 1431463308
 new [description:"biannual test" due:"1451624399" entry:"1431463308" modified:"1431463308" recur:"biannual" status:"recurring" uuid:"45fc918e-f106-45d8-96b6-37eaf61f2f4e"]
 ---
+time 1431820774
+new [description:"yolo swaggins" entry:"1431820774" modified:"1431820774" status:"pending" uuid:"d04aacab-b13d-4903-80ff-1cf47fb6ea80"]
+---

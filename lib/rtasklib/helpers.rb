@@ -9,6 +9,14 @@ module Rtasklib
     # make this module a stateless, singleton
     extend self
 
+    # Wrap a string with quotes to make it safe to pass to `task`
+    #
+    # @param string [String]
+    # @api public
+    def wrap_string string
+      "\"#{string.to_s}\""
+    end
+
     # Converts ids, tags, and dom queries to a single string ready to pass
     # directly to task.
     #
@@ -96,8 +104,21 @@ module Rtasklib
       return tag
     end
 
+    # Process string and array input of the likes of project:Work or 
+    # description.contains:yolo
+    #
+    # @todo handle Hash parameters
+    # @param [String, Array<String>]
     # @api private
     def process_dom dom
+      case dom
+      when String
+        dom
+      when Array
+        dom.join(" ")
+      when Hash
+        raise NotImplemtedError
+      end
     end
 
     # Is a given taskrc attribute dealing with udas?

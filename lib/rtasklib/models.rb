@@ -55,6 +55,7 @@ module Rtasklib::Models
     # But on creation these should be set by `task`
     attribute :status,        String
     attribute :uuid,          String
+    attribute :id,            Fixnum
     attribute :entry,         DateTime
 
     # Optional for every task

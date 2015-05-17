@@ -43,8 +43,8 @@ module Rtasklib
     # @api public
     def some ids: nil, tags: nil, dom: nil
       some = []
-      filter_s = Helpers.filter(ids: ids, tags: tags, dom: dom)
-      Execute.task_popen3(*@override_a, filter_s, "export") do |i, o, e, t|
+      f = Helpers.filter(ids: ids, tags: tags, dom: dom)
+      Execute.task_popen3(*@override_a, f, "export") do |i, o, e, t|
         some = MultiJson.load(o.read).map do |x|
           Rtasklib::Models::TaskModel.new(x)
         end
@@ -52,17 +52,25 @@ module Rtasklib
       return some
     end
 
-    # 
+    # Add a single task to the database
     #
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @api public
-    def add! description
+    def add! description, tags: nil, dom: nil
+      f = Helpers.filter(tags: tags, dom: dom)
+      d = Helpers.wrap_string(description)
+      Execute.task_popen3(*override_a, "add", d, f) do |i, o, e, t|
+        return t.value
+      end
     end
 
+    # Modify a set of task the match the input filter with a single attr/value
+    # pair.
     #
-    #
+    # @param attr [String]
+    # @param value [String]
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
@@ -73,6 +81,14 @@ module Rtasklib
       Execute.task_popen3(*override_a, query) do |i, o, e, t|
         return t.value
       end
+    end
+
+    # @api public
+    def done!
+    end
+
+    # @api public
+    def delete!
     end
 
     # Directly call `task undo`, which only applies to edits to the task db
