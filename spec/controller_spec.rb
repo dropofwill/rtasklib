@@ -73,6 +73,21 @@ describe Rtasklib::Controller do
   end
 
   describe 'Rtasklib::Controller#modify!' do
+    before(:context) do
+      @tw = Rtasklib::TaskWarrior.new("spec/data/.task")
+      @pre_task = @tw.some(ids: 1).first
+      @tw.modify!(attr: "description", val: "Modified description", ids: 1)
+      @after_task = @tw.some(ids: 1).first
+      @tw.undo!
+    end
+
+    it 'should have a different description after modification' do
+      expect(@pre_task.description).not_to eq(@after_task.description)
+    end
+
+    it 'should have the same description after undo' do
+      expect(@pre_task.description).to eq(@tw.some(ids: 1).first.description)
+    end
   end
 
   describe 'Rtasklib::Controller#undo!' do
