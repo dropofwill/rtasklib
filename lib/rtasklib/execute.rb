@@ -7,10 +7,14 @@ module Rtasklib
     # so that the methods are available within the modules lookup path
     extend self
 
-    @@exp_regex = {
-      create_rc: %r{Would \s you \s like \s a \s sample \s *.+ \s created, \s
-                    so \s taskwarrior \s can \s proceed\? \s
-                    \(yes/no\)}x }
+    # Turned off confirmations, so this regex is deprecated
+    # This also means we have to handle that all ourselves
+    # For example warn user with bang methods.
+    #
+    # @@exp_regex = {
+    #   create_rc: %r{Would \s you \s like \s a \s sample \s *.+ \s created, \s
+    #                 so \s taskwarrior \s can \s proceed\? \s
+    #                 \(yes/no\)}x }
 
     # Use Open3#popen3 to execute a unix program with an array of options
     # and an optional block to handle the response.
