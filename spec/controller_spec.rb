@@ -47,11 +47,36 @@ describe Rtasklib::Controller do
   end
 
   describe 'Rtasklib::Controller#uda_exists?' do
-    it 'should return true if a uda is found that matches the input' do
+    subject { Rtasklib::TaskWarrior.new("spec/data/.task").uda_exists?("client")}
+
+    it 'should return false if a uda is not found that matches the input' do
+      expect(subject).to eq(false)
     end
   end
 
-  describe 'Rtasklib::Controller#all' do
+  describe 'Rtasklib::Controller#count' do
+
+    describe '#count should count existing tasks' do
+
+      subject { Rtasklib::TaskWarrior.new("spec/data/.task").count ids:[1,2] }
+
+      it 'should return an integer' do
+        expect(subject.is_a? Integer).to eq(true)
+      end
+
+      it 'should return 2 for ids 1,2' do
+        expect(subject).to eq(2)
+      end
+    end
+
+    describe '#count should return 0 for non existing tasks' do
+
+      subject { Rtasklib::TaskWarrior.new("spec/data/.task").count ids:1000 }
+
+      it 'should return 0 for ids 1000' do
+        expect(subject).to eq(0)
+      end
+    end
   end
 
   describe 'Rtasklib::Controller#add!' do
@@ -59,17 +84,16 @@ describe Rtasklib::Controller do
       @tw = Rtasklib::TaskWarrior.new("spec/data/.task")
       @pre_count = @tw.all.count
       @count_of_undos = 0
+      @tw.add!("Test adding methods")
     end
 
-    # after(:context) do
-    #   @tw.undo!
-    # end
+    it 'should add another task' do
+      expect(@tw.all.count).to eq(@pre_count + 1)
+    end
 
-    # subject { @tw.add!("Test") }
-    #
-    # it 'should add another task' do
-    #   expect(@tw.all.count).to eq(@pre_count + 1)
-    # end
+    after(:context) do
+      @tw.undo!
+    end
   end
 
   describe 'Rtasklib::Controller#modify!' do

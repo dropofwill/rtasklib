@@ -72,5 +72,20 @@ describe Rtasklib::Helpers do
         .to eq("1,2,4,5 +stuff -school +work")
     end
 
+    it 'treats dom strings properly' do
+      expect(Rtasklib::Helpers.filter(dom: "project:Work due:today"))
+        .to eq("project:Work due:today")
+    end
+
+    it 'treats dom arrays properly' do
+      expect(Rtasklib::Helpers.filter(dom: ["project:Work", "due:today priority:L"]))
+        .to eq("project:Work due:today priority:L")
+    end
+
+    it 'treats dom hashes properly' do
+      expect(Rtasklib::Helpers.filter(dom: {project:"Work", due:"today", priority:"L"}))
+        .to eq("project:Work due:today priority:L")
+    end
+
   end
 end

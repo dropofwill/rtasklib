@@ -67,6 +67,57 @@ module Rtasklib
       end
     end
 
+    # Calls `task _show` with initial overrides returns a Taskrc object of the
+    # result
+    #
+    # @return [Taskrc]
+    # @api public
+    def get_rc
+      res = []
+      Execute.task_popen3(*@override_a, "_show") do |i, o, e, t|
+        res = o.read.each_line.map { |l| l.chomp }
+      end
+      Taskrc.new(res, :array)
+    end
+
+    # Calls `task _version` and returns the result
+    #
+    # @return [String]
+    # @api public
+    def get_version
+      version = nil
+      Execute.task_popen3("_version") do |i, o, e, t|
+        version = Helpers.to_gem_version(o.read.chomp)
+      end
+      version
+    end
+
+    # Mark the filter of tasks as started
+    # Returns false if filter (ids:, tags:, dom:) is blank.
+    #
+    # @api public
+    def start! ids: nil, tags: nil, dom: nil
+      f = Helpers.filter(ids: ids, tags: tags, dom: dom)
+      return false if f.blank?
+
+      Execute.task_popen3(*@override_a, f, "start") do |i, o, e, t|
+        return t.value
+      end
+    end
+
+    # Mark the filter of tasks as stopped
+    # Returns false if filter (ids:, tags:, dom:) is blank.
+    #
+    # @api public
+    def stop! ids: nil, tags: nil, dom: nil
+      f = Helpers.filter(ids: ids, tags: tags, dom: dom)
+      return false if f.blank?
+
+      Execute.task_popen3(*@override_a, f, "stop") do |i, o, e, t|
+        return t.value
+      end
+    end
+
     # Add a single task to the database w/required description and optional
     # tags and dom queries (e.g. project:Work)
     #
@@ -144,17 +195,6 @@ module Rtasklib
       end
     end
 
-    # Update a configuration variable in the .taskrc
-    #
-    # @param attr [String]
-    # @param val [String]
-    # @api public
-    def update_config! attr, val
-      Execute.task_popen3(*override_a, "config #{attr} #{val}") do |i, o, e, t|
-        return t.value
-      end
-    end
-
     # Retrieves a hash of hashes with info about the UDAs currently available
     #
     # @return [Hash{Symbol=>Hash}]
@@ -172,6 +212,17 @@ module Rtasklib
           udas[attr.to_sym] = Hash[uda]
         end
         return udas
+    end
+
+    # Update a configuration variable in the .taskrc
+    #
+    # @param attr [String]
+    # @param val [String]
+    # @api public
+    def update_config! attr, val
+      Execute.task_popen3(*override_a, "config #{attr} #{val}") do |i, o, e, t|
+        return t.value
+      end
     end
 
     # Add new found udas to our internal TaskModel
@@ -234,29 +285,19 @@ module Rtasklib
       update_config("uda.#{name}.urgency", urgency) unless urgency.nil?
     end
 
-    # Calls `task _show` with initial overrides returns a Taskrc object of the
-    # result
-    #
-    # @return [Taskrc]
-    # @api public
-    def get_rc
-      res = []
-      Execute.task_popen3(*@override_a, "_show") do |i, o, e, t|
-        res = o.read.each_line.map { |l| l.chomp }
-      end
-      Taskrc.new(res, :array)
-    end
 
-    # Calls `task _version` and returns the result
+    # TODO: implement and test convenience methods for modifying tasks
     #
-    # @return [String]
-    # @api public
-    def get_version
-      version = nil
-      Execute.task_popen3("_version") do |i, o, e, t|
-        version = Helpers.to_gem_version(o.read.chomp)
-      end
-      version
-    end
+    # def annotate
+    # end
+    #
+    # def denotate
+    # end
+    #
+    # def append
+    # end
+    #
+    # def prepend
+    # end
   end
 end

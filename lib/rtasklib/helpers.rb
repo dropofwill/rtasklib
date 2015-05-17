@@ -109,7 +109,7 @@ module Rtasklib
     #
     # @todo handle Hash parameters
     # @param [String, Array<String>]
-    # @api private
+    # @api public
     def process_dom dom
       case dom
       when String
@@ -117,8 +117,17 @@ module Rtasklib
       when Array
         dom.join(" ")
       when Hash
-        raise NotImplemtedError
+        process_hash_dom(dom)
       end
+    end
+
+    # Parse the hash input to a string
+    #
+    # @param dom_hash [Hash]
+    # @return [String]
+    # @api public
+    def process_hash_dom dom_hash
+      dom_hash.reduce("") { |dom, (k,v)| dom += "#{k.to_s}:#{v} " }.strip
     end
 
     # Is a given taskrc attribute dealing with udas?
