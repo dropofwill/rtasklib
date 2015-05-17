@@ -7,6 +7,8 @@ module Rtasklib
     # so that the methods are available within the modules lookup path
     extend self
 
+    DEBUG = false
+
     # Turned off confirmations, so this regex is deprecated
     # This also means we have to handle that all ourselves
     # For example warn user with bang methods.
@@ -32,7 +34,7 @@ module Rtasklib
     def popen3 program='task', *opts, &block
       execute = opts.unshift(program)
       execute = execute.join(" ")
-      warn execute
+      warn execute if DEBUG 
 
       Open3.popen3(execute) do |i, o, e, t|
         handle_response(o, e, t)

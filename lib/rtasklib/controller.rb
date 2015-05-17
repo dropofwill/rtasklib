@@ -60,6 +60,21 @@ module Rtasklib
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @api public
+    def count ids: nil, tags: nil, dom: nil
+      f = Helpers.filter(ids: ids, tags: tags, dom: dom)
+      Execute.task_popen3(*@override_a, f, "count") do |i, o, e, t|
+        return Integer(o.read)
+      end
+    end
+
+    # Add a single task to the database w/required description and optional
+    # tags and dom queries (e.g. project:Work)
+    #
+    # @param description [String] the required desc of the task
+    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param tags [Array<String>, String]
+    # @param dom [Array<String>, String]
+    # @api public
     def add! description, tags: nil, dom: nil
       f = Helpers.filter(tags: tags, dom: dom)
       d = Helpers.wrap_string(description)
@@ -69,7 +84,8 @@ module Rtasklib
     end
 
     # Modify a set of task the match the input filter with a single attr/value
-    # pair. Returns false if filter is blank.
+    # pair.
+    # Returns false if filter (ids:, tags:, dom:) is blank.
     #
     # @param attr [String]
     # @param value [String]
@@ -87,7 +103,8 @@ module Rtasklib
       end
     end
 
-    # Returns false if filter is blank.
+    # Finishes the filtered tasks
+    # Returns false if filter (ids:, tags:, dom:) is blank.
     #
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
