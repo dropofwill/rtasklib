@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Rtasklib::Taskrc do
 
   describe "initialize with a test .taskrc" do
+
     subject { Rtasklib::Taskrc.new("spec/data/.taskrc", :path).config }
 
     it "creates a Virtus model representation" do
@@ -10,7 +11,7 @@ describe Rtasklib::Taskrc do
     end
 
     it "attribute name dot paths are converted to underscores" do
-      expect(subject.data_location).to eq "./.task"
+      expect(subject.data_location).to eq ".task"
     end
 
     it "top level configs are possible" do

@@ -76,17 +76,22 @@ describe Rtasklib::Controller do
   end
 
   describe 'Rtasklib::Controller#undo!' do
-    before(:context) do
-      @tw = Rtasklib::TaskWarrior.new("spec/data/.task")
-      @pre_count = @tw.all.count
-      @tw.add!("#undo! test")
-      @after_count = @tw.all.count
-      @tw.undo!
+    describe '#undo! should fix changes from add!' do
+      before(:context) do
+        @tw = Rtasklib::TaskWarrior.new("spec/data/.task")
+        @pre_count = @tw.all.count
+        @tw.add!("#undo! test")
+        @after_count = @tw.all.count
+        @tw.undo!
+      end
+
+      it 'should have the same count as before the "undo! test" task was created' do
+        expect(@tw.all.count).to eq(@pre_count)
+        expect(@tw.all.count).not_to eq(@after_count)
+      end
     end
 
-    it 'should have the same count as before the "undo! test" task was created' do
-      expect(@tw.all.count).to eq(@pre_count)
-      expect(@tw.all.count).not_to eq(@after_count)
+    describe '#undo! should fix changes from modify!' do
     end
   end
 end

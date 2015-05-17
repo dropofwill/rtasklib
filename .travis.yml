@@ -26,7 +26,6 @@ before_install:
     - export TASKDATA=/home/travis/build/dropofwill/rtasklib/spec/data/.task
     - task _version
     - task export
-    - task add "Test task persistence"
 
 script: 'bundle exec rake'
 
