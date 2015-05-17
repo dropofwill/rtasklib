@@ -34,7 +34,6 @@ new [description:"Test recur" due:"1451624399" entry:"1431461218" mask:"-" modif
 time 1431881392
 new [description:"biannual test" due:"1451624399" entry:"1431881392" imask:"0" modified:"1431463308" parent:"45fc918e-f106-45d8-96b6-37eaf61f2f4e" recur:"biannual" status:"pending" uuid:"8dbe292a-414e-40a5-960c-663814ecbc82"]
 ---
-time 1431881392
-old [description:"biannual test" due:"1451624399" entry:"1431463308" modified:"1431463308" recur:"biannual" status:"recurring" uuid:"45fc918e-f106-45d8-96b6-37eaf61f2f4e"]
-new [description:"biannual test" due:"1451624399" entry:"1431463308" mask:"-" modified:"1431463308" recur:"biannual" status:"recurring" uuid:"45fc918e-f106-45d8-96b6-37eaf61f2f4e"]
+time 1431887836
+new [description:"#undo ! test" entry:"1431887836" modified:"1431887836" status:"pending" uuid:"5719857b-abec-4813-a54a-c0b530d07eba"]
 ---

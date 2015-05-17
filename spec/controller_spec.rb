@@ -55,12 +55,36 @@ describe Rtasklib::Controller do
   end
 
   describe 'Rtasklib::Controller#add!' do
-    # let(:pre_count) { 
+    before(:context) do
+      @tw = Rtasklib::TaskWarrior.new("spec/data/.task")
+      @pre_count = @tw.all.count
+      @count_of_undos = 0
+    end
+
+    # after(:context) do
+    #   @tw.undo!
+    # end
+
+    # subject { @tw.add!("Test") }
+    #
+    # it 'should add another task' do
+    #   expect(@tw.all.count).to eq(@pre_count + 1)
+    # end
   end
 
   describe 'Rtasklib::Controller#modify!' do
   end
 
   describe 'Rtasklib::Controller#undo!' do
+    before(:context) do
+      @tw = Rtasklib::TaskWarrior.new("spec/data/.task")
+      @pre_count = @tw.all.count
+      @tw.add!("#undo! test")
+      @tw.undo!
+    end
+
+    it 'should have the same count as before the "undo! test" task was created' do
+      expect(@tw.all.count).to eq(@pre_count)
+    end
   end
 end

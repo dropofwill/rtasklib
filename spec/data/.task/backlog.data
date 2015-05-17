@@ -10,3 +10,5 @@
 {"description":"Test recur","due":"20160101T045959Z","entry":"20150512T200658Z","mask":"-","modified":"20150512T200658Z","recur":"weekly","status":"recurring","uuid":"d203a656-f7ab-4707-8e38-abdced29acc4"}
 {"description":"biannual test","due":"20160101T045959Z","entry":"20150517T164952Z","imask":"0","modified":"20150512T204148Z","parent":"45fc918e-f106-45d8-96b6-37eaf61f2f4e","recur":"biannual","status":"pending","uuid":"8dbe292a-414e-40a5-960c-663814ecbc82"}
 {"description":"biannual test","due":"20160101T045959Z","entry":"20150512T204148Z","mask":"-","modified":"20150512T204148Z","recur":"biannual","status":"recurring","uuid":"45fc918e-f106-45d8-96b6-37eaf61f2f4e"}
+{"description":"biannual test","due":"20160101T045959Z","entry":"20150512T204148Z","modified":"20150512T204148Z","recur":"biannual","status":"recurring","uuid":"45fc918e-f106-45d8-96b6-37eaf61f2f4e"}
+{"description":"#undo ! test","entry":"20150517T183716Z","modified":"20150517T183716Z","status":"pending","uuid":"5719857b-abec-4813-a54a-c0b530d07eba"}
