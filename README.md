@@ -113,14 +113,24 @@ tw.some(ids: [1..5, 10]).size
 #=> 6
 
 tw.done!(ids: 5)
-#=> 0
 
 tw.some(ids: [1..5, 10]).size
 #=> 5
+
+tw.get_uda_names
+#=> ["author", "estimate"]
+
+task.sync!
 ```
 
-[Controller docs](http://will-paul.com/rtasklib/Rtasklib/Controller.html)
+[Controller docs has more examples for each method](http://will-paul.com/rtasklib/Rtasklib/Controller.html)
 
+
+## Documentation
+
+[Generated using yardoc](http://will-paul.com/rtasklib/Rtasklib)
+
+100.00% documented
 
 ## Development
 

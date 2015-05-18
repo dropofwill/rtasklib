@@ -14,9 +14,42 @@ module Rtasklib
   # By convention bang methods modify the task database, and non-bang read
   # from the database, e.g. `Controller#all` vs `Controller#modify!`
   #
+  # Most methods accept filtering in the form of ids, tags, and dom
+  #
   # Changes to the config are not effected by #undo!
   #
   # XXX: depends on TaskWarrior#override_a currently, which isn't great.
+  #
+  # @example ids: can be a single id as a String or Fixnum or Range
+  #   tw.some(ids: 1)
+  #   tw.some(ids: "1")
+  #   tw.some(ids: 1..4)  # 1,2,3,4
+  #   tw.some(ids: 1...4) # 1,2,3
+  #
+  # @example ids: can be an array of mixed types
+  #   tw.some(ids: [1,2,4...10,"12"])
+  #
+  # @example ids: can be a TaskWarrior formatted string
+  #   tw.some(ids: "1-3,10")
+  #
+  # @example tags: can be a single string
+  #   tw.some(tags: "work") # converted to +work
+  #   tw.some(tags: "-work")
+  #
+  # @example tags: can be an array and include relational operators
+  #   tw.some(tags: ["work", "and", "-fun"])
+  #
+  # @example tags: work with TaskWarrior built-in virtual tags http://taskwarrior.org/docs/tags.html
+  #   tw.some(tags: "+TODAY")
+  #
+  # @example dom: work as hashes
+  #   require "date"
+  #   today = DateTime.now
+  #   tw.some(dom: {project: "Work", "due.before" => today})
+  #
+  # @example You can also pass in a TW style string if you prefer
+  #   tw.some(dom: "project:Work due.before:#{today}")
+  #
   module Controller
     extend self
 
@@ -56,7 +89,7 @@ module Rtasklib
     # @example filter by a dom query
     #   require "date"
     #   today = DateTime.now
-    #   # note that queries with dots need to be Strings, as they would be 
+    #   # note that queries with dots need to be Strings, as they would be
     #   # invalid Symbols
     #   tw.some(dom: {project: "Work", "due.before" => today})
     #   # You can also pass in a TW style string if you prefer
@@ -125,6 +158,9 @@ module Rtasklib
 
     # Mark the filter of tasks as started
     # Returns false if filter (ids:, tags:, dom:) is blank.
+    #
+    # @example
+    #   tw.start!(ids: 1)
     #
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
