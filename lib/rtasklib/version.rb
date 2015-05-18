@@ -5,5 +5,5 @@
 
 module Rtasklib
   # The latest version of rtasklib
-  VERSION = "0.2.3-beta"
+  VERSION = "0.2.3"
 end
