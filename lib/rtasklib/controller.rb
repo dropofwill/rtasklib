@@ -124,7 +124,6 @@ module Rtasklib
     # tags and dom queries (e.g. project:Work)
     #
     # @param description [String] the required desc of the task
-    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @api public
@@ -141,7 +140,7 @@ module Rtasklib
     # Returns false if filter (ids:, tags:, dom:) is blank.
     #
     # @param attr [String]
-    # @param value [String]
+    # @param val [String]
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]

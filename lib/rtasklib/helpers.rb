@@ -107,8 +107,7 @@ module Rtasklib
     # Process string and array input of the likes of project:Work or 
     # description.contains:yolo
     #
-    # @todo handle Hash parameters
-    # @param [String, Array<String>]
+    # @param dom [String, Array<String>, Hash]
     # @api public
     def process_dom dom
       case dom
@@ -132,6 +131,8 @@ module Rtasklib
 
     # Is a given taskrc attribute dealing with udas?
     #
+    # @param attr [String]
+    # @return [Boolean]
     # @api public
     def uda_attr? attr
       attr.to_s.start_with? "uda"
@@ -139,6 +140,9 @@ module Rtasklib
 
     # Returns part of attribute at a given depth
     #
+    # @param attr [String]
+    # @param depth [Integer]
+    # @return [Boolean]
     # @api public
     def arbitrary_attr attr, depth: 1
       attr.to_s.split("_")[depth]
@@ -146,6 +150,9 @@ module Rtasklib
 
     # Returns all attribute string after given depth
     #
+    # @param attr [String]
+    # @param depth [Integer]
+    # @return [Boolean]
     # @api public
     def deep_attr attr, depth: 2
       attr.to_s.split("_")[depth..-1].join("_")
