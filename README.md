@@ -10,6 +10,10 @@ A Ruby wrapper around the TaskWarrior command line tool.
 
 ## Installation
 
+### Using `bundle` or `gem`
+
+#### With Bundler
+
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -20,18 +24,64 @@ And then execute:
 
     $ bundle
 
+#### With Rubygems
+
 Or install it yourself as:
 
     $ gem install rtasklib
 
+With this method you will need to install TaskWarrior (version 2.4 or above) yourself.
+
+**On OSX:**
+    
+    $ brew install task
+
+**On Fedora:**
+
+    $ yum install task
+
+**On Debian/Ubuntu:**
+
+The major repos TaskWarrior packages are extremely outdated, so you will have to install from source. The following is what we're using to build on Travis CI, your mileage may vary:
+
+    $ sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+    $ sudo apt-get update -qq
+    $ sudo apt-get install -qq build-essential cmake uuid-dev g++-4.8
+    $ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50
+    $ git clone https://git.tasktools.org/scm/tm/task.git
+    $ cd task
+    $ git checkout $TASK_VERSION
+    $ git clean -dfx
+    $ cmake .
+    $ make
+    $ sudo make install
+
+### Using the RPM
+
+If you are running Fedora there is an RPM available, this comes with the advantage of being managed by `yum` and installing TaskWarrior for you. Simply get the desired version RPM from the `pkg/` dir:
+
+    $ sudo yum install rubygem-rtasklib-VERSION.rpm
+
+### Configure TaskWarrior
+
+Once you install TaskWarrior a database still needs to be created, luckily this is as simple as running `task` and answer `yes` when it asks you about creating a `.taskrc` file.
+
 
 ## Dependencies
 
-* Taskwarrior > 2.4 (require custom UDAs, recurrences, and duration data types)
+* TaskWarrior > 2.4 (require custom UDAs, recurrences, and duration data types)
 
-* Ruby > 2.1 (Because default keyword arguments are too hard to live without :) )
+* Ruby > 2.0
 
-* See `./rtasklib.gemspec` for the latest Ruby dependencies
+* ISO8601 gem, for dealing with duration and datetimes from TaskWarrior
+
+* Virtus gem, for simple Ruby object based domain modeling (TaskModel and TaskrcModel)
+
+* multi_json gem, for parsing JSON objects
+
+*
+
+* See `./rtasklib.gemspec` to verify the latest Ruby dependencies
 
 
 ## Usage
