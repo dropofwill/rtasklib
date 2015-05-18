@@ -111,8 +111,10 @@ module Rtasklib
       end
     end
 
-    # Ensures that a tag begins with a + or -
+    # Ensures that a tag begins with a + or - or is one of the operational
+    # operators `and or xor < <= = != >=  > ( )`
     #
+    # @param tag [String]
     # @return [String]
     # @api public
     def process_tag tag
@@ -207,7 +209,6 @@ module Rtasklib
     # Doesn't detect arrays, b/c task stores these as comma separated strings
     # which could just as easily be Strings....
     # If nothing works it defaults to String.
-    # TODO: JSON parse
     #
     # @param value [Object] anything that needs to be coerced, probably string
     # @return [Axiom::Types::Boolean, Integer, Float, String]

@@ -66,6 +66,14 @@ If you are running Fedora there is an RPM available, this comes with the advanta
 
 Once you install TaskWarrior a database still needs to be created, luckily this is as simple as running `task` and answer `yes` when it asks you about creating a `.taskrc` file.
 
+There is a small testing database in `spec/data/.task` if you would like to test on something other than you main TaskWarrior db. You can experiment with this by running:
+
+```
+$ ./bin/console
+```
+
+Which returns an interactive Pry Ruby session with the variable `tw` already initialized to a `Rtasklib::TW` instance with the test database. Changes to the database aren't tracked so don't worry about merge conflicts if you plan on contributing.
+
 
 ## Dependencies
 

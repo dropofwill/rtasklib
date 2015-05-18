@@ -50,10 +50,16 @@ module Rtasklib
     #   tw.some(ids: [1..2, 5])
     # @example filter by tags
     #   tw.some(tags: ["+school", "or", "-work"]
+    #   # You can also pass in a TW style string if you prefer
+    #   tw.some(tags: "+school or -work"]
     # @example filter by a dom query
     #   require "date"
     #   today = DateTime.now
-    #   tw.some(dom: {project: "Work", "due.before": today})
+    #   # note that queries with dots need to be Strings, as they would be 
+    #   # invalid Symbols
+    #   tw.some(dom: {project: "Work", "due.before" => today})
+    #   # You can also pass in a TW style string if you prefer
+    #   tw.some(dom: "project:Work due.before:#{today}")
     #
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
@@ -94,7 +100,7 @@ module Rtasklib
     # Calls `task _show` with initial overrides returns a Taskrc object of the
     # result
     #
-    # @return [Taskrc]
+    # @return [Rtasklib::Taskrc]
     # @api public
     def get_rc
       res = []

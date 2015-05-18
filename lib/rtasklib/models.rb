@@ -24,13 +24,18 @@ module Rtasklib::Models
     end
   end
 
-  # Custom coercer to change a string input into an TWDuration object
+  # Custom coercer that changes a string input into an TWDuration object
+  # If nil? or blank? it returns nil
+  # 
+  # Modifies the #coerce method.
   class VirtusDuration < Virtus::Attribute
     def coerce(v)
       if v.nil? || v.blank? then nil else TWDuration.new(v) end
     end
   end
 
+  # Allows us to treat the strings "on", "off", "no", "yes" as Booleans,
+  # Which is how TaskWarrior does it.
   RcBooleans = Virtus.model do |mod|
     mod.coerce = true
     mod.coercer.config.string.boolean_map = {
@@ -48,8 +53,8 @@ module Rtasklib::Models
 
   class TaskModel
     include Virtus.model
-    # perhaps use Veto
-    # include ActiveModel::Validations
+    # TODO: perhaps use Veto to validate these, if we ever implement mutable
+    # changes, e.g. task_model.save!
 
     # Default attributes from TW
     # Should match: http://taskwarrior.org/docs/design/task.html
