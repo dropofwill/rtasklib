@@ -1,6 +1,6 @@
-# Generated from rtasklib-0.2.0.gem by gem2rpm -*- rpm-spec -*-
+# Generated from rtasklib-0.2.1.gem by gem2rpm -*- rpm-spec -*-
 %define rbname rtasklib
-%define version 0.2.0
+%define version 0.2.1
 %define release 1
 
 Summary: A Ruby wrapper around the TaskWarrior CLI
@@ -15,8 +15,8 @@ Source0: %{rbname}-%{version}.gem
 # Make sure the spec template is included in the SRPM
 Source1: ruby-gems-%{rbname}.spec.in
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-Requires: ruby >= 2.1
-Requires: ruby-gems >= 2.2.2
+Requires: ruby >= 2
+Requires: ruby-gems >= 2
 Requires: ruby-gems-virtus 
 Requires: ruby-gems-activesupport 
 Requires: ruby-gems-activemodel 
@@ -34,8 +34,8 @@ Requires: ruby-gems-rspec-nc
 Requires: ruby-gems-guard 
 Requires: ruby-gems-guard-rspec 
 Requires: ruby-gems-yard 
-BuildRequires: ruby >= 2.1
-BuildRequires: ruby-gems >= 2.2.2
+BuildRequires: ruby >= 2
+BuildRequires: ruby-gems >= 2
 BuildArch: noarch
 Provides: ruby(Rtasklib) = %{version}
 
@@ -62,11 +62,10 @@ gem install --local --install-dir %{gembuilddir} --force %{SOURCE0}
 
 %files
 %defattr(-, root, root)
-%{gemdir}/gems/rtasklib-0.2.0/
+%{gemdir}/gems/rtasklib-0.2.1/
 
-
-%doc %{gemdir}/doc/rtasklib-0.2.0
-%{gemdir}/cache/rtasklib-0.2.0.gem
-%{gemdir}/specifications/rtasklib-0.2.0.gemspec
+%doc %{gemdir}/doc/rtasklib-0.2.1
+%{gemdir}/cache/rtasklib-0.2.1.gem
+%{gemdir}/specifications/rtasklib-0.2.1.gemspec
 
 %changelog
