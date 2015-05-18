@@ -19,7 +19,16 @@ module Rtasklib
   module Controller
     extend self
 
-    # Retrieves the current task list from the TW database
+    # Retrieves the current task list from the TaskWarrior database. Defaults
+    # to just show active (waiting & pending) tasks, which is usually what is
+    # exposed to the end user through the default reports. To see everything
+    # including completed, deleted, and parent recurring tasks, set
+    # `active: false`. For more granular control see Controller#some.
+    #
+    # @example
+    #   tw.all.count #=> 200
+    #   tw.all(active: true) #=> 200
+    #   tw.all(active: false) #=> 578
     #
     # @param active [Boolean] return only pending & waiting tasks
     # @return [Array<Models::TaskModel>]
@@ -41,16 +50,22 @@ module Rtasklib
     #   tw.some(ids: [1..2, 5])
     # @example filter by tags
     #   tw.some(tags: ["+school", "or", "-work"]
+    # @example filter by a dom query
+    #   require "date"
+    #   today = DateTime.now
+    #   tw.some(dom: {project: "Work", "due.before": today})
     #
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
+    # @param active [Boolean] return only pending & waiting tasks
     # @return [Array<Models::TaskModel>]
     # @api public
-    def some ids: nil, tags: nil, dom: nil
+    def some ids: nil, tags: nil, dom: nil, active: true
       some = []
       f = Helpers.filter(ids: ids, tags: tags, dom: dom)
-      Execute.task_popen3(*@override_a, f, "export") do |i, o, e, t|
+      a = Helpers.pending_or_waiting(active)
+      Execute.task_popen3(*@override_a, f, a, "export") do |i, o, e, t|
         some = MultiJson.load(o.read).map do |x|
           Rtasklib::Models::TaskModel.new(x)
         end
@@ -58,17 +73,18 @@ module Rtasklib
       return some
     end
 
-    # Add a single task to the database
+    # Count the number of tasks that match a given filter. Faster than counting
+    # an array returned by Controller#all or Controller#some.
     #
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
-    # @param active [Boolean]
+    # @param active [Boolean] return only pending & waiting tasks
     # @api public
     def count ids: nil, tags: nil, dom: nil, active: true
       f = Helpers.filter(ids: ids, tags: tags, dom: dom)
-      active = Helpers.pending_or_waiting(active)
-      Execute.task_popen3(*@override_a, f, active, "count") do |i, o, e, t|
+      a = Helpers.pending_or_waiting(active)
+      Execute.task_popen3(*@override_a, f, a, "count") do |i, o, e, t|
         return Integer(o.read)
       end
     end
@@ -103,12 +119,19 @@ module Rtasklib
     # Mark the filter of tasks as started
     # Returns false if filter (ids:, tags:, dom:) is blank.
     #
+    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param tags [Array<String>, String]
+    # @param dom [Array<String>, String]
+    # @param active [Boolean] return only pending & waiting tasks
+    # @return [Process::Status, False] the exit status of the thread or false
+    #   if it exited early because filter was blank.
     # @api public
-    def start! ids: nil, tags: nil, dom: nil
+    def start! ids: nil, tags: nil, dom: nil, active: true
       f = Helpers.filter(ids: ids, tags: tags, dom: dom)
+      a = Helpers.pending_or_waiting(active)
       return false if f.blank?
 
-      Execute.task_popen3(*@override_a, f, "start") do |i, o, e, t|
+      Execute.task_popen3(*@override_a, f, a, "start") do |i, o, e, t|
         return t.value
       end
     end
@@ -116,12 +139,19 @@ module Rtasklib
     # Mark the filter of tasks as stopped
     # Returns false if filter (ids:, tags:, dom:) is blank.
     #
+    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param tags [Array<String>, String]
+    # @param dom [Array<String>, String]
+    # @param active [Boolean] return only pending & waiting tasks
+    # @return [Process::Status, False] the exit status of the thread or false
+    #   if it exited early because filter was blank.
     # @api public
-    def stop! ids: nil, tags: nil, dom: nil
+    def stop! ids: nil, tags: nil, dom: nil, active: true
       f = Helpers.filter(ids: ids, tags: tags, dom: dom)
+      a = Helpers.pending_or_waiting(active)
       return false if f.blank?
 
-      Execute.task_popen3(*@override_a, f, "stop") do |i, o, e, t|
+      Execute.task_popen3(*@override_a, f, a, "stop") do |i, o, e, t|
         return t.value
       end
     end
@@ -132,6 +162,7 @@ module Rtasklib
     # @param description [String] the required desc of the task
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
+    # @return [Process::Status] the exit status of the thread
     # @api public
     def add! description, tags: nil, dom: nil
       f = Helpers.filter(tags: tags, dom: dom)
@@ -150,29 +181,35 @@ module Rtasklib
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
+    # @param active [Boolean] return only pending & waiting tasks
+    # @return [Process::Status] the exit status of the thread
     # @api public
-    def modify! attr, val, ids: nil, tags: nil, dom: nil
+    def modify! attr, val, ids: nil, tags: nil, dom: nil, active: true
       f = Helpers.filter(ids: ids, tags: tags, dom: dom)
+      a = Helpers.pending_or_waiting(active)
       return false if f.blank?
 
-      query = "#{f} modify #{attr}:#{val}"
+      query = "#{f} #{a} modify #{attr}:#{val}"
       Execute.task_popen3(*override_a, query) do |i, o, e, t|
         return t.value
       end
     end
 
-    # Finishes the filtered tasks
+    # Finishes the filtered tasks.
     # Returns false if filter (ids:, tags:, dom:) is blank.
     #
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
+    # @param active [Boolean] return only pending & waiting tasks
+    # @return [Process::Status] the exit status of the thread
     # @api public
-    def done! ids: nil, tags: nil, dom: nil
+    def done! ids: nil, tags: nil, dom: nil, active: true
       f = Helpers.filter(ids: ids, tags: tags, dom: dom)
+      a = Helpers.pending_or_waiting(active)
       return false if f.blank?
 
-      Execute.task_popen3(*override_a, f, "done") do |i, o, e, t|
+      Execute.task_popen3(*override_a, f, a, "done") do |i, o, e, t|
         return t.value
       end
     end
@@ -182,12 +219,15 @@ module Rtasklib
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
+    # @param active [Boolean] return only pending & waiting tasks
+    # @return [Process::Status] the exit status of the thread
     # @api public
-    def delete! ids: nil, tags: nil, dom: nil
+    def delete! ids: nil, tags: nil, dom: nil, active: true
       f = Helpers.filter(ids: ids, tags: tags, dom: dom)
+      a = Helpers.pending_or_waiting(active)
       return false if f.blank?
 
-      Execute.task_popen3(*override_a, f, "delete") do |i, o, e, t|
+      Execute.task_popen3(*override_a, f, a, "delete") do |i, o, e, t|
         return t.value
       end
     end
@@ -225,6 +265,7 @@ module Rtasklib
     #
     # @param attr [String]
     # @param val [String]
+    # @return [Process::Status] the exit status of the thread
     # @api public
     def update_config! attr, val
       Execute.task_popen3(*override_a, "config #{attr} #{val}") do |i, o, e, t|
@@ -295,14 +336,17 @@ module Rtasklib
     # Sync the local TaskWarrior database changes to the remote databases.
     # Remotes need to be configured in the .taskrc.
     #
-    # @return [Integer] the exit code
+    # @example
+    #   # make some local changes with add!, modify!, or the like
+    #   tw.sync!
+    #
+    # @return [Process::Status] the exit status of the thread
     # @api public
     def sync!
       Execute.task_popen3(*override_a, "sync") do |i, o, e, t|
         return t.value
       end
     end
-
 
     # TODO: implement and test convenience methods for modifying tasks
     #
