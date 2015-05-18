@@ -9,13 +9,14 @@ module Rtasklib
 
   # Accessed through the main TW, which includes this module, e.g. `tw.all`
   #
-  # Ideally should only be the well documented public, user-facing methods.
-  # We're getting there.
+  # This module contains the public, user-facing methods.
   #
   # By convention bang methods modify the task database, and non-bang read
   # from the database, e.g. `Controller#all` vs `Controller#modify!`
   #
-  # XXX: depends on @override_a currently, which isn't great.
+  # Changes to the config are not effected by #undo!
+  #
+  # XXX: depends on TaskWarrior#override_a currently, which isn't great.
   module Controller
     extend self
 

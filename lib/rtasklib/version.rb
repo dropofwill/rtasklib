@@ -4,5 +4,6 @@
 # This file is distributed under the MIT license. See LICENSE.txt for details.
 
 module Rtasklib
+  # The latest version of rtasklib
   VERSION = "0.2.3-alpha"
 end

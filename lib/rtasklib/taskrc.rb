@@ -10,8 +10,13 @@ module Rtasklib
 
   # A class that wraps a single Virtus domain model with a number of creation
   # and manipulation methods
+  #
+  # Intialize with either a hash of attribute value pairs or a Pathname
+  # to the raw taskrc file to read.
+  #
+  # @!attribute [rw] config
+  #   @return [Models::TaskrcModel] a custom Virtus domain model
   class Taskrc
-    # @attr config [Models::TaskrcModel] a custom Virtus domain model
     attr_accessor :config
 
     # Generate a dynamic Virtus model, with the attributes defined by the input
@@ -159,6 +164,8 @@ module Rtasklib
       config.send("#{attr.to_s}".to_sym)
     end
 
+    # Convert dot notation to Symbol safe underscores
+    #
     # @param attr [String] the name for the attr, e.g. "json_array"
     # @return [String]
     # @api private
@@ -167,6 +174,8 @@ module Rtasklib
     end
     private :get_hash_attr_from_rc
 
+    # Convert Symbol safe underscores to dot notation
+    #
     # @param attr [String] the name for the attr, e.g. "json_array"
     # @return [String]
     # @api private

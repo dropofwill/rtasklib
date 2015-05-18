@@ -16,7 +16,7 @@ require "pathname"
 module Rtasklib
 
   # To interact with the TaskWarrior database simply instantiate this with a
-  # path to the .task folder where data is stored. If left out it will look 
+  # path to the .task folder where data is stored. If left out it will look
   # for a database in the default location `~/.task`
   #
   # Optionally pass in a hash of taskrc options to override what is in your
@@ -61,9 +61,9 @@ module Rtasklib
   # @!attribute [r] override
   #   @return [Rtasklib::Taskrc] The options to override the default .taskrc
   # @!attribute [r] override_a
-  #   @return [Array] @override in array form, useful for passing to shell
+  #   @return [Array] override in array form, useful for passing to shell
   # @!attribute [r] override_str
-  #   @return [String] @override in string form, useful for passing to shell
+  #   @return [String] override in string form, useful for passing to shell
   class TaskWarrior
     attr_reader :version, :data_location, :taskrc, :udas,
                 :override, :override_a, :override_str
@@ -116,6 +116,6 @@ module Rtasklib
     end
   end
 
-  # Add a convenience alias
+  # Add a convenience alias to Rtasklib::TaskWarrior => Rtasklib:TW
   TW = TaskWarrior
 end

@@ -29,6 +29,8 @@ module Rtasklib::Models
   # 
   # Modifies the #coerce method.
   class VirtusDuration < Virtus::Attribute
+    # @param [Object] any value that we are trying to coerce, probably String
+    # @return [TWDuration, nil]
     def coerce(v)
       if v.nil? || v.blank? then nil else TWDuration.new(v) end
     end
@@ -43,14 +45,19 @@ module Rtasklib::Models
       'no'  => false, 'off' => false }
   end
 
+  # A base Virtus model whose attributes are created dynamically based on the
+  # given attributes are read from a .taskrc or Hash
+  #
+  # attr_accessors are available for all attributes, and more can be added
+  # See Rtasklib::Controller for methods to do this
   class TaskrcModel
-    # A base Virtus model whose attributes are created dynamically based on the
-    # given attributes are read from a .taskrc or Hash
-    #
-    # Dynamically add convert Boolean Strings to Ruby's Boolean values
+    # Dynamically add attrs that use Boolean Strings to Ruby's Boolean values
     include RcBooleans
   end
 
+  # Defines a Virtus model for a single task, defining the data types for all
+  # the default attributes
+  #
   class TaskModel
     include Virtus.model
     # TODO: perhaps use Veto to validate these, if we ever implement mutable
