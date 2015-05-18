@@ -521,7 +521,7 @@ description.contains:yolo.</p>
         <span class='name'>attr</span>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -560,12 +560,12 @@ description.contains:yolo.</p>
       <pre class="lines">
 
 
-147
-148
-149</pre>
+168
+169
+170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 147</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 168</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_arbitrary_attr'>arbitrary_attr</span> <span class='id identifier rubyid_attr'>attr</span><span class='comma'>,</span> <span class='label'>depth:</span> <span class='int'>1</span>
   <span class='id identifier rubyid_attr'>attr</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='id identifier rubyid_depth'>depth</span><span class='rbracket'>]</span>
@@ -601,7 +601,7 @@ description.contains:yolo.</p>
         <span class='name'>attr</span>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -640,12 +640,12 @@ description.contains:yolo.</p>
       <pre class="lines">
 
 
-157
-158
-159</pre>
+178
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 178</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deep_attr'>deep_attr</span> <span class='id identifier rubyid_attr'>attr</span><span class='comma'>,</span> <span class='label'>depth:</span> <span class='int'>2</span>
   <span class='id identifier rubyid_attr'>attr</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='id identifier rubyid_depth'>depth</span><span class='op'>..</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -703,7 +703,7 @@ Strings.… If nothing works it defaults to String. TODO: JSON parse</p>
     <li>
       
       
-        <span class='type'>(<tt>Axiom::Types::Boolean</tt>, <tt>Integer</tt>, <tt>Float</tt>, <tt>String</tt>)</span>
+        <span class='type'>(<tt>Axiom::Types::Boolean</tt>, <tt>Integer</tt>, <tt>Float</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -717,22 +717,22 @@ Strings.… If nothing works it defaults to String. TODO: JSON parse</p>
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206</pre>
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 215</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_determine_type'>determine_type</span> <span class='id identifier rubyid_value'>value</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_boolean?'>boolean?</span> <span class='id identifier rubyid_value'>value</span>
@@ -755,7 +755,7 @@ Strings.… If nothing works it defaults to String. TODO: JSON parse</p>
       <div class="method_details ">
   <h3 class="signature " id="filter-instance_method">
   
-    - (<tt>String</tt>) <strong>filter</strong>(ids: nil, tags: nil, dom: nil) 
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>filter</strong>(ids: nil, tags: nil, dom: nil) 
   
 
   
@@ -779,7 +779,7 @@ directly to task.</p>
         <span class='name'>ids</span>
       
       
-        <span class='type'>(<tt>Range</tt>, <tt>Array&lt;String, Range, Fixnum&gt;</tt>, <tt>String</tt>, <tt>Fixnum</tt>)</span>
+        <span class='type'>(<tt>Range</tt>, <tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>, Range, Fixnum&gt;</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Fixnum</tt>)</span>
       
       
       
@@ -790,7 +790,7 @@ directly to task.</p>
         <span class='name'>tags</span>
       
       
-        <span class='type'>(<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
       
       
       
@@ -801,7 +801,7 @@ directly to task.</p>
         <span class='name'>dom</span>
       
       
-        <span class='type'>(<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
       
       
       
@@ -815,7 +815,7 @@ directly to task.</p>
     <li>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -834,16 +834,16 @@ directly to task.</p>
       <pre class="lines">
 
 
-28
-29
-30
-31
-32
-33
-34</pre>
+49
+50
+51
+52
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_filter'>filter</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_id_s'>id_s</span> <span class='op'>=</span> <span class='id identifier rubyid_tag_s'>tag_s</span> <span class='op'>=</span> <span class='id identifier rubyid_dom_s'>dom_s</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -860,7 +860,7 @@ directly to task.</p>
       <div class="method_details ">
   <h3 class="signature " id="id_a_to_s-instance_method">
   
-    - (<tt>String</tt>) <strong>id_a_to_s</strong>(id_a) 
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>id_a_to_s</strong>(id_a) 
   
 
   
@@ -888,7 +888,7 @@ directly to task.</p>
         <span class='name'>id_a</span>
       
       
-        <span class='type'>(<tt>Array&lt;String, Range, Fixnum&gt;</tt>)</span>
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>, Range, Fixnum&gt;</tt>)</span>
       
       
       
@@ -902,7 +902,7 @@ directly to task.</p>
     <li>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -916,15 +916,15 @@ directly to task.</p>
       <pre class="lines">
 
 
-47
-48
-49
-50
-51
-52</pre>
+68
+69
+70
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_id_a_to_s'>id_a_to_s</span> <span class='id identifier rubyid_id_a'>id_a</span>
   <span class='id identifier rubyid_id_a'>id_a</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_el'>el</span><span class='op'>|</span>
@@ -940,7 +940,7 @@ directly to task.</p>
       <div class="method_details ">
   <h3 class="signature " id="id_range_to_s-instance_method">
   
-    - (<tt>Array&lt;String&gt;</tt>) <strong>id_range_to_s</strong>(id_range) 
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>id_range_to_s</strong>(id_range) 
   
 
   
@@ -977,7 +977,7 @@ directly to task.</p>
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
       
       
       
@@ -991,12 +991,12 @@ directly to task.</p>
       <pre class="lines">
 
 
-76
-77
-78</pre>
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_id_range_to_s'>id_range_to_s</span> <span class='id identifier rubyid_id_range'>id_range</span>
   <span class='id identifier rubyid_id_range'>id_range</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>,</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -1009,7 +1009,7 @@ directly to task.</p>
       <div class="method_details ">
   <h3 class="signature " id="pending_or_waiting-instance_method">
   
-    - (<tt>String</tt>) <strong>pending_or_waiting</strong>(use = true) 
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>pending_or_waiting</strong>(use = true) 
   
 
   
@@ -1048,7 +1048,7 @@ directly to task.</p>
     <li>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -1062,16 +1062,16 @@ directly to task.</p>
       <pre class="lines">
 
 
-176
-177
-178
-179
-180
-181
-182</pre>
+197
+198
+199
+200
+201
+202
+203</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 176</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 197</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pending_or_waiting'>pending_or_waiting</span> <span class='id identifier rubyid_use'>use</span><span class='op'>=</span><span class='kw'>true</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_use'>use</span>
@@ -1112,7 +1112,7 @@ description.contains:yolo</p>
         <span class='name'>dom</span>
       
       
-        <span class='type'>(<tt>String</tt>, <tt>Array&lt;String&gt;</tt>, <tt>Hash</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>, <tt>Hash</tt>)</span>
       
       
       
@@ -1127,19 +1127,19 @@ description.contains:yolo</p>
       <pre class="lines">
 
 
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121</pre>
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_dom'>process_dom</span> <span class='id identifier rubyid_dom'>dom</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_dom'>dom</span>
@@ -1159,7 +1159,7 @@ description.contains:yolo</p>
       <div class="method_details ">
   <h3 class="signature " id="process_hash_dom-instance_method">
   
-    - (<tt>String</tt>) <strong>process_hash_dom</strong>(dom_hash) 
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>process_hash_dom</strong>(dom_hash) 
   
 
   
@@ -1196,7 +1196,7 @@ description.contains:yolo</p>
     <li>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -1210,12 +1210,12 @@ description.contains:yolo</p>
       <pre class="lines">
 
 
-128
-129
-130</pre>
+149
+150
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_hash_dom'>process_hash_dom</span> <span class='id identifier rubyid_dom_hash'>dom_hash</span>
   <span class='id identifier rubyid_dom_hash'>dom_hash</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_dom'>dom</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span><span class='op'>|</span> <span class='id identifier rubyid_dom'>dom</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_v'>v</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span>
@@ -1251,7 +1251,7 @@ description.contains:yolo</p>
         <span class='name'>ids</span>
       
       
-        <span class='type'>(<tt>Range</tt>, <tt>Array&lt;String, Range, Fixnum&gt;</tt>, <tt>String</tt>, <tt>Fixnum</tt>)</span>
+        <span class='type'>(<tt>Range</tt>, <tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>, Range, Fixnum&gt;</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Fixnum</tt>)</span>
       
       
       
@@ -1266,21 +1266,21 @@ description.contains:yolo</p>
       <pre class="lines">
 
 
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69</pre>
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_ids'>process_ids</span> <span class='id identifier rubyid_ids'>ids</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_ids'>ids</span>
@@ -1302,7 +1302,7 @@ description.contains:yolo</p>
       <div class="method_details ">
   <h3 class="signature " id="process_tag-instance_method">
   
-    - (<tt>String</tt>) <strong>process_tag</strong>(tag) 
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>process_tag</strong>(tag) 
   
 
   
@@ -1324,7 +1324,7 @@ description.contains:yolo</p>
     <li>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -1338,18 +1338,18 @@ description.contains:yolo</p>
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
-102
-103
-104
-105</pre>
+118
+119
+120
+121
+122
+123
+124
+125
+126</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_tag'>process_tag</span> <span class='id identifier rubyid_tag'>tag</span>
   <span class='id identifier rubyid_reserved_symbols'>reserved_symbols</span> <span class='op'>=</span> <span class='qwords_beg'>%w{</span><span class='tstring_content'>+</span><span class='words_sep'> </span><span class='tstring_content'>-</span><span class='words_sep'> </span><span class='tstring_content'>and</span><span class='words_sep'> </span><span class='tstring_content'>or</span><span class='words_sep'> </span><span class='tstring_content'>xor</span><span class='words_sep'> </span><span class='tstring_content'>&lt;</span><span class='words_sep'> </span><span class='tstring_content'>&lt;=</span><span class='words_sep'> </span><span class='tstring_content'>=</span><span class='words_sep'> </span><span class='tstring_content'>!=</span><span class='words_sep'> </span><span class='tstring_content'>&gt;=</span><span class='words_sep'>  </span><span class='tstring_content'>&gt;</span><span class='words_sep'> </span><span class='tstring_content'>(</span><span class='words_sep'> </span><span class='tstring_content'>)</span><span class='words_sep'>}</span>
@@ -1395,7 +1395,7 @@ description.contains:yolo</p>
         <span class='name'>tags</span>
       
       
-        <span class='type'>(<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
       
       
       
@@ -1410,17 +1410,17 @@ description.contains:yolo</p>
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91</pre>
+105
+106
+107
+108
+109
+110
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_tags'>process_tags</span> <span class='id identifier rubyid_tags'>tags</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_tags'>tags</span>
@@ -1461,7 +1461,7 @@ description.contains:yolo</p>
         <span class='name'>raw</span>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -1489,13 +1489,13 @@ description.contains:yolo</p>
       <pre class="lines">
 
 
-166
-167
-168
-169</pre>
+187
+188
+189
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 166</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 187</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_gem_version'>to_gem_version</span> <span class='id identifier rubyid_raw'>raw</span>
   <span class='id identifier rubyid_std_ver'>std_ver</span> <span class='op'>=</span> <span class='id identifier rubyid_raw'>raw</span><span class='period'>.</span><span class='id identifier rubyid_chomp'>chomp</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>(</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>)</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -1532,7 +1532,7 @@ description.contains:yolo</p>
         <span class='name'>attr</span>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -1560,12 +1560,12 @@ description.contains:yolo</p>
       <pre class="lines">
 
 
-137
-138
-139</pre>
+158
+159
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 137</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 158</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_uda_attr?'>uda_attr?</span> <span class='id identifier rubyid_attr'>attr</span>
   <span class='id identifier rubyid_attr'>attr</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>uda</span><span class='tstring_end'>&quot;</span></span>
@@ -1601,7 +1601,7 @@ description.contains:yolo</p>
         <span class='name'>string</span>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
@@ -1616,12 +1616,12 @@ description.contains:yolo</p>
       <pre class="lines">
 
 
-16
-17
-18</pre>
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/helpers.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wrap_string'>wrap_string</span> <span class='id identifier rubyid_string'>string</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_content'>\&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -1636,7 +1636,7 @@ description.contains:yolo</p>
 </div>
 
     <div id="footer">
-  Generated on Sun May 17 21:13:57 2015 by
+  Generated on Mon May 18 10:28:50 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.3).
 </div>
