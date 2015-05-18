@@ -63,10 +63,12 @@ module Rtasklib
     # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
+    # @param active [Boolean]
     # @api public
-    def count ids: nil, tags: nil, dom: nil
+    def count ids: nil, tags: nil, dom: nil, active: true
       f = Helpers.filter(ids: ids, tags: tags, dom: dom)
-      Execute.task_popen3(*@override_a, f, "count") do |i, o, e, t|
+      active = Helpers.pending_or_waiting(active)
+      Execute.task_popen3(*@override_a, f, active, "count") do |i, o, e, t|
         return Integer(o.read)
       end
     end
@@ -153,7 +155,7 @@ module Rtasklib
       f = Helpers.filter(ids: ids, tags: tags, dom: dom)
       return false if f.blank?
 
-      query = "#{f} modify #{attr} #{val}"
+      query = "#{f} modify #{attr}:#{val}"
       Execute.task_popen3(*override_a, query) do |i, o, e, t|
         return t.value
       end
@@ -288,6 +290,17 @@ module Rtasklib
       update_config("uda.#{name}.values",  values)  unless values.nil?
       update_config("uda.#{name}.default", default) unless default.nil?
       update_config("uda.#{name}.urgency", urgency) unless urgency.nil?
+    end
+
+    # Sync the local TaskWarrior database changes to the remote databases.
+    # Remotes need to be configured in the .taskrc.
+    #
+    # @return [Integer] the exit code
+    # @api public
+    def sync!
+      Execute.task_popen3(*override_a, "sync") do |i, o, e, t|
+        return t.value
+      end
     end
 
 
