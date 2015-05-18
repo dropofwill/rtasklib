@@ -15,7 +15,7 @@ Source0: %{rbname}-%{version}.gem
 # Make sure the spec template is included in the SRPM
 Source1: ruby-gems-%{rbname}.spec.in
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-Requires: ruby [">= 2.1"]
+Requires: ruby >= 2.1
 Requires: ruby-gems >= 2.2.2
 Requires: ruby-gems-virtus 
 Requires: ruby-gems-activesupport 
