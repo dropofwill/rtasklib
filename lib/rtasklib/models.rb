@@ -1,5 +1,4 @@
 require "virtus"
-require "active_model"
 require 'iso8601'
 require 'date'
 

@@ -23,8 +23,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "virtus"
   spec.add_dependency "activesupport"
-  spec.add_dependency "activemodel"
-  spec.add_dependency "active_model_serializers"
   spec.add_dependency "oj"
   spec.add_dependency "multi_json"
   spec.add_dependency "iso8601"
