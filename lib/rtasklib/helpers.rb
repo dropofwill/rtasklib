@@ -1,5 +1,22 @@
 require "multi_json"
 
+# Monkey patching String, instead of importing ActiveSupport, bc its overkill
+# for what we were using it for
+class String
+  # Returns true for blank Strings
+  #
+  # @example
+  #   "".blank? #=> true
+  #   "  ".blank? #=> true
+  #   ".".blank? #=> false
+  #
+  # @return [Boolean]
+  # @api public
+  def blank?
+    self.strip.empty?
+  end
+end
+
 module Rtasklib
 
   # A collection of stateless, non-end-user facing functions available
