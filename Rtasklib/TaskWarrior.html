@@ -114,6 +114,7 @@
         <dd><pre class="code"><span class='lbrace'>{</span>
 <span class='label'>json_array:</span>              <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
 <span class='label'>verbose:</span>                 <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nothing</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+<span class='label'>gc:</span>                      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
 <span class='label'>confirmation:</span>            <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
 <span class='label'>dependency_confirmation:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
 <span class='label'>exit_on_missing_db:</span>      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yes</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='rbrace'>}</span></pre></dd>
@@ -409,7 +410,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="Controller.html" title="Rtasklib::Controller (module)">Controller</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Controller.html#add%21-instance_method" title="Rtasklib::Controller#add! (method)">#add!</a></span>, <span class='object_link'><a href="Controller.html#all-instance_method" title="Rtasklib::Controller#all (method)">#all</a></span>, <span class='object_link'><a href="Controller.html#check_uda-instance_method" title="Rtasklib::Controller#check_uda (method)">#check_uda</a></span>, <span class='object_link'><a href="Controller.html#create_uda%21-instance_method" title="Rtasklib::Controller#create_uda! (method)">#create_uda!</a></span>, <span class='object_link'><a href="Controller.html#get_rc-instance_method" title="Rtasklib::Controller#get_rc (method)">#get_rc</a></span>, <span class='object_link'><a href="Controller.html#get_uda_names-instance_method" title="Rtasklib::Controller#get_uda_names (method)">#get_uda_names</a></span>, <span class='object_link'><a href="Controller.html#get_udas-instance_method" title="Rtasklib::Controller#get_udas (method)">#get_udas</a></span>, <span class='object_link'><a href="Controller.html#get_version-instance_method" title="Rtasklib::Controller#get_version (method)">#get_version</a></span>, <span class='object_link'><a href="Controller.html#modify%21-instance_method" title="Rtasklib::Controller#modify! (method)">#modify!</a></span>, <span class='object_link'><a href="Controller.html#some-instance_method" title="Rtasklib::Controller#some (method)">#some</a></span>, <span class='object_link'><a href="Controller.html#undo%21-instance_method" title="Rtasklib::Controller#undo! (method)">#undo!</a></span>, <span class='object_link'><a href="Controller.html#update_config%21-instance_method" title="Rtasklib::Controller#update_config! (method)">#update_config!</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Controller.html#add%21-instance_method" title="Rtasklib::Controller#add! (method)">#add!</a></span>, <span class='object_link'><a href="Controller.html#all-instance_method" title="Rtasklib::Controller#all (method)">#all</a></span>, <span class='object_link'><a href="Controller.html#count-instance_method" title="Rtasklib::Controller#count (method)">#count</a></span>, <span class='object_link'><a href="Controller.html#create_uda%21-instance_method" title="Rtasklib::Controller#create_uda! (method)">#create_uda!</a></span>, <span class='object_link'><a href="Controller.html#delete%21-instance_method" title="Rtasklib::Controller#delete! (method)">#delete!</a></span>, <span class='object_link'><a href="Controller.html#done%21-instance_method" title="Rtasklib::Controller#done! (method)">#done!</a></span>, <span class='object_link'><a href="Controller.html#get_rc-instance_method" title="Rtasklib::Controller#get_rc (method)">#get_rc</a></span>, <span class='object_link'><a href="Controller.html#get_uda_names-instance_method" title="Rtasklib::Controller#get_uda_names (method)">#get_uda_names</a></span>, <span class='object_link'><a href="Controller.html#get_udas-instance_method" title="Rtasklib::Controller#get_udas (method)">#get_udas</a></span>, <span class='object_link'><a href="Controller.html#get_version-instance_method" title="Rtasklib::Controller#get_version (method)">#get_version</a></span>, <span class='object_link'><a href="Controller.html#modify%21-instance_method" title="Rtasklib::Controller#modify! (method)">#modify!</a></span>, <span class='object_link'><a href="Controller.html#some-instance_method" title="Rtasklib::Controller#some (method)">#some</a></span>, <span class='object_link'><a href="Controller.html#start%21-instance_method" title="Rtasklib::Controller#start! (method)">#start!</a></span>, <span class='object_link'><a href="Controller.html#stop%21-instance_method" title="Rtasklib::Controller#stop! (method)">#stop!</a></span>, <span class='object_link'><a href="Controller.html#uda_exists%3F-instance_method" title="Rtasklib::Controller#uda_exists? (method)">#uda_exists?</a></span>, <span class='object_link'><a href="Controller.html#undo%21-instance_method" title="Rtasklib::Controller#undo! (method)">#undo!</a></span>, <span class='object_link'><a href="Controller.html#update_config%21-instance_method" title="Rtasklib::Controller#update_config! (method)">#update_config!</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -439,7 +440,6 @@
       <pre class="lines">
 
 
-27
 28
 29
 30
@@ -454,10 +454,11 @@
 39
 40
 41
-42</pre>
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_data'>data</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='comment'># Check TaskWarrior version, and throw warning if unavailable
@@ -808,16 +809,16 @@
       <pre class="lines">
 
 
-44
 45
 46
 47
 48
 49
-50</pre>
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_version'>check_version</span> <span class='id identifier rubyid_version'>version</span><span class='op'>=</span><span class='kw'>nil</span>
   <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_get_version'>get_version</span> <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -836,7 +837,7 @@
 </div>
 
     <div id="footer">
-  Generated on Sat May 16 19:50:30 2015 by
+  Generated on Sun May 17 21:01:27 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.3).
 </div>
