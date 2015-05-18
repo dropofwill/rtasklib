@@ -1,5 +1,5 @@
 require "multi_json"
-require "oj"
+require "active_support/core_ext/object/blank"
 
 module Rtasklib
 

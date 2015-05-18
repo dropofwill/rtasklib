@@ -1,5 +1,4 @@
 require "multi_json"
-require "oj"
 
 module Rtasklib
 
