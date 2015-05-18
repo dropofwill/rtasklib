@@ -109,7 +109,18 @@
     <dl class="constants">
       
         <dt id="DEBUG-constant" class="">DEBUG =
-          
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>When true writes all shell commands to STDERR</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
         </dt>
         <dd><pre class="code"><span class='kw'>false</span></pre></dd>
       
@@ -354,16 +365,16 @@ for convenience.</p>
       <pre class="lines">
 
 
-65
 66
 67
 68
 69
 70
-71</pre>
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/execute.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/execute.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each_popen3'>each_popen3</span> <span class='id identifier rubyid_program'>program</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>task</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_opts'>opts</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_popen3'>popen3</span><span class='lparen'>(</span><span class='id identifier rubyid_program'>program</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
@@ -422,15 +433,15 @@ had a failing exit code</p>
       <pre class="lines">
 
 
-90
 91
 92
 93
 94
-95</pre>
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/execute.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/execute.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_handle_response'>handle_response</span> <span class='id identifier rubyid_stdout'>stdout</span><span class='comma'>,</span> <span class='id identifier rubyid_stderr'>stderr</span><span class='comma'>,</span> <span class='id identifier rubyid_thread'>thread</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_thread'>thread</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_success?'>success?</span>
@@ -547,7 +558,6 @@ optional block to handle the response.</p>
       <pre class="lines">
 
 
-30
 31
 32
 33
@@ -556,10 +566,11 @@ optional block to handle the response.</p>
 36
 37
 38
-39</pre>
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/execute.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/execute.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_popen3'>popen3</span> <span class='id identifier rubyid_program'>program</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>task</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_opts'>opts</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_execute'>execute</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_program'>program</span><span class='rparen'>)</span>
@@ -656,14 +667,14 @@ optional block to handle the response.</p>
       <pre class="lines">
 
 
-80
 81
 82
 83
-84</pre>
+84
+85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/execute.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/execute.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_task_each_popen3'>task_each_popen3</span> <span class='op'>*</span><span class='id identifier rubyid_opts'>opts</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_each_popen3'>each_popen3</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_l'>l</span><span class='comma'>,</span> <span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
@@ -766,12 +777,12 @@ for convenience.</p>
       <pre class="lines">
 
 
-53
 54
-55</pre>
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/execute.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/execute.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_task_popen3'>task_popen3</span> <span class='op'>*</span><span class='id identifier rubyid_opts'>opts</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_popen3'>popen3</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>task</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -786,7 +797,7 @@ for convenience.</p>
 </div>
 
     <div id="footer">
-  Generated on Mon May 18 11:46:37 2015 by
+  Generated on Mon May 18 11:52:38 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.3).
 </div>
