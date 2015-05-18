@@ -92,7 +92,23 @@ tw = Rtasklib::TW.new('../path/to/.task')
 # do some stuff with the task database
 # available commands are documented in the Controller class
 
-tw.all
+tasks = tw.all
+#=> returns an array of TaskModels
+
+tasks.first.description
+#=> "An example task"
+
+tasks[-1].due
+#=> #<DateTime: 2015-03-16T17:48:23+00:00 ((2457098j,64103s,0n),+0s,2299161j)>
+
+tw.some(ids: [1..5, 10]).size
+#=> 6
+
+tw.done!(ids: 5)
+#=> 0
+
+tw.some(ids: [1..5, 10]).size
+#=> 5
 ```
 
 [Controller docs](http://will-paul.com/rtasklib/Rtasklib/Controller.html)
