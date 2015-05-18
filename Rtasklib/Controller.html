@@ -129,7 +129,7 @@ the database, e.g. `Controller#all` vs `Controller#modify!`</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#add%21-instance_method" title="#add! (instance method)">- (Object) <strong>add!</strong>(description, tags: nil, dom: nil) </a>
+      <a href="#add%21-instance_method" title="#add! (instance method)">- (Process::Status) <strong>add!</strong>(description, tags: nil, dom: nil) </a>
     
 
     
@@ -169,7 +169,7 @@ and dom queries (e.g. project:Work).</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Retrieves the current task list from the TW database.</p>
+<p>Retrieves the current task list from the TaskWarrior database.</p>
 </div></span>
   
 </li>
@@ -178,7 +178,7 @@ and dom queries (e.g. project:Work).</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#count-instance_method" title="#count (instance method)">- (Object) <strong>count</strong>(ids: nil, tags: nil, dom: nil) </a>
+      <a href="#count-instance_method" title="#count (instance method)">- (Object) <strong>count</strong>(ids: nil, tags: nil, dom: nil, active: true) </a>
     
 
     
@@ -195,7 +195,7 @@ and dom queries (e.g. project:Work).</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Add a single task to the database.</p>
+<p>Count the number of tasks that match a given filter.</p>
 </div></span>
   
 </li>
@@ -228,7 +228,7 @@ and dom queries (e.g. project:Work).</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#delete%21-instance_method" title="#delete! (instance method)">- (Object) <strong>delete!</strong>(ids: nil, tags: nil, dom: nil) </a>
+      <a href="#delete%21-instance_method" title="#delete! (instance method)">- (Process::Status) <strong>delete!</strong>(ids: nil, tags: nil, dom: nil, active: true) </a>
     
 
     
@@ -252,7 +252,7 @@ and dom queries (e.g. project:Work).</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#done%21-instance_method" title="#done! (instance method)">- (Object) <strong>done!</strong>(ids: nil, tags: nil, dom: nil) </a>
+      <a href="#done%21-instance_method" title="#done! (instance method)">- (Process::Status) <strong>done!</strong>(ids: nil, tags: nil, dom: nil, active: true) </a>
     
 
     
@@ -267,8 +267,7 @@ and dom queries (e.g. project:Work).</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Finishes the filtered tasks Returns false if filter (ids:, tags:, dom:) is
-blank.</p>
+<p>Finishes the filtered tasks.</p>
 </div></span>
   
 </li>
@@ -374,7 +373,7 @@ result.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#modify%21-instance_method" title="#modify! (instance method)">- (Object) <strong>modify!</strong>(attr, val, ids: nil, tags: nil, dom: nil) </a>
+      <a href="#modify%21-instance_method" title="#modify! (instance method)">- (Process::Status) <strong>modify!</strong>(attr, val, ids: nil, tags: nil, dom: nil, active: true) </a>
     
 
     
@@ -399,7 +398,7 @@ pair.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#some-instance_method" title="#some (instance method)">- (Array&lt;Models::TaskModel&gt;) <strong>some</strong>(ids: nil, tags: nil, dom: nil) </a>
+      <a href="#some-instance_method" title="#some (instance method)">- (Array&lt;Models::TaskModel&gt;) <strong>some</strong>(ids: nil, tags: nil, dom: nil, active: true) </a>
     
 
     
@@ -423,7 +422,7 @@ pair.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#start%21-instance_method" title="#start! (instance method)">- (Object) <strong>start!</strong>(ids: nil, tags: nil, dom: nil) </a>
+      <a href="#start%21-instance_method" title="#start! (instance method)">- (Process::Status, False) <strong>start!</strong>(ids: nil, tags: nil, dom: nil, active: true) </a>
     
 
     
@@ -448,7 +447,7 @@ dom:) is blank.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#stop%21-instance_method" title="#stop! (instance method)">- (Object) <strong>stop!</strong>(ids: nil, tags: nil, dom: nil) </a>
+      <a href="#stop%21-instance_method" title="#stop! (instance method)">- (Process::Status, False) <strong>stop!</strong>(ids: nil, tags: nil, dom: nil, active: true) </a>
     
 
     
@@ -473,7 +472,7 @@ dom:) is blank.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#sync%21-instance_method" title="#sync! (instance method)">- (Integer) <strong>sync!</strong> </a>
+      <a href="#sync%21-instance_method" title="#sync! (instance method)">- (Process::Status) <strong>sync!</strong> </a>
     
 
     
@@ -546,7 +545,7 @@ configuration changes.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#update_config%21-instance_method" title="#update_config! (instance method)">- (Object) <strong>update_config!</strong>(attr, val) </a>
+      <a href="#update_config%21-instance_method" title="#update_config! (instance method)">- (Process::Status) <strong>update_config!</strong>(attr, val) </a>
     
 
     
@@ -579,7 +578,7 @@ configuration changes.</p>
       <div class="method_details first">
   <h3 class="signature first" id="add!-instance_method">
   
-    - (<tt>Object</tt>) <strong>add!</strong>(description, tags: nil, dom: nil) 
+    - (<tt>Process::Status</tt>) <strong>add!</strong>(description, tags: nil, dom: nil) 
   
 
   
@@ -638,6 +637,24 @@ and dom queries (e.g. project:Work)</p>
   
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Process::Status</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the exit status of the thread</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -645,16 +662,16 @@ and dom queries (e.g. project:Work)</p>
       <pre class="lines">
 
 
-134
-135
-136
-137
-138
-139
-140</pre>
+167
+168
+169
+170
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 134</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 167</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add!'>add!</span> <span class='id identifier rubyid_description'>description</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='lparen'>(</span><span class='label'>tags:</span> <span class='id identifier rubyid_tags'>tags</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='id identifier rubyid_dom'>dom</span><span class='rparen'>)</span>
@@ -680,13 +697,27 @@ and dom queries (e.g. project:Work)</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Retrieves the current task list from the TW database</p>
+<p>Retrieves the current task list from the TaskWarrior database. Defaults to
+just show active (waiting &amp; pending) tasks, which is usually what is
+exposed to the end user through the default reports. To see everything
+including completed, deleted, and parent recurring tasks, set `active:
+false`. For more granular control see Controller#some.</p>
 
 
   </div>
 </div>
 <div class="tags">
-  <p class="tag_title">Parameters:</p>
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_tw'>tw</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 200
+</span><span class='id identifier rubyid_tw'>tw</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='lparen'>(</span><span class='label'>active:</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='comment'>#=&gt; 200
+</span><span class='id identifier rubyid_tw'>tw</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='lparen'>(</span><span class='label'>active:</span> <span class='kw'>false</span><span class='rparen'>)</span> <span class='comment'>#=&gt; 578</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
 <ul class="param">
   
     <li>
@@ -727,19 +758,19 @@ and dom queries (e.g. project:Work)</p>
       <pre class="lines">
 
 
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36</pre>
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_all'>all</span> <span class='label'>active:</span> <span class='kw'>true</span>
   <span class='id identifier rubyid_all'>all</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -759,7 +790,7 @@ and dom queries (e.g. project:Work)</p>
       <div class="method_details ">
   <h3 class="signature " id="count-instance_method">
   
-    - (<tt>Object</tt>) <strong>count</strong>(ids: nil, tags: nil, dom: nil) 
+    - (<tt>Object</tt>) <strong>count</strong>(ids: nil, tags: nil, dom: nil, active: true) 
   
 
   
@@ -772,7 +803,8 @@ and dom queries (e.g. project:Work)</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Add a single task to the database</p>
+<p>Count the number of tasks that match a given filter. Faster than counting
+an array returned by Controller#all or Controller#some.</p>
 
 
   </div>
@@ -814,6 +846,22 @@ and dom queries (e.g. project:Work)</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return only pending &amp; waiting tasks</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 
@@ -823,19 +871,21 @@ and dom queries (e.g. project:Work)</p>
       <pre class="lines">
 
 
-67
-68
-69
-70
-71
-72</pre>
+84
+85
+86
+87
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 84</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_count'>count</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_count'>count</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>active:</span> <span class='kw'>true</span>
   <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='lparen'>(</span><span class='label'>ids:</span> <span class='id identifier rubyid_ids'>ids</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='id identifier rubyid_tags'>tags</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='id identifier rubyid_dom'>dom</span><span class='rparen'>)</span>
-  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>count</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_a'>a</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_pending_or_waiting'>pending_or_waiting</span><span class='lparen'>(</span><span class='id identifier rubyid_active'>active</span><span class='rparen'>)</span>
+  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>count</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
     <span class='kw'>return</span> <span class='const'>Integer</span><span class='lparen'>(</span><span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -958,19 +1008,19 @@ and dom queries (e.g. project:Work)</p>
       <pre class="lines">
 
 
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291</pre>
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 282</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 325</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_uda!'>create_uda!</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>string</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>label:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>values:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                <span class='label'>default:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>urgency:</span> <span class='kw'>nil</span>
@@ -990,7 +1040,7 @@ and dom queries (e.g. project:Work)</p>
       <div class="method_details ">
   <h3 class="signature " id="delete!-instance_method">
   
-    - (<tt>Object</tt>) <strong>delete!</strong>(ids: nil, tags: nil, dom: nil) 
+    - (<tt>Process::Status</tt>) <strong>delete!</strong>(ids: nil, tags: nil, dom: nil, active: true) 
   
 
   
@@ -1041,8 +1091,42 @@ and dom queries (e.g. project:Work)</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return only pending &amp; waiting tasks</p>
+</div>
+      
+    </li>
+  
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Process::Status</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the exit status of the thread</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1050,23 +1134,25 @@ and dom queries (e.g. project:Work)</p>
       <pre class="lines">
 
 
-184
-185
-186
-187
-188
-189
-190
-191</pre>
+225
+226
+227
+228
+229
+230
+231
+232
+233</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 184</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 225</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_delete!'>delete!</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_delete!'>delete!</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>active:</span> <span class='kw'>true</span>
   <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='lparen'>(</span><span class='label'>ids:</span> <span class='id identifier rubyid_ids'>ids</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='id identifier rubyid_tags'>tags</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='id identifier rubyid_dom'>dom</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_a'>a</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_pending_or_waiting'>pending_or_waiting</span><span class='lparen'>(</span><span class='id identifier rubyid_active'>active</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
 
-  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_override_a'>override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_override_a'>override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1078,7 +1164,7 @@ and dom queries (e.g. project:Work)</p>
       <div class="method_details ">
   <h3 class="signature " id="done!-instance_method">
   
-    - (<tt>Object</tt>) <strong>done!</strong>(ids: nil, tags: nil, dom: nil) 
+    - (<tt>Process::Status</tt>) <strong>done!</strong>(ids: nil, tags: nil, dom: nil, active: true) 
   
 
   
@@ -1087,7 +1173,7 @@ and dom queries (e.g. project:Work)</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Finishes the filtered tasks Returns false if filter (ids:, tags:, dom:) is
+<p>Finishes the filtered tasks. Returns false if filter (ids:, tags:, dom:) is
 blank.</p>
 
 
@@ -1130,8 +1216,42 @@ blank.</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return only pending &amp; waiting tasks</p>
+</div>
+      
+    </li>
+  
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Process::Status</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the exit status of the thread</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1139,23 +1259,25 @@ blank.</p>
       <pre class="lines">
 
 
-169
-170
-171
-172
-173
-174
-175
-176</pre>
+207
+208
+209
+210
+211
+212
+213
+214
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 169</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 207</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_done!'>done!</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_done!'>done!</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>active:</span> <span class='kw'>true</span>
   <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='lparen'>(</span><span class='label'>ids:</span> <span class='id identifier rubyid_ids'>ids</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='id identifier rubyid_tags'>tags</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='id identifier rubyid_dom'>dom</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_a'>a</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_pending_or_waiting'>pending_or_waiting</span><span class='lparen'>(</span><span class='id identifier rubyid_active'>active</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
 
-  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_override_a'>override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_override_a'>override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>done</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1204,16 +1326,16 @@ result</p>
       <pre class="lines">
 
 
-81
-82
-83
-84
-85
-86
-87</pre>
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_rc'>get_rc</span>
   <span class='id identifier rubyid_res'>res</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -1266,14 +1388,14 @@ result</p>
       <pre class="lines">
 
 
-253
-254
-255
-256
-257</pre>
+296
+297
+298
+299
+300</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 253</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 296</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_uda_names'>get_uda_names</span>
   <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_udas</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
@@ -1324,23 +1446,23 @@ result</p>
       <pre class="lines">
 
 
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220</pre>
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 207</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 249</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_udas'>get_udas</span>
   <span class='id identifier rubyid_udas'>udas</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -1400,16 +1522,16 @@ result</p>
       <pre class="lines">
 
 
-93
-94
-95
-96
-97
-98
-99</pre>
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_version'>get_version</span>
   <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -1426,7 +1548,7 @@ result</p>
       <div class="method_details ">
   <h3 class="signature " id="modify!-instance_method">
   
-    - (<tt>Object</tt>) <strong>modify!</strong>(attr, val, ids: nil, tags: nil, dom: nil) 
+    - (<tt>Process::Status</tt>) <strong>modify!</strong>(attr, val, ids: nil, tags: nil, dom: nil, active: true) 
   
 
   
@@ -1500,8 +1622,42 @@ pair. Returns false if filter (ids:, tags:, dom:) is blank.</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return only pending &amp; waiting tasks</p>
+</div>
+      
+    </li>
+  
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Process::Status</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the exit status of the thread</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1509,24 +1665,26 @@ pair. Returns false if filter (ids:, tags:, dom:) is blank.</p>
       <pre class="lines">
 
 
-152
-153
-154
-155
-156
-157
-158
-159
-160</pre>
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 152</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 187</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_modify!'>modify!</span> <span class='id identifier rubyid_attr'>attr</span><span class='comma'>,</span> <span class='id identifier rubyid_val'>val</span><span class='comma'>,</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_modify!'>modify!</span> <span class='id identifier rubyid_attr'>attr</span><span class='comma'>,</span> <span class='id identifier rubyid_val'>val</span><span class='comma'>,</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>active:</span> <span class='kw'>true</span>
   <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='lparen'>(</span><span class='label'>ids:</span> <span class='id identifier rubyid_ids'>ids</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='id identifier rubyid_tags'>tags</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='id identifier rubyid_dom'>dom</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_a'>a</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_pending_or_waiting'>pending_or_waiting</span><span class='lparen'>(</span><span class='id identifier rubyid_active'>active</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
 
-  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_f'>f</span><span class='embexpr_end'>}</span><span class='tstring_content'> modify </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attr'>attr</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_f'>f</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_a'>a</span><span class='embexpr_end'>}</span><span class='tstring_content'> modify </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attr'>attr</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_override_a'>override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_query'>query</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
   <span class='kw'>end</span>
@@ -1539,7 +1697,7 @@ pair. Returns false if filter (ids:, tags:, dom:) is blank.</p>
       <div class="method_details ">
   <h3 class="signature " id="some-instance_method">
   
-    - (<tt>Array&lt;<span class='object_link'><a href="Models/TaskModel.html" title="Rtasklib::Models::TaskModel (class)">Models::TaskModel</a></span>&gt;</tt>) <strong>some</strong>(ids: nil, tags: nil, dom: nil) 
+    - (<tt>Array&lt;<span class='object_link'><a href="Models/TaskModel.html" title="Rtasklib::Models::TaskModel (class)">Models::TaskModel</a></span>&gt;</tt>) <strong>some</strong>(ids: nil, tags: nil, dom: nil, active: true) 
   
 
   
@@ -1571,6 +1729,15 @@ pair. Returns false if filter (ids:, tags:, dom:) is blank.</p>
 </div></p>
       
       <pre class="example code"><code>tw.some(tags: [&quot;+school&quot;, &quot;or&quot;, &quot;-work&quot;]</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>filter by a dom query</p>
+</div></p>
+      
+      <pre class="example code"><code>require &quot;date&quot;
+today = DateTime.now
+tw.some(dom: {project: &quot;Work&quot;, &quot;due.before&quot;: today})</code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -1609,6 +1776,22 @@ pair. Returns false if filter (ids:, tags:, dom:) is blank.</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return only pending &amp; waiting tasks</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -1631,24 +1814,26 @@ pair. Returns false if filter (ids:, tags:, dom:) is blank.</p>
       <pre class="lines">
 
 
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59</pre>
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 64</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_some'>some</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_some'>some</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>active:</span> <span class='kw'>true</span>
   <span class='id identifier rubyid_some'>some</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='lparen'>(</span><span class='label'>ids:</span> <span class='id identifier rubyid_ids'>ids</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='id identifier rubyid_tags'>tags</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='id identifier rubyid_dom'>dom</span><span class='rparen'>)</span>
-  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>export</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_a'>a</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_pending_or_waiting'>pending_or_waiting</span><span class='lparen'>(</span><span class='id identifier rubyid_active'>active</span><span class='rparen'>)</span>
+  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>export</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
     <span class='id identifier rubyid_some'>some</span> <span class='op'>=</span> <span class='const'>MultiJson</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span>
       <span class='const'>Rtasklib</span><span class='op'>::</span><span class='const'>Models</span><span class='op'>::</span><span class='const'>TaskModel</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
@@ -1663,7 +1848,7 @@ pair. Returns false if filter (ids:, tags:, dom:) is blank.</p>
       <div class="method_details ">
   <h3 class="signature " id="start!-instance_method">
   
-    - (<tt>Object</tt>) <strong>start!</strong>(ids: nil, tags: nil, dom: nil) 
+    - (<tt>Process::Status</tt>, <tt>False</tt>) <strong>start!</strong>(ids: nil, tags: nil, dom: nil, active: true) 
   
 
   
@@ -1679,7 +1864,79 @@ dom:) is blank.</p>
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>ids</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Range, Fixnum, <span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Range</tt>, <tt>Fixnum</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tags</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dom</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return only pending &amp; waiting tasks</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Process::Status</tt>, <tt>False</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the exit status of the thread or false if it exited early because filter
+was blank.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1687,23 +1944,25 @@ dom:) is blank.</p>
       <pre class="lines">
 
 
-105
-106
-107
-108
-109
-110
-111
-112</pre>
+129
+130
+131
+132
+133
+134
+135
+136
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 129</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_start!'>start!</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_start!'>start!</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>active:</span> <span class='kw'>true</span>
   <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='lparen'>(</span><span class='label'>ids:</span> <span class='id identifier rubyid_ids'>ids</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='id identifier rubyid_tags'>tags</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='id identifier rubyid_dom'>dom</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_a'>a</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_pending_or_waiting'>pending_or_waiting</span><span class='lparen'>(</span><span class='id identifier rubyid_active'>active</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
 
-  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>start</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>start</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1715,7 +1974,7 @@ dom:) is blank.</p>
       <div class="method_details ">
   <h3 class="signature " id="stop!-instance_method">
   
-    - (<tt>Object</tt>) <strong>stop!</strong>(ids: nil, tags: nil, dom: nil) 
+    - (<tt>Process::Status</tt>, <tt>False</tt>) <strong>stop!</strong>(ids: nil, tags: nil, dom: nil, active: true) 
   
 
   
@@ -1731,7 +1990,79 @@ dom:) is blank.</p>
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>ids</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Range, Fixnum, <span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Range</tt>, <tt>Fixnum</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tags</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dom</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>active</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>return only pending &amp; waiting tasks</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Process::Status</tt>, <tt>False</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the exit status of the thread or false if it exited early because filter
+was blank.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1739,23 +2070,25 @@ dom:) is blank.</p>
       <pre class="lines">
 
 
-118
-119
-120
-121
-122
-123
-124
-125</pre>
+149
+150
+151
+152
+153
+154
+155
+156
+157</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 149</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_stop!'>stop!</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_stop!'>stop!</span> <span class='label'>ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>active:</span> <span class='kw'>true</span>
   <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='lparen'>(</span><span class='label'>ids:</span> <span class='id identifier rubyid_ids'>ids</span><span class='comma'>,</span> <span class='label'>tags:</span> <span class='id identifier rubyid_tags'>tags</span><span class='comma'>,</span> <span class='label'>dom:</span> <span class='id identifier rubyid_dom'>dom</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_a'>a</span> <span class='op'>=</span> <span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid_pending_or_waiting'>pending_or_waiting</span><span class='lparen'>(</span><span class='id identifier rubyid_active'>active</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
 
-  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>stop</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='ivar'>@override_a</span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>stop</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1767,7 +2100,7 @@ dom:) is blank.</p>
       <div class="method_details ">
   <h3 class="signature " id="sync!-instance_method">
   
-    - (<tt>Integer</tt>) <strong>sync!</strong> 
+    - (<tt>Process::Status</tt>) <strong>sync!</strong> 
   
 
   
@@ -1784,19 +2117,28 @@ Remotes need to be configured in the .taskrc.</p>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='comment'># make some local changes with add!, modify!, or the like
+</span><span class='id identifier rubyid_tw'>tw</span><span class='period'>.</span><span class='id identifier rubyid_sync!'>sync!</span></code></pre>
+    
+  </div>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
     <li>
       
       
-        <span class='type'>(<tt>Integer</tt>)</span>
+        <span class='type'>(<tt>Process::Status</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>the exit code</p>
+<p>the exit status of the thread</p>
 </div>
       
     </li>
@@ -1809,14 +2151,14 @@ Remotes need to be configured in the .taskrc.</p>
       <pre class="lines">
 
 
-298
-299
-300
-301
-302</pre>
+345
+346
+347
+348
+349</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 298</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 345</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sync!'>sync!</span>
   <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_override_a'>override_a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sync</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
@@ -1892,16 +2234,16 @@ Remotes need to be configured in the .taskrc.</p>
       <pre class="lines">
 
 
-264
-265
-266
-267
-268
-269
-270</pre>
+307
+308
+309
+310
+311
+312
+313</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 307</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_uda_exists?'>uda_exists?</span> <span class='id identifier rubyid_uda_name'>uda_name</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_get_udas'>get_udas</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_uda'>uda</span><span class='op'>|</span> <span class='id identifier rubyid_uda'>uda</span> <span class='op'>==</span> <span class='id identifier rubyid_uda_name'>uda_name</span> <span class='rbrace'>}</span>
@@ -1942,14 +2284,14 @@ configuration changes</p>
       <pre class="lines">
 
 
-197
-198
-199
-200
-201</pre>
+239
+240
+241
+242
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 239</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_undo!'>undo!</span>
   <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_override_a'>override_a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>undo</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
@@ -1964,7 +2306,7 @@ configuration changes</p>
       <div class="method_details ">
   <h3 class="signature " id="update_config!-instance_method">
   
-    - (<tt>Object</tt>) <strong>update_config!</strong>(attr, val) 
+    - (<tt>Process::Status</tt>) <strong>update_config!</strong>(attr, val) 
   
 
   
@@ -2006,6 +2348,24 @@ configuration changes</p>
   
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Process::Status</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the exit status of the thread</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -2013,14 +2373,14 @@ configuration changes</p>
       <pre class="lines">
 
 
-227
-228
-229
-230
-231</pre>
+270
+271
+272
+273
+274</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 227</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib/controller.rb', line 270</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_config!'>update_config!</span> <span class='id identifier rubyid_attr'>attr</span><span class='comma'>,</span> <span class='id identifier rubyid_val'>val</span>
   <span class='const'>Execute</span><span class='period'>.</span><span class='id identifier rubyid_task_popen3'>task_popen3</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_override_a'>override_a</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>config </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_attr'>attr</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_o'>o</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
@@ -2037,7 +2397,7 @@ configuration changes</p>
 </div>
 
     <div id="footer">
-  Generated on Mon May 18 10:28:50 2015 by
+  Generated on Mon May 18 10:59:45 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.3).
 </div>
