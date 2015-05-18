@@ -12,6 +12,7 @@ module Rtasklib
     # so that the methods are available within the modules lookup path
     extend self
 
+    # When true writes all shell commands to STDERR
     DEBUG = false
 
     # Use Open3#popen3 to execute a unix program with an array of options

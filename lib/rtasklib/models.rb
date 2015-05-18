@@ -7,6 +7,8 @@ require "virtus"
 require 'iso8601'
 require 'date'
 
+# Module that holds all domain model related functionality.
+# Primarily Taskrc and TaskModel representations.
 module Rtasklib::Models
 
   # A subclass of the ISO8601::Duration object that use `task calc` to parse

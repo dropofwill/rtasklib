@@ -70,14 +70,26 @@ module Rtasklib
 
     include Controller
 
+    # Sane defaults to override a base .taskrc
     DEFAULTS = {
+      # Wrap export objects in an array? Disabling this will break Rtasklib
+      # functionality
       json_array:              'true',
+      # Stop writing user friendly methods. Disabling this will break Rtasklib
+      # functionality
       verbose:                 'nothing',
+      # Call the gc on every execution. This will change id numbers whenever the
+      # task list changes. By default this is off, but may have some
+      # performance implications.
       gc:                      'off',
+      # Will ask for confirmation before we do anything TaskWarrior decides is
+      # dangerous. We handle most of these cases in Rtasklib.
       confirmation:            'no',
       dependency_confirmation: 'no',
+      # If it can't find a TaskWarrior db just exit.
       exit_on_missing_db:      'yes', }
 
+    # Lowest supported TaskWarrior version
     LOWEST_VERSION = Gem::Version.new('2.4.0')
 
     # @param data [String, Pathname] path to the .task database
