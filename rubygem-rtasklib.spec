@@ -35,11 +35,11 @@ Requires: ruby-gems-guard
 Requires: ruby-gems-guard-rspec 
 Requires: ruby-gems-yard 
 BuildRequires: ruby >= 2.1
-BuildRequires: ruby-gems >= 2.2.2
+# BuildRequires: ruby-gems >= 2.2.2
 BuildArch: noarch
 Provides: ruby(Rtasklib) = %{version}
 
-%define gemdir /Users/willpaul/.gem/ruby/2.1.3
+%define gemdir /usr/share/gems
 %define gembuilddir %{buildroot}%{gemdir}
 
 %description
@@ -62,39 +62,6 @@ gem install --local --install-dir %{gembuilddir} --force %{SOURCE0}
 
 %files
 %defattr(-, root, root)
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
-%{gemdir}/gems/rtasklib-0.2.0/
 %{gemdir}/gems/rtasklib-0.2.0/
 
 

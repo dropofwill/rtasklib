@@ -23,11 +23,11 @@ Requires: ruby-gems-<%= d.name %> <%= req %>
 <% end -%>
 <% end -%>
 BuildRequires: ruby <%= spec.required_ruby_version %>
-BuildRequires: ruby-gems >= <%= Gem::RubyGemsVersion %>
+# BuildRequires: ruby-gems >= <%= Gem::RubyGemsVersion %>
 BuildArch: noarch
 Provides: ruby(<%= spec.name.capitalize %>) = %{version}
 
-%define gemdir <%= Gem.dir %>
+%define gemdir /usr/share/gems
 %define gembuilddir %{buildroot}%{gemdir}
 
 %description
