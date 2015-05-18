@@ -33,7 +33,7 @@ Or install it yourself as:
 With this method you will need to install TaskWarrior (version 2.4 or above) yourself.
 
 **On OSX:**
-    
+
     $ brew install task
 
 **On Fedora:**
@@ -58,9 +58,17 @@ The major repos TaskWarrior packages are extremely outdated, so you will have to
 
 ### Using the RPM
 
-If you are running Fedora there is an RPM available, this comes with the advantage of being managed by `yum` and installing TaskWarrior for you. Simply get the desired version RPM from the `pkg/` dir:
+If you are running Fedora there is an RPM available, this comes with the advantage of being managed by `yum` and installing TaskWarrior for you. Simply get the desired version RPM from the `rpms/` dir:
 
-    $ sudo yum install rubygem-rtasklib-VERSION.rpm
+    $ sudo yum install rubygem-rtasklib-VERSION-noarch.rpm
+    $ sudo yum install rubygem-rtasklib-docs-VERSION-noarch.rpm
+
+The docs package installs documentation that you can access through the ruby doc interface ri, e.g:
+
+    $ ri Rtasklib
+
+This will bring up a `less` like interface to browse the documentation with.
+
 
 ### Configure TaskWarrior
 
