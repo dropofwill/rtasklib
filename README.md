@@ -69,24 +69,22 @@ Once you install TaskWarrior a database still needs to be created, luckily this 
 
 ## Dependencies
 
-* TaskWarrior > 2.4 (require custom UDAs, recurrences, and duration data types)
+* Ruby > 2.0 (Uses keyword args)
 
-* Ruby > 2.0
+* TaskWarrior > 2.4, require custom UDAs, recurrences, and duration data types (MIT license)
 
-* ISO8601 gem, for dealing with duration and datetimes from TaskWarrior
+* ISO8601 gem, for dealing with duration and datetimes from TaskWarrior (MIT license)
 
-* Virtus gem, for simple Ruby object based domain modeling (TaskModel and TaskrcModel)
+* Virtus gem, for simple Ruby object based domain modeling (TaskModel and TaskrcModel) (MIT license)
 
-* multi_json gem, for parsing JSON objects
-
-*
+* multi_json gem, for parsing JSON objects (MIT license)
 
 * See `./rtasklib.gemspec` to verify the latest Ruby dependencies
 
 
 ## Usage
 
-```
+```ruby
 require 'rtasklib'
 
 tw = Rtasklib::TW.new('../path/to/.task')
