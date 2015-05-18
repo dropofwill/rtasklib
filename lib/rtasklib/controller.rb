@@ -66,8 +66,8 @@ module Rtasklib
         return Integer(o.read)
       end
     end
-    alias_method :count, :size
-    alias_method :count, :length
+    alias_method :size,   :count
+    alias_method :length, :count
 
     # Calls `task _show` with initial overrides returns a Taskrc object of the
     # result
