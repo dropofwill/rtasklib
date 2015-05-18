@@ -145,7 +145,7 @@ module Rtasklib
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @api public
-    def modify! attr:, val:, ids: nil, tags: nil, dom: nil
+    def modify! attr, val, ids: nil, tags: nil, dom: nil
       f = Helpers.filter(ids: ids, tags: tags, dom: dom)
       return false if f.blank?
 
