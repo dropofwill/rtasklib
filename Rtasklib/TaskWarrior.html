@@ -103,7 +103,57 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>To interact with the TaskWarrior database simply instantiate this with a
+path to the .task folder where data is stored. If left out it will look 
+for a database in the default location `~/.task`</p>
 
+<p>Optionally pass in a hash of taskrc options to override what is in your
+.taskrc on every command. By default `rtasklib` provides a set of sensible
+defaults:</p>
+
+<p>These of course can be overridden with opts param as well</p>
+
+<p>In general `rtasklib` is only feature complete on TaskWarrior installs 2.4
+and greater and it will warn you if yours is lower or can&#39;t be
+determined, but will still allow you to interact with it. Proceed at your
+own risk.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='comment'># Use the default path and overrides
+</span><span class='id identifier rubyid_tw'>tw</span> <span class='op'>=</span> <span class='const'>Rtasklib</span><span class='op'>::</span><span class='const'>TaskWarrior</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='comment'># TaskWarrior is also available aliased as TW:
+</span><span class='id identifier rubyid_tw'>tw</span> <span class='op'>=</span> <span class='const'>Rtasklib</span><span class='op'>::</span><span class='const'>TW</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='comment'># Custom path, in this case the test db in spec/
+</span><span class='id identifier rubyid_tw'>tw</span> <span class='op'>=</span> <span class='const'>Rtasklib</span><span class='op'>::</span><span class='const'>TW</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>./spec/data/.task</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='comment'># Custom override, in this case calling the gc everytime
+</span><span class='comment'># This will change id numbers whenever the task list changes
+</span><span class='comment'># By default this is off, but may have some performance implications.
+</span><span class='id identifier rubyid_tw'>tw</span> <span class='op'>=</span> <span class='const'>Rtasklib</span><span class='op'>::</span><span class='const'>TW</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='op'>=</span><span class='lbrace'>{</span><span class='label'>gc:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>on</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span></code></pre>
+    
+      
+      <pre class="example code"><code><span class='const'>DEFAULTS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+  <span class='label'>json_array:</span>              <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>verbose:</span>                 <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nothing</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>gc:</span>                      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>confirmation:</span>            <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>dependency_confirmation:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>exit_on_missing_db:</span>      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yes</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='rbrace'>}</span></code></pre>
+    
+  </div>
+
+
+</div>
   <h2>Constant Summary</h2>
   
     <dl class="constants">
@@ -136,7 +186,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#data_location-instance_method" title="#data_location (instance method)">- (Object) <strong>data_location</strong> </a>
+      <a href="#data_location-instance_method" title="#data_location (instance method)">- (String) <strong>data_location</strong> </a>
     
 
     
@@ -156,7 +206,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute data_location.</p>
+<p>The file path that you passed in at initialization.</p>
 </div></span>
   
 </li>
@@ -165,7 +215,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#override-instance_method" title="#override (instance method)">- (Object) <strong>override</strong> </a>
+      <a href="#override-instance_method" title="#override (instance method)">- (Rtasklib::Taskrc) <strong>override</strong> </a>
     
 
     
@@ -185,7 +235,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute override.</p>
+<p>The options to override the default .taskrc.</p>
 </div></span>
   
 </li>
@@ -194,7 +244,61 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#override_a-instance_method" title="#override_a (instance method)">- (Object) <strong>override_a</strong> </a>
+      <a href="#override_a-instance_method" title="#override_a (instance method)">- (Array) <strong>override_a</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#override_str-instance_method" title="#override_str (instance method)">- (String) <strong>override_str</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#taskrc-instance_method" title="#taskrc (instance method)">- (Rtasklib::Taskrc) <strong>taskrc</strong> </a>
     
 
     
@@ -214,7 +318,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute override_a.</p>
+<p>Your current TaskWarrior configuration.</p>
 </div></span>
   
 </li>
@@ -223,7 +327,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#override_str-instance_method" title="#override_str (instance method)">- (Object) <strong>override_str</strong> </a>
+      <a href="#udas-instance_method" title="#udas (instance method)">- (Hash{Symbol=&gt;Hash}) <strong>udas</strong> </a>
     
 
     
@@ -243,7 +347,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute override_str.</p>
+<p>Currently configured User Defined Attributes.</p>
 </div></span>
   
 </li>
@@ -252,7 +356,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#taskrc-instance_method" title="#taskrc (instance method)">- (Object) <strong>taskrc</strong> </a>
+      <a href="#version-instance_method" title="#version (instance method)">- (Gem::Version) <strong>version</strong> </a>
     
 
     
@@ -272,65 +376,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute taskrc.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#udas-instance_method" title="#udas (instance method)">- (Object) <strong>udas</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute udas.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#version-instance_method" title="#version (instance method)">- (Object) <strong>version</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute version.</p>
+<p>The version of the current TaskWarrior install.</p>
 </div></span>
   
 </li>
@@ -352,7 +398,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#check_version-instance_method" title="#check_version (instance method)">- (Object) <strong>check_version</strong>(version = nil) </a>
+      <a href="#check_version-instance_method" title="#check_version (instance method)">- (Gem::Version) <strong>check_version</strong>(version = nil) </a>
     
 
     
@@ -366,7 +412,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Check the state of the TaskWarrior install.</p>
+</div></span>
   
 </li>
 
@@ -432,7 +480,47 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>, <tt>Pathname</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&quot;#{Dir.home}/.task&quot;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>path to the .task database</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>opts</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>overrides to the .taskrc to run on each command</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -440,25 +528,25 @@
       <pre class="lines">
 
 
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48</pre>
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_data'>data</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='comment'># Check TaskWarrior version, and throw warning if unavailable
@@ -491,7 +579,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="data_location-instance_method">
   
-    - (<tt>Object</tt>) <strong>data_location</strong>  <span class="extras">(readonly)</span>
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>data_location</strong>  <span class="extras">(readonly)</span>
   
 
   
@@ -500,13 +588,31 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute data_location</p>
+<p>Returns The file path that you passed in at initialization</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The file path that you passed in at initialization</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -514,15 +620,111 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 67</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_data_location'>data_location</span>
-  <span class='ivar'>@data_location</span>
+<span class='kw'>class</span> <span class='const'>TaskWarrior</span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:version</span><span class='comma'>,</span> <span class='symbol'>:data_location</span><span class='comma'>,</span> <span class='symbol'>:taskrc</span><span class='comma'>,</span> <span class='symbol'>:udas</span><span class='comma'>,</span>
+              <span class='symbol'>:override</span><span class='comma'>,</span> <span class='symbol'>:override_a</span><span class='comma'>,</span> <span class='symbol'>:override_str</span>
+
+  <span class='id identifier rubyid_include'>include</span> <span class='const'>Controller</span>
+
+  <span class='const'>DEFAULTS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>json_array:</span>              <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>verbose:</span>                 <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nothing</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>gc:</span>                      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>confirmation:</span>            <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>dependency_confirmation:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>exit_on_missing_db:</span>      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yes</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='rbrace'>}</span>
+
+  <span class='const'>LOWEST_VERSION</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='op'>::</span><span class='const'>Version</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>2.4.0</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'># @param data [String, Pathname] path to the .task database
+</span>  <span class='comment'># @param opts [Hash] overrides to the .taskrc to run on each command
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_data'>data</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+    <span class='comment'># Check TaskWarrior version, and throw warning if unavailable
+</span>    <span class='kw'>begin</span>
+      <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_check_version'>check_version</span>
+    <span class='kw'>rescue</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Couldn&#39;t verify TaskWarrior&#39;s version</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='ivar'>@data_location</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
+    <span class='id identifier rubyid_override_h'>override_h</span>     <span class='op'>=</span> <span class='const'>DEFAULTS</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>data_location:</span> <span class='id identifier rubyid_data'>data</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
+    <span class='ivar'>@override</span>      <span class='op'>=</span> <span class='const'>Taskrc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_override_h'>override_h</span><span class='comma'>,</span> <span class='symbol'>:hash</span><span class='rparen'>)</span>
+    <span class='ivar'>@override_a</span>    <span class='op'>=</span> <span class='id identifier rubyid_override'>override</span><span class='period'>.</span><span class='id identifier rubyid_model_to_rc'>model_to_rc</span>
+    <span class='ivar'>@taskrc</span>        <span class='op'>=</span> <span class='id identifier rubyid_get_rc'>get_rc</span>
+    <span class='ivar'>@udas</span>          <span class='op'>=</span> <span class='id identifier rubyid_get_udas'>get_udas</span>
+    <span class='id identifier rubyid_add_udas_to_model!'>add_udas_to_model!</span><span class='lparen'>(</span><span class='id identifier rubyid_udas'>udas</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_udas'>udas</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Check the state of the TaskWarrior install. Either pass a Gem::Version
+</span>  <span class='comment'># representation passed to the version param or call with no args for
+</span>  <span class='comment'># it to make a call to the shell to figure that out itself.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param version [Gem::Version, nil] version to check
+</span>  <span class='comment'># @return [Gem::Version]
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_check_version'>check_version</span> <span class='id identifier rubyid_version'>version</span><span class='op'>=</span><span class='kw'>nil</span>
+    <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_get_version'>get_version</span> <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span> <span class='op'>&lt;</span> <span class='const'>LOWEST_VERSION</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The current TaskWarrior version, </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'>, is untested</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_version'>version</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -534,7 +736,7 @@
       <div class="method_details ">
   <h3 class="signature " id="override-instance_method">
   
-    - (<tt>Object</tt>) <strong>override</strong>  <span class="extras">(readonly)</span>
+    - (<tt><span class='object_link'><a href="Taskrc.html" title="Rtasklib::Taskrc (class)">Rtasklib::Taskrc</a></span></tt>) <strong>override</strong>  <span class="extras">(readonly)</span>
   
 
   
@@ -543,13 +745,31 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute override</p>
+<p>Returns The options to override the default .taskrc</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Taskrc.html" title="Rtasklib::Taskrc (class)">Rtasklib::Taskrc</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The options to override the default .taskrc</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -557,15 +777,111 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 67</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_override'>override</span>
-  <span class='ivar'>@override</span>
+<span class='kw'>class</span> <span class='const'>TaskWarrior</span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:version</span><span class='comma'>,</span> <span class='symbol'>:data_location</span><span class='comma'>,</span> <span class='symbol'>:taskrc</span><span class='comma'>,</span> <span class='symbol'>:udas</span><span class='comma'>,</span>
+              <span class='symbol'>:override</span><span class='comma'>,</span> <span class='symbol'>:override_a</span><span class='comma'>,</span> <span class='symbol'>:override_str</span>
+
+  <span class='id identifier rubyid_include'>include</span> <span class='const'>Controller</span>
+
+  <span class='const'>DEFAULTS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>json_array:</span>              <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>verbose:</span>                 <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nothing</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>gc:</span>                      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>confirmation:</span>            <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>dependency_confirmation:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>exit_on_missing_db:</span>      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yes</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='rbrace'>}</span>
+
+  <span class='const'>LOWEST_VERSION</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='op'>::</span><span class='const'>Version</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>2.4.0</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'># @param data [String, Pathname] path to the .task database
+</span>  <span class='comment'># @param opts [Hash] overrides to the .taskrc to run on each command
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_data'>data</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+    <span class='comment'># Check TaskWarrior version, and throw warning if unavailable
+</span>    <span class='kw'>begin</span>
+      <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_check_version'>check_version</span>
+    <span class='kw'>rescue</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Couldn&#39;t verify TaskWarrior&#39;s version</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='ivar'>@data_location</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
+    <span class='id identifier rubyid_override_h'>override_h</span>     <span class='op'>=</span> <span class='const'>DEFAULTS</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>data_location:</span> <span class='id identifier rubyid_data'>data</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
+    <span class='ivar'>@override</span>      <span class='op'>=</span> <span class='const'>Taskrc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_override_h'>override_h</span><span class='comma'>,</span> <span class='symbol'>:hash</span><span class='rparen'>)</span>
+    <span class='ivar'>@override_a</span>    <span class='op'>=</span> <span class='id identifier rubyid_override'>override</span><span class='period'>.</span><span class='id identifier rubyid_model_to_rc'>model_to_rc</span>
+    <span class='ivar'>@taskrc</span>        <span class='op'>=</span> <span class='id identifier rubyid_get_rc'>get_rc</span>
+    <span class='ivar'>@udas</span>          <span class='op'>=</span> <span class='id identifier rubyid_get_udas'>get_udas</span>
+    <span class='id identifier rubyid_add_udas_to_model!'>add_udas_to_model!</span><span class='lparen'>(</span><span class='id identifier rubyid_udas'>udas</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_udas'>udas</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Check the state of the TaskWarrior install. Either pass a Gem::Version
+</span>  <span class='comment'># representation passed to the version param or call with no args for
+</span>  <span class='comment'># it to make a call to the shell to figure that out itself.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param version [Gem::Version, nil] version to check
+</span>  <span class='comment'># @return [Gem::Version]
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_check_version'>check_version</span> <span class='id identifier rubyid_version'>version</span><span class='op'>=</span><span class='kw'>nil</span>
+    <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_get_version'>get_version</span> <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span> <span class='op'>&lt;</span> <span class='const'>LOWEST_VERSION</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The current TaskWarrior version, </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'>, is untested</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_version'>version</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -577,7 +893,7 @@
       <div class="method_details ">
   <h3 class="signature " id="override_a-instance_method">
   
-    - (<tt>Object</tt>) <strong>override_a</strong>  <span class="extras">(readonly)</span>
+    - (<tt>Array</tt>) <strong>override_a</strong>  <span class="extras">(readonly)</span>
   
 
   
@@ -586,13 +902,31 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute override_a</p>
+<p>Returns @override in array form, useful for passing to shell</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>@override in array form, useful for passing to shell</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -600,15 +934,111 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 67</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_override_a'>override_a</span>
-  <span class='ivar'>@override_a</span>
+<span class='kw'>class</span> <span class='const'>TaskWarrior</span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:version</span><span class='comma'>,</span> <span class='symbol'>:data_location</span><span class='comma'>,</span> <span class='symbol'>:taskrc</span><span class='comma'>,</span> <span class='symbol'>:udas</span><span class='comma'>,</span>
+              <span class='symbol'>:override</span><span class='comma'>,</span> <span class='symbol'>:override_a</span><span class='comma'>,</span> <span class='symbol'>:override_str</span>
+
+  <span class='id identifier rubyid_include'>include</span> <span class='const'>Controller</span>
+
+  <span class='const'>DEFAULTS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>json_array:</span>              <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>verbose:</span>                 <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nothing</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>gc:</span>                      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>confirmation:</span>            <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>dependency_confirmation:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>exit_on_missing_db:</span>      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yes</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='rbrace'>}</span>
+
+  <span class='const'>LOWEST_VERSION</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='op'>::</span><span class='const'>Version</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>2.4.0</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'># @param data [String, Pathname] path to the .task database
+</span>  <span class='comment'># @param opts [Hash] overrides to the .taskrc to run on each command
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_data'>data</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+    <span class='comment'># Check TaskWarrior version, and throw warning if unavailable
+</span>    <span class='kw'>begin</span>
+      <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_check_version'>check_version</span>
+    <span class='kw'>rescue</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Couldn&#39;t verify TaskWarrior&#39;s version</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='ivar'>@data_location</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
+    <span class='id identifier rubyid_override_h'>override_h</span>     <span class='op'>=</span> <span class='const'>DEFAULTS</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>data_location:</span> <span class='id identifier rubyid_data'>data</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
+    <span class='ivar'>@override</span>      <span class='op'>=</span> <span class='const'>Taskrc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_override_h'>override_h</span><span class='comma'>,</span> <span class='symbol'>:hash</span><span class='rparen'>)</span>
+    <span class='ivar'>@override_a</span>    <span class='op'>=</span> <span class='id identifier rubyid_override'>override</span><span class='period'>.</span><span class='id identifier rubyid_model_to_rc'>model_to_rc</span>
+    <span class='ivar'>@taskrc</span>        <span class='op'>=</span> <span class='id identifier rubyid_get_rc'>get_rc</span>
+    <span class='ivar'>@udas</span>          <span class='op'>=</span> <span class='id identifier rubyid_get_udas'>get_udas</span>
+    <span class='id identifier rubyid_add_udas_to_model!'>add_udas_to_model!</span><span class='lparen'>(</span><span class='id identifier rubyid_udas'>udas</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_udas'>udas</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Check the state of the TaskWarrior install. Either pass a Gem::Version
+</span>  <span class='comment'># representation passed to the version param or call with no args for
+</span>  <span class='comment'># it to make a call to the shell to figure that out itself.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param version [Gem::Version, nil] version to check
+</span>  <span class='comment'># @return [Gem::Version]
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_check_version'>check_version</span> <span class='id identifier rubyid_version'>version</span><span class='op'>=</span><span class='kw'>nil</span>
+    <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_get_version'>get_version</span> <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span> <span class='op'>&lt;</span> <span class='const'>LOWEST_VERSION</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The current TaskWarrior version, </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'>, is untested</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_version'>version</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -620,7 +1050,7 @@
       <div class="method_details ">
   <h3 class="signature " id="override_str-instance_method">
   
-    - (<tt>Object</tt>) <strong>override_str</strong>  <span class="extras">(readonly)</span>
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>override_str</strong>  <span class="extras">(readonly)</span>
   
 
   
@@ -629,13 +1059,31 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute override_str</p>
+<p>Returns @override in string form, useful for passing to shell</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>@override in string form, useful for passing to shell</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -643,15 +1091,111 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 67</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_override_str'>override_str</span>
-  <span class='ivar'>@override_str</span>
+<span class='kw'>class</span> <span class='const'>TaskWarrior</span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:version</span><span class='comma'>,</span> <span class='symbol'>:data_location</span><span class='comma'>,</span> <span class='symbol'>:taskrc</span><span class='comma'>,</span> <span class='symbol'>:udas</span><span class='comma'>,</span>
+              <span class='symbol'>:override</span><span class='comma'>,</span> <span class='symbol'>:override_a</span><span class='comma'>,</span> <span class='symbol'>:override_str</span>
+
+  <span class='id identifier rubyid_include'>include</span> <span class='const'>Controller</span>
+
+  <span class='const'>DEFAULTS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>json_array:</span>              <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>verbose:</span>                 <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nothing</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>gc:</span>                      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>confirmation:</span>            <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>dependency_confirmation:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>exit_on_missing_db:</span>      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yes</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='rbrace'>}</span>
+
+  <span class='const'>LOWEST_VERSION</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='op'>::</span><span class='const'>Version</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>2.4.0</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'># @param data [String, Pathname] path to the .task database
+</span>  <span class='comment'># @param opts [Hash] overrides to the .taskrc to run on each command
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_data'>data</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+    <span class='comment'># Check TaskWarrior version, and throw warning if unavailable
+</span>    <span class='kw'>begin</span>
+      <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_check_version'>check_version</span>
+    <span class='kw'>rescue</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Couldn&#39;t verify TaskWarrior&#39;s version</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='ivar'>@data_location</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
+    <span class='id identifier rubyid_override_h'>override_h</span>     <span class='op'>=</span> <span class='const'>DEFAULTS</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>data_location:</span> <span class='id identifier rubyid_data'>data</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
+    <span class='ivar'>@override</span>      <span class='op'>=</span> <span class='const'>Taskrc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_override_h'>override_h</span><span class='comma'>,</span> <span class='symbol'>:hash</span><span class='rparen'>)</span>
+    <span class='ivar'>@override_a</span>    <span class='op'>=</span> <span class='id identifier rubyid_override'>override</span><span class='period'>.</span><span class='id identifier rubyid_model_to_rc'>model_to_rc</span>
+    <span class='ivar'>@taskrc</span>        <span class='op'>=</span> <span class='id identifier rubyid_get_rc'>get_rc</span>
+    <span class='ivar'>@udas</span>          <span class='op'>=</span> <span class='id identifier rubyid_get_udas'>get_udas</span>
+    <span class='id identifier rubyid_add_udas_to_model!'>add_udas_to_model!</span><span class='lparen'>(</span><span class='id identifier rubyid_udas'>udas</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_udas'>udas</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Check the state of the TaskWarrior install. Either pass a Gem::Version
+</span>  <span class='comment'># representation passed to the version param or call with no args for
+</span>  <span class='comment'># it to make a call to the shell to figure that out itself.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param version [Gem::Version, nil] version to check
+</span>  <span class='comment'># @return [Gem::Version]
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_check_version'>check_version</span> <span class='id identifier rubyid_version'>version</span><span class='op'>=</span><span class='kw'>nil</span>
+    <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_get_version'>get_version</span> <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span> <span class='op'>&lt;</span> <span class='const'>LOWEST_VERSION</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The current TaskWarrior version, </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'>, is untested</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_version'>version</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -663,7 +1207,7 @@
       <div class="method_details ">
   <h3 class="signature " id="taskrc-instance_method">
   
-    - (<tt>Object</tt>) <strong>taskrc</strong>  <span class="extras">(readonly)</span>
+    - (<tt><span class='object_link'><a href="Taskrc.html" title="Rtasklib::Taskrc (class)">Rtasklib::Taskrc</a></span></tt>) <strong>taskrc</strong>  <span class="extras">(readonly)</span>
   
 
   
@@ -672,13 +1216,31 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute taskrc</p>
+<p>Returns Your current TaskWarrior configuration</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Taskrc.html" title="Rtasklib::Taskrc (class)">Rtasklib::Taskrc</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Your current TaskWarrior configuration</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -686,15 +1248,111 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 67</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_taskrc'>taskrc</span>
-  <span class='ivar'>@taskrc</span>
+<span class='kw'>class</span> <span class='const'>TaskWarrior</span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:version</span><span class='comma'>,</span> <span class='symbol'>:data_location</span><span class='comma'>,</span> <span class='symbol'>:taskrc</span><span class='comma'>,</span> <span class='symbol'>:udas</span><span class='comma'>,</span>
+              <span class='symbol'>:override</span><span class='comma'>,</span> <span class='symbol'>:override_a</span><span class='comma'>,</span> <span class='symbol'>:override_str</span>
+
+  <span class='id identifier rubyid_include'>include</span> <span class='const'>Controller</span>
+
+  <span class='const'>DEFAULTS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>json_array:</span>              <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>verbose:</span>                 <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nothing</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>gc:</span>                      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>confirmation:</span>            <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>dependency_confirmation:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>exit_on_missing_db:</span>      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yes</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='rbrace'>}</span>
+
+  <span class='const'>LOWEST_VERSION</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='op'>::</span><span class='const'>Version</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>2.4.0</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'># @param data [String, Pathname] path to the .task database
+</span>  <span class='comment'># @param opts [Hash] overrides to the .taskrc to run on each command
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_data'>data</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+    <span class='comment'># Check TaskWarrior version, and throw warning if unavailable
+</span>    <span class='kw'>begin</span>
+      <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_check_version'>check_version</span>
+    <span class='kw'>rescue</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Couldn&#39;t verify TaskWarrior&#39;s version</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='ivar'>@data_location</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
+    <span class='id identifier rubyid_override_h'>override_h</span>     <span class='op'>=</span> <span class='const'>DEFAULTS</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>data_location:</span> <span class='id identifier rubyid_data'>data</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
+    <span class='ivar'>@override</span>      <span class='op'>=</span> <span class='const'>Taskrc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_override_h'>override_h</span><span class='comma'>,</span> <span class='symbol'>:hash</span><span class='rparen'>)</span>
+    <span class='ivar'>@override_a</span>    <span class='op'>=</span> <span class='id identifier rubyid_override'>override</span><span class='period'>.</span><span class='id identifier rubyid_model_to_rc'>model_to_rc</span>
+    <span class='ivar'>@taskrc</span>        <span class='op'>=</span> <span class='id identifier rubyid_get_rc'>get_rc</span>
+    <span class='ivar'>@udas</span>          <span class='op'>=</span> <span class='id identifier rubyid_get_udas'>get_udas</span>
+    <span class='id identifier rubyid_add_udas_to_model!'>add_udas_to_model!</span><span class='lparen'>(</span><span class='id identifier rubyid_udas'>udas</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_udas'>udas</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Check the state of the TaskWarrior install. Either pass a Gem::Version
+</span>  <span class='comment'># representation passed to the version param or call with no args for
+</span>  <span class='comment'># it to make a call to the shell to figure that out itself.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param version [Gem::Version, nil] version to check
+</span>  <span class='comment'># @return [Gem::Version]
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_check_version'>check_version</span> <span class='id identifier rubyid_version'>version</span><span class='op'>=</span><span class='kw'>nil</span>
+    <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_get_version'>get_version</span> <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span> <span class='op'>&lt;</span> <span class='const'>LOWEST_VERSION</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The current TaskWarrior version, </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'>, is untested</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_version'>version</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -706,7 +1364,7 @@
       <div class="method_details ">
   <h3 class="signature " id="udas-instance_method">
   
-    - (<tt>Object</tt>) <strong>udas</strong>  <span class="extras">(readonly)</span>
+    - (<tt>Hash{Symbol=&gt;Hash}</tt>) <strong>udas</strong>  <span class="extras">(readonly)</span>
   
 
   
@@ -715,13 +1373,31 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute udas</p>
+<p>Returns Currently configured User Defined Attributes</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol=&gt;Hash}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Currently configured User Defined Attributes</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -729,15 +1405,111 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 67</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_udas'>udas</span>
-  <span class='ivar'>@udas</span>
+<span class='kw'>class</span> <span class='const'>TaskWarrior</span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:version</span><span class='comma'>,</span> <span class='symbol'>:data_location</span><span class='comma'>,</span> <span class='symbol'>:taskrc</span><span class='comma'>,</span> <span class='symbol'>:udas</span><span class='comma'>,</span>
+              <span class='symbol'>:override</span><span class='comma'>,</span> <span class='symbol'>:override_a</span><span class='comma'>,</span> <span class='symbol'>:override_str</span>
+
+  <span class='id identifier rubyid_include'>include</span> <span class='const'>Controller</span>
+
+  <span class='const'>DEFAULTS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>json_array:</span>              <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>verbose:</span>                 <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nothing</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>gc:</span>                      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>confirmation:</span>            <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>dependency_confirmation:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>exit_on_missing_db:</span>      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yes</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='rbrace'>}</span>
+
+  <span class='const'>LOWEST_VERSION</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='op'>::</span><span class='const'>Version</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>2.4.0</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'># @param data [String, Pathname] path to the .task database
+</span>  <span class='comment'># @param opts [Hash] overrides to the .taskrc to run on each command
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_data'>data</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+    <span class='comment'># Check TaskWarrior version, and throw warning if unavailable
+</span>    <span class='kw'>begin</span>
+      <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_check_version'>check_version</span>
+    <span class='kw'>rescue</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Couldn&#39;t verify TaskWarrior&#39;s version</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='ivar'>@data_location</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
+    <span class='id identifier rubyid_override_h'>override_h</span>     <span class='op'>=</span> <span class='const'>DEFAULTS</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>data_location:</span> <span class='id identifier rubyid_data'>data</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
+    <span class='ivar'>@override</span>      <span class='op'>=</span> <span class='const'>Taskrc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_override_h'>override_h</span><span class='comma'>,</span> <span class='symbol'>:hash</span><span class='rparen'>)</span>
+    <span class='ivar'>@override_a</span>    <span class='op'>=</span> <span class='id identifier rubyid_override'>override</span><span class='period'>.</span><span class='id identifier rubyid_model_to_rc'>model_to_rc</span>
+    <span class='ivar'>@taskrc</span>        <span class='op'>=</span> <span class='id identifier rubyid_get_rc'>get_rc</span>
+    <span class='ivar'>@udas</span>          <span class='op'>=</span> <span class='id identifier rubyid_get_udas'>get_udas</span>
+    <span class='id identifier rubyid_add_udas_to_model!'>add_udas_to_model!</span><span class='lparen'>(</span><span class='id identifier rubyid_udas'>udas</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_udas'>udas</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Check the state of the TaskWarrior install. Either pass a Gem::Version
+</span>  <span class='comment'># representation passed to the version param or call with no args for
+</span>  <span class='comment'># it to make a call to the shell to figure that out itself.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param version [Gem::Version, nil] version to check
+</span>  <span class='comment'># @return [Gem::Version]
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_check_version'>check_version</span> <span class='id identifier rubyid_version'>version</span><span class='op'>=</span><span class='kw'>nil</span>
+    <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_get_version'>get_version</span> <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span> <span class='op'>&lt;</span> <span class='const'>LOWEST_VERSION</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The current TaskWarrior version, </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'>, is untested</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_version'>version</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -749,7 +1521,7 @@
       <div class="method_details ">
   <h3 class="signature " id="version-instance_method">
   
-    - (<tt>Object</tt>) <strong>version</strong>  <span class="extras">(readonly)</span>
+    - (<tt>Gem::Version</tt>) <strong>version</strong>  <span class="extras">(readonly)</span>
   
 
   
@@ -758,13 +1530,31 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute version</p>
+<p>Returns The version of the current TaskWarrior install</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gem::Version</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The version of the current TaskWarrior install</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -772,15 +1562,111 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 67</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_version'>version</span>
-  <span class='ivar'>@version</span>
+<span class='kw'>class</span> <span class='const'>TaskWarrior</span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:version</span><span class='comma'>,</span> <span class='symbol'>:data_location</span><span class='comma'>,</span> <span class='symbol'>:taskrc</span><span class='comma'>,</span> <span class='symbol'>:udas</span><span class='comma'>,</span>
+              <span class='symbol'>:override</span><span class='comma'>,</span> <span class='symbol'>:override_a</span><span class='comma'>,</span> <span class='symbol'>:override_str</span>
+
+  <span class='id identifier rubyid_include'>include</span> <span class='const'>Controller</span>
+
+  <span class='const'>DEFAULTS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>json_array:</span>              <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>true</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>verbose:</span>                 <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nothing</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>gc:</span>                      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>confirmation:</span>            <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>dependency_confirmation:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>exit_on_missing_db:</span>      <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yes</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='rbrace'>}</span>
+
+  <span class='const'>LOWEST_VERSION</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='op'>::</span><span class='const'>Version</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>2.4.0</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'># @param data [String, Pathname] path to the .task database
+</span>  <span class='comment'># @param opts [Hash] overrides to the .taskrc to run on each command
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_data'>data</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_home'>home</span><span class='embexpr_end'>}</span><span class='tstring_content'>/.task</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+    <span class='comment'># Check TaskWarrior version, and throw warning if unavailable
+</span>    <span class='kw'>begin</span>
+      <span class='ivar'>@version</span> <span class='op'>=</span> <span class='id identifier rubyid_check_version'>check_version</span>
+    <span class='kw'>rescue</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Couldn&#39;t verify TaskWarrior&#39;s version</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='ivar'>@data_location</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
+    <span class='id identifier rubyid_override_h'>override_h</span>     <span class='op'>=</span> <span class='const'>DEFAULTS</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>data_location:</span> <span class='id identifier rubyid_data'>data</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
+    <span class='ivar'>@override</span>      <span class='op'>=</span> <span class='const'>Taskrc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_override_h'>override_h</span><span class='comma'>,</span> <span class='symbol'>:hash</span><span class='rparen'>)</span>
+    <span class='ivar'>@override_a</span>    <span class='op'>=</span> <span class='id identifier rubyid_override'>override</span><span class='period'>.</span><span class='id identifier rubyid_model_to_rc'>model_to_rc</span>
+    <span class='ivar'>@taskrc</span>        <span class='op'>=</span> <span class='id identifier rubyid_get_rc'>get_rc</span>
+    <span class='ivar'>@udas</span>          <span class='op'>=</span> <span class='id identifier rubyid_get_udas'>get_udas</span>
+    <span class='id identifier rubyid_add_udas_to_model!'>add_udas_to_model!</span><span class='lparen'>(</span><span class='id identifier rubyid_udas'>udas</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_udas'>udas</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Check the state of the TaskWarrior install. Either pass a Gem::Version
+</span>  <span class='comment'># representation passed to the version param or call with no args for
+</span>  <span class='comment'># it to make a call to the shell to figure that out itself.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param version [Gem::Version, nil] version to check
+</span>  <span class='comment'># @return [Gem::Version]
+</span>  <span class='comment'># @api public
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_check_version'>check_version</span> <span class='id identifier rubyid_version'>version</span><span class='op'>=</span><span class='kw'>nil</span>
+    <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_get_version'>get_version</span> <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span> <span class='op'>&lt;</span> <span class='const'>LOWEST_VERSION</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The current TaskWarrior version, </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'>, is untested</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_version'>version</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -797,28 +1683,76 @@
       <div class="method_details first">
   <h3 class="signature first" id="check_version-instance_method">
   
-    - (<tt>Object</tt>) <strong>check_version</strong>(version = nil) 
+    - (<tt>Gem::Version</tt>) <strong>check_version</strong>(version = nil) 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Check the state of the TaskWarrior install. Either pass a Gem::Version
+representation passed to the version param or call with no args for it to
+make a call to the shell to figure that out itself.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>version</span>
+      
+      
+        <span class='type'>(<tt>Gem::Version</tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>version to check</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gem::Version</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-50
-51
-52
-53
-54
-55
-56</pre>
+110
+111
+112
+113
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/rtasklib.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_version'>check_version</span> <span class='id identifier rubyid_version'>version</span><span class='op'>=</span><span class='kw'>nil</span>
   <span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='id identifier rubyid_get_version'>get_version</span> <span class='kw'>if</span> <span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -837,7 +1771,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon May 18 10:59:45 2015 by
+  Generated on Mon May 18 11:32:01 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.3).
 </div>

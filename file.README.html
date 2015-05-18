@@ -139,6 +139,17 @@ for you. Simply get the desired version RPM from the <code>pkg/</code> dir:</p>
 this is as simple as running <code>task</code> and answer <code>yes</code>
 when it asks you about creating a <code>.taskrc</code> file.</p>
 
+<p>There is a small testing database in <code>spec/data/.task</code> if you
+would like to test on something other than you main TaskWarrior db. You can
+experiment with this by running:</p>
+
+<pre class="code ruby"><code class="ruby">$ ./bin/console</code></pre>
+
+<p>Which returns an interactive Pry Ruby session with the variable
+<code>tw</code> already initialized to a <code>Rtasklib::TW</code> instance
+with the test database. Changes to the database aren&#39;t tracked so
+don&#39;t worry about merge conflicts if you plan on contributing.</p>
+
 <h2 id="label-Dependencies">Dependencies</h2>
 <ul><li>
 <p>Ruby &gt; 2.0 (Uses keyword args)</p>
@@ -223,7 +234,7 @@ feature&#39;</code>)</p>
 </div></div>
 
     <div id="footer">
-  Generated on Mon May 18 10:59:45 2015 by
+  Generated on Mon May 18 11:32:00 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.1.3).
 </div>
