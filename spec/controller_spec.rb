@@ -100,7 +100,7 @@ describe Rtasklib::Controller do
     before(:context) do
       @tw = Rtasklib::TaskWarrior.new("spec/data/.task")
       @pre_task = @tw.some(ids: 1).first
-      @tw.modify!(attr: "description", val: "Modified description", ids: 1)
+      @tw.modify!("description", "Modified description", ids: 1)
       @after_task = @tw.some(ids: 1).first
       @tw.undo!
     end
