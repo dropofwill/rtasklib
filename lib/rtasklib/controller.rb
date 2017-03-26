@@ -20,7 +20,7 @@ module Rtasklib
   #
   # XXX: depends on TaskWarrior#override_a currently, which isn't great.
   #
-  # @example ids: can be a single id as a String or Fixnum or Range
+  # @example ids: can be a single id as a String or Integer or Range
   #   tw.some(ids: 1)
   #   tw.some(ids: "1")
   #   tw.some(ids: 1..4)  # 1,2,3,4
@@ -95,7 +95,7 @@ module Rtasklib
     #   # You can also pass in a TW style string if you prefer
     #   tw.some(dom: "project:Work due.before:#{today}")
     #
-    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param ids [Array<Range, Integer, String>, String, Range, Integer]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @param active [Boolean] return only pending & waiting tasks
@@ -116,7 +116,7 @@ module Rtasklib
     # Count the number of tasks that match a given filter. Faster than counting
     # an array returned by Controller#all or Controller#some.
     #
-    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param ids [Array<Range, Integer, String>, String, Range, Integer]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @param active [Boolean] return only pending & waiting tasks
@@ -162,7 +162,7 @@ module Rtasklib
     # @example
     #   tw.start!(ids: 1)
     #
-    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param ids [Array<Range, Integer, String>, String, Range, Integer]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @param active [Boolean] return only pending & waiting tasks
@@ -182,7 +182,7 @@ module Rtasklib
     # Mark the filter of tasks as stopped
     # Returns false if filter (ids:, tags:, dom:) is blank.
     #
-    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param ids [Array<Range, Integer, String>, String, Range, Integer]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @param active [Boolean] return only pending & waiting tasks
@@ -221,7 +221,7 @@ module Rtasklib
     #
     # @param attr [String]
     # @param val [String]
-    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param ids [Array<Range, Integer, String>, String, Range, Integer]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @param active [Boolean] return only pending & waiting tasks
@@ -241,7 +241,7 @@ module Rtasklib
     # Finishes the filtered tasks.
     # Returns false if filter (ids:, tags:, dom:) is blank.
     #
-    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param ids [Array<Range, Integer, String>, String, Range, Integer]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @param active [Boolean] return only pending & waiting tasks
@@ -259,7 +259,7 @@ module Rtasklib
 
     # Returns false if filter is blank.
     #
-    # @param ids [Array<Range, Fixnum, String>, String, Range, Fixnum]
+    # @param ids [Array<Range, Integer, String>, String, Range, Integer]
     # @param tags [Array<String>, String]
     # @param dom [Array<String>, String]
     # @param active [Boolean] return only pending & waiting tasks

@@ -41,7 +41,7 @@ module Rtasklib
     # Converts ids, tags, and dom queries to a single string ready to pass
     # directly to task.
     #
-    # @param ids[Range, Array<String, Range, Fixnum>, String, Fixnum]
+    # @param ids[Range, Array<String, Range, Integer>, String, Integer]
     # @param tags[String, Array<String>]
     # @param dom[String, Array<String>]
     # @return [String] a string with ids tags and dom joined by a space
@@ -62,7 +62,7 @@ module Rtasklib
     # and joined with ","
     # [1...5, 8, 9] : "1,2,3,4,5,8,9"
     #
-    # @param id_a [Array<String, Range, Fixnum>]
+    # @param id_a [Array<String, Range, Integer>]
     # @return [String]
     # @api public
     def id_a_to_s id_a
@@ -74,7 +74,7 @@ module Rtasklib
 
     # Converts arbitrary id input to a task safe string
     #
-    # @param ids[Range, Array<String, Range, Fixnum>, String, Fixnum]
+    # @param ids[Range, Array<String, Range, Integer>, String, Integer]
     # @api public
     def process_ids ids
       case ids
@@ -84,7 +84,7 @@ module Rtasklib
         return id_a_to_s(ids)
       when String
         return ids.delete(" ")
-      when Fixnum
+      when Integer
         return ids
       end
     end
